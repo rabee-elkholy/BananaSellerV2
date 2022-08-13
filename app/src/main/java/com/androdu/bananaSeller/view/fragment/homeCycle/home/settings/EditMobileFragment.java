@@ -140,6 +140,7 @@ public class EditMobileFragment extends Fragment {
     private void editMobile(String phone, String code) {
         if (isConnected(getContext())) {
             disableView(fragmentEditMobileBtnConfirm);
+
             showProgressDialog(getActivity());
             getClient().profileEditMobileNum(loadDataString(getActivity(), TOKEN), new ChangePhoneRequestBody(phone, code))
                     .enqueue(new Callback<GeneralResponse>() {
