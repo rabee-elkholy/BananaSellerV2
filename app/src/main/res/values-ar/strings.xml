@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Banana Seller</string>
+    <string name="skip">تخطي</string>
+    <string name="start">بدء</string>
+
+    <string name="slider_title1">استقبل الطلبات</string>
+    <string name="slider_title2">قدم العروض</string>
+    <string name="slider_title3">استلم فلوسك</string>
+    <string name="slider_subtitle1">تستطيع من خلال التطبيق استقبال العديد من الطلبات الخاصة بمنتجاتك</string>
+    <string name="slider_subtitle2">تستطيع من خلال التطبيق تقديم العروض للعملاء بأفضل الأسعار</string>
+    <string name="slider_subtitle3">تستطيع من خلال التطبيق استلام فلوسك اونلاين وبطريقة امنة</string>
+    <string name="language">اللغة</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="wait">انتطر</string>
+    <string name="ok">حسناً</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="please_enter_you_your_account">من فضلك قم بتسجيل الدخول</string>
+    <string name="or">أو</string>
+    <string name="don_t_have_an_account">ليس لديك حساب؟</string>
+    <string name="create_one"><u>إنشاء حساب</u></string>
+    <string name="sign_up">التسجيل</string>
+    <string name="name">الإسم</string>
+    <string name="please_create_an_account">من فضلك قم بإنشاء حساب</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="already_have_an_account">لديك حساب بالفعل؟</string>
+    <string name="go_login"><u>تسجيل</u></string>
+    <string name="fruits_and_vegetables">الفواكه والخضروات</string>
+    <string name="meat_and_fish">اللحوم والاسماك</string>
+    <string name="baked_goods">المخبوزات</string>
+    <string name="food">المواد الغذائية</string>
+    <string name="search">بحث</string>
+    <string name="confirm">تم</string>
+    <string name="cancel">إلغاء</string>
+
+    <string name="enter_name">أدخل الاسم!</string>
+    <string name="enter_phone">أدخل رقم الهاتف</string>
+    <string name="enter_password">أدخل كلمة المرور</string>
+    <string name="password_must_greater_than_7">يجب أن تكون كلمة المرور اكبر من 7</string>
+    <string name="enter_confirm_password">أكد كلمة المرور</string>
+    <string name="password_does_not_match">كلمة المرور غير متشابهة</string>
+    <string name="account_created_successfully">تم إنشاء الحساب بنجاح</string>
+    <string name="phone_number_already_registered">رقم الهاتف مسجل بالفعل</string>
+    <string name="error_occurred_try_again">حدث خطأ برجاء إعادة المحاولة</string>
+
+    <string-array name="weights">
+        <item>كجم</item>
+        <item>جرام</item>
+        <item>حبة</item>
+        <item>لتر</item>
+        <item>جالون</item>
+        <item>درزن</item>
+        <item>علبة</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>عربي</item>
+        <item>اردو</item>
+    </string-array>
+
+    <string-array name="order_sort">
+        <item>الكل</item>
+        <item>الكمية</item>
+        <item>المضاف حديثاً</item>
+        <item>تاريخ التوصيل</item>
+    </string-array>
+
+    <string-array name="order_filter">
+        <item>الكل</item>
+        <item>الأقرب</item>
+        <item>آخر 12 ساعة</item>
+        <item>التوصيل المباشر</item>
+    </string-array>
+
+    <string name="no_internet">لا يوجد اتصال بالإنترنت!</string>
+    <string name="check_internet">يرجى التحقق من اتصال الإنترنت الخاص بك ثم حاول مرة أخرى.</string>
+    <string name="wrong_mobile_number">رقم هاتف خاطئ</string>
+    <string name="wrong_password">كلمة مرور خاطئة</string>
+
+    <string name="fruits">الفواكه</string>
+    <string name="vegetables">الخضراوات</string>
+    <string name="bread">الخبز</string>
+    <string name="sandwiches">السندويشات</string>
+    <string name="pies">الفطائر</string>
+    <string name="croissant">الكروسون</string>
+    <string name="commodity">السلع الاساسيه</string>
+    <string name="frozen">المجمده</string>
+    <string name="refrigerated">المبرده</string>
+    <string name="canned_food">المعلبات</string>
+    <string name="goodies_and_sweets">تسالي وحلويات</string>
+    <string name="animal_products">منتجات حيوانيه</string>
+    <string name="fish_products">منتجات سمكيه</string>
+    <string name="most_wanted">الاكثر طلباً</string>
+    <string name="recently_added">المضاف حديثاً</string>
+
+    <string-array name="error_handler">
+        <item>خطأ في الخادم</item>
+        <item>تم</item>
+        <item>غير مسموح يجب تسجيل الدخول</item>
+        <item>مستخدم غير موجود</item>
+        <item>تم حظر حسابك</item>
+        <item>خطأ في البيانات</item>
+        <item>رقم الهاتف مسجل من قبل</item>
+        <item>رقم الهاتف أو البريد غير صحيح</item>
+        <item>كلمة المرور غير صحيحة</item>
+        <item>غير موجود</item>
+        <item>العربة فارغة</item>
+        <item>انت لست المالك!!</item>
+        <item>the order status != started</item>
+        <item>موجود بالفعل!</item>
+        <item>the order status != ended</item>
+        <item>كلمة الجديدة مطابقة للقديمة</item>
+        <item>رقم الهاتف الجديد مطابق للقديم</item>
+        <item>يجب تسجيل الدخول</item>
+        <item>www</item>
+        <item>تم إلغاء العرض أو تم إنهاء الطلب</item>
+        <item>خطأ في عملية الدفع</item>
+        <item>لم يقم العميل بتحديد عرض البائع</item>
+        <item>حدث شيء ما في دفع العميل</item>
+        <item>لا يمكن للبائع إضافة أكثر من عرض لنفس الطلب</item>
+        <item>لا يمكن العثور على العرض المحدد للطلب</item>
+        <item>تم إرسال شكوي بالفعل</item>
+        <item>هذا البريد مسجل مسبقاً</item>
+        <item>يجب عليك تقديم شهادة لفئة الطلب</item>
+        <item>أوراق النشاط التجاري قيد المراجعة</item>
+        <item>انتهت صلاحية الشهادة</item>
+        <item>الفئة موجودة بالفعل</item>
+        <item>خطأ في إرسال الرسائل القصيرة</item>
+        <item>رقم هاتف غير صالح</item>
+        <item>لا توجد رسالة نصية كريدي</item>
+        <item>يجب عليك التحقق من الحساب للاستمرار</item>
+        <item>غير مسموح به عنوان url تم التحقق منه بالفعل</item>
+        <item>كود خاطئ</item>
+        <item>كود التحقق منتهي الصلاحية</item>
+        <item>فارغ</item>
+        <item>لا يوجد ما يكفي من المال في محفظتك ، الرجاء الشحن!</item>
+        <item>الطلب لم ينته</item>
+        <item>لم تدفع!</item>
+        <item>لا يمكن إلغاء الطلب بعد تسليمه!</item>
+        <item> تم إلغاء الطلب! </item>
+        <item> لم يتم العثور على عرض! </item>
+        <item> تم تسليم الطلب بالفعل! </item>
+        <item> الطلب تم إلغاؤه من قبل العميل! </item>
+        <item> الطلب لم يحذف </item>
+        <item>ليس لديك رصيد كافٍ!</item>
+        <item> الطلب لم يحذف </item>
+        <item> لا يمكنك تقديم شكوى بعد 3 أيام! </item>
+        <item> سعر أقل من 30 </item>
+        <item> لا يمكنك التصفية في وضع التجربة! </item>
+        <item> يجب عليك تحديد موقعك اولا! </item>
+        <item>يجب عليك تسجيل الدخول لاستخدام هذه الميزة</item>
+
+    </string-array>
+    <string name="successfully_added_to_the_cart">تم الاضافة الي العربة بنجاح</string>
+    <string name="are_you_sure">هل أنت متأكد؟</string>
+    <string name="add_to_your_cart">أضف إلي العربة</string>
+
+
+    <string name="canceled">الملغية</string>
+    <string name="current">الحالية</string>
+    <string name="completed">المكتملة</string>
+    <string name="order_number">رقم الطلب:</string>
+    <string name="items">الاصناف:</string>
+    <string name="quantity">الكمية:</string>
+    <string name="price">السعر:</string>
+    <string name="address">العنوان:</string>
+    <string name="delivery_date">تاريخ التوصيل:</string>
+    <string name="cancel_order">إلغاء الطلب</string>
+    <string name="make_complaint">تقديم شكوي</string>
+    <string name="orders">الطلبات</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="my_favorites">مفضلاتي</string>
+    <string name="my_wallet">محفظتي</string>
+    <string name="settings">الإعدادات</string>
+    <string name="about">حول التطبيق</string>
+    <string name="complaints">الشكاوي</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="add_new_favorite_list">إضافة قائمة جديدة</string>
+    <string name="no_products_found">لايوجد منتجات!</string>
+    <string name="enter_list_name">ادخل اسم القائمة:</string>
+    <string name="my_favorite">مفضلتي</string>
+    <string name="successfully_added">تم الاضافة بنجاح</string>
+    <string name="remove_from_favorites">ازالة من المفضلة</string>
+    <string name="successfully_deleted">تم الحذف بنجاح</string>
+    <string name="choose_your_favorite_list">اخترت قائمة المفضلة:</string>
+    <string name="successfully_added_to_your_favorites">تم الاضافة الي المفضلة</string>
+    <string name="your_order_successfully_canceled">تم الغاء الطلب</string>
+    <string name="no_orders_found">"لا يوجد طلبات"</string>
+    <string name="shopping_cart">عربة التسوق</string>
+    <string name="remove_from_cart">ازالة من العربة</string>
+    <string name="add_order">أضف طلب</string>
+    <string name="order_created_successfully">تم الطلب بنجاح</string>
+    <string name="add_product">أضف منتج</string>
+    <string name="product_name">اسم المنتج</string>
+    <string name="notifications">الاشعارات</string>
+    <string name="edit_mobile_number">تعديل رقم الهاتف</string>
+    <string name="edit_your_name">تعديل الاسم</string>
+    <string name="edit_password">تغيير كلمة المرور</string>
+    <string name="my_addresses">عناويني</string>
+    <string name="english">انجليزي</string>
+    <string name="old_mobile_number">رقم الهاتف القديم:</string>
+    <string name="new_mobile_number">رقم الهاتف الجديد:</string>
+    <string name="old_password">كلمة المرور القديمة:</string>
+    <string name="new_password">كلمة المرور الجديدة:</string>
+    <string name="about_us">من نحن</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="app_review">تقييم التطبيق</string>
+    <string name="sharing">مشاركة</string>
+    <string name="tell_us_what_your_suggestion">أخبرنا ما هو اقتراحك</string>
+    <string name="email">البريد الاليكتروني</string>
+    <string name="your_suggestion">اقتراحك</string>
+    <string name="send">إرسال</string>
+    <string name="cause_of_conflict">سبب النزاع</string>
+    <string name="add_your_evidence">اضف الادلة</string>
+
+    <string name="address_details">تفاصيل العنوان</string>
+    <string name="dialog_permission_title">منح الصلاحيات</string>
+    <string name="dialog_permission_message">يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.</string>
+    <string name="go_to_settings">اذهب إلي الإعدادات</string>
+    <string name="enter_old_phone">أدخل رقم الهاتف القديم!</string>
+    <string name="done">تم</string>
+    <string name="arabic">عربي</string>
+    <string name="id">رقم:</string>
+    <string name="enter_email">ادخل البريد الاليكتروني!</string>
+    <string name="enter_your_message">اكتب رسالتك!</string>
+    <string name="your_requests">الطلبات</string>
+    <string name="enter_order_id">ادخل رقم الطلب!</string>
+    <string name="enter_cause_of_conflict">ادخل سبب النزاع!</string>
+    <string name="enter_your_requests">ادخل طلباتك!</string>
+    <string name="enter_product_name">أدخل اسم المنتج:</string>
+    <string name="need_location_permission">يحتاج هذا التطبيق إلى إذن الموقع ، يرجى قبول استخدام وظيفة الموقع</string>
+    <string name="location_permission_needed">إذن الموقع مطلوب</string>
+    <string name="mark_your_location">يرجى تحديد موقعك!</string>
+    <string name="add_location">أضف الموقع</string>
+    <string name="enter_address_details">أدخل تفاصيل العنوان:</string>
+    <string name="enter_address_name">أدخل اسم العنوان:</string>
+    <string name="selected_position">الموقع المحدد</string>
+    <string name="your_location">موقعك</string>
+    <string name="choose_address">اختر عنوانًا</string>
+    <string name="no_addresses_found">لا توجد عناوين</string>
+    <string name="you_have_not_added_addresses">لم تقم بإضافة عناوين!</string>
+    <string name="rating">التقييم:</string>
+    <string name="accept_offer">قبول العرض</string>
+    <string name="refuse_offer">رفض العرض</string>
+    <string name="delivery_service">خدمة التوصيل</string>
+    <string name="offers">العروض</string>
+    <string name="add_new_one">أضف جديد؟</string>
+    <string name="work_time">وقت العمل:</string>
+    <string name="no_offers_found">لا يوجد عروض!</string>
+    <string name="time_date">التاريخ والوقت</string>
+    <string name="direct_delivery">توصيل مباشر</string>
+    <string name="data">البيانات</string>
+    <string name="enter_date_time">أدخل التاريخ والوقت</string>
+    <string name="mr_ms">Me/Ms</string>
+    <string name="no_notifications_found">لا توجد تنبيهات</string>
+    <string name="enter_the_code_that_you_received_via_sms">ادخل الكود الذي تلقيته عبر SMS</string>
+    <string name="resend_code"><u>إعادة ارسال الرمز</u></string>
+    <string name="seconds">ثواني</string>
+    <string name="seconds_ago">ثانية</string>
+    <string name="minutes_ago">دقيقة</string>
+    <string name="hours_ago">ساعة</string>
+    <string name="days_ago">يوم</string>
+    <string name="today">اليوم</string>
+    <string name="earlier">سابقاً</string>
+    <string name="email_phone">البريد او الهاتف</string>
+    <string name="logout_from_other_devices">الخروج من الاجهزة الأخري؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="choose_your_favorite_avatar">اختر الصورة المناسبة</string>
+    <string name="register">تسجيل</string>
+    <string name="enter_email_phone">أدخل البريد او الهاتف</string>
+    <string name="remove_favorite_list">حذف قائمة المفضلة</string>
+    <string name="ago">منذ</string>
+    <string name="enter_your_mobile_number">أدخل رقم الهاتف</string>
+    <string name="mobile_number">رقم الهاتف</string>
+    <string name="united_arab_emirates">الإمارات العربية المتحدة</string>
+    <string name="invalid_code">كود خاطئ</string>
+    <string name="We_well_send_code_to_this_phone_number">سيتم ارسال رمز التحقق الي هذا الهاتف:</string>
+    <string name="this_or_edit">\n\nموافق؟ ام تود تعديل الرقم؟</string>
+    <string name="edit">تعديل</string>
+    <string name="choose_country">اختر الدولة</string>
+    <string name="choose_conflict_reason">اختر سبب النزاع</string>
+    <string name="invalid_phone_number">رقم الهاتف غير موجود</string>
+    <string name="activate_your_account_now">تفعيل الحساب الآن؟</string>
+    <string name="account_activated">تم تفعيل الحساب</string>
+    <string name="code_sent">تم ارسال كود التفعيل الي هاتفك</string>
+    <string name="add_new_pass">أضف كلمة مرور جديدة</string>
+    <string name="seller_app">Seller App</string>
+    <string name="choose_your_field">اختر نشاطك التجاري</string>
+    <string name="edit_my_activities">تعديل النشاط التجاري</string>
+    <string name="my_commercial_license">رخصتي التجارية</string>
+    <string name="orders_number">عدد الطلبات:</string>
+    <string name="distance">المسافة:</string>
+    <string name="add_offer">أضف عرض</string>
+    <string name="from">من</string>
+    <string name="enter_mobile_number">أدخل رقم الهاتف:</string>
+    <string name="gps_network_not_enabled">خدمة تحديد الموقع غير مفعلة</string>
+    <string name="about_us_body">بنانا هي مؤسسة فردية واعدة نعمل في تسهيل الوصول والربط بين تجار الأغذية والعملاء بأفضل سعر وخدمة سلسه، نقدم خدمة فريدة لم يسبق لها مثيل، ننطلق من دولة الإمارات إلى العالم، رؤيتنا تهدف لتوفير الوقت والمال والمساهمة في رفع التنافسية التجارية في تجارة الأغذية.</string>
+    <string name="acceptt">أوافق علي </string>
+    <string name="terms"><u>الشروط والأحكام </u>و</string>
+    <string name="privacy"><u>سياسة الخصوصية.</u></string>
+    <string name="all_notifications">جميع الاشعارات</string>
+    <string name="nearly_orders">الطلبات القريبة</string>
+    <string name="discounts">الخصومات</string>
+    <string name="orders_status">حالة العروض</string>
+    <string name="updates">التحديثات</string>
+    <string name="notification_settings">اعدادات الاشعارات</string>
+    <string name="terms_conditions">الشروط والأحكام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_error">يجب الموافقة علي الشروط والاحكام سياسة الخصوصية.</string>
+    <string name="by_date">المضاف حديثا</string>
+    <string name="by_amount">الكمية</string>
+    <string name="add_your_certificate">أضف الرخصة</string>
+    <string name="expiry_date">تاريخ الانتهاء</string>
+    <string name="working_time">اوقات العمل</string>
+    <string name="seller_info">معلومات البائع</string>
+    <string name="to">إلي</string>
+    <string name="working_from">العمل من:</string>
+    <string name="working_to">العمل الي:</string>
+    <string name="enter_date">ادخل التاريخ!</string>
+    <string name="enter_time">ادخل الوقت!</string>
+    <string name="total_price">السعر الكلي</string>
+    <string name="banana_delivery">توصيل شركة</string>
+    <string name="my_delivery">توصيلي</string>
+    <string name="order_location">مكان الطلب</string>
+    <string name="empty_offer">العرض فارغ!</string>
+    <string name="enter_total_price">ادخل السعر الكلي!</string>
+    <string name="delivered">تم التوصيل</string>
+    <string name="not_delivered">لم توصل</string>
+    <string name="binding">معلقة</string>
+    <string name="client_info">العميل</string>
+    <string name="my_offers">عروضي</string>
+    <string name="balance">الرصيد</string>
+    <string name="my_last_transactions">المعاملات السابقة:</string>
+    <string name="current_balance">الرصيد الحالي</string>
+    <string name="withdrawal">سحب</string>
+    <string name="charge">شحن</string>
+    <string name="no_transactions_found">لا يوجد معاملات!</string>
+    <string name="refund">عائد</string>
+    <string name="deposit">دفع</string>
+    <string name="mobile_number2">رقم الهاتف:</string>
+    <string name="time_date2"><![CDATA[التاريخ والوقت:]]></string>
+    <string name="tap_to_show_order_location">اضغط لفتح الموقع</string>
+    <string name="accepted">مقبول</string>
+    <string name="offer_number">رقم العرض:</string>
+    <string name="conflict_reason">سبب النزاع:</string>
+    <string name="requests">المطالبات</string>
+    <string name="evidence">الادلة</string>
+    <string name="accept">أوافق</string>
+    <string name="refuse">لا أوافق</string>
+    <string name="complaint_details">تفاصيل الشكوي</string>
+    <string name="no_complaints_found">لا توجد شكاوي</string>
+    <string name="my_fields">مجالاتي</string>
+    <string name="other_fields">مجالات اخري</string>
+    <string name="edit_my_fields">تعديل مجالي</string>
+    <string name="from2">من:</string>
+    <string name="to2">إلي:</string>
+    <string name="your_field_will_be_deleted">سيتم حذف المجال</string>
+    <string name="your_licence_will_be_deleted_you_shoud_send_new_one">سيتم حذف ترخيصك ، يجب عليك إرسال ترخيص جديد</string>
+    <string name="must_be_greater_than_15">يجب ان يكون اكبر من 15</string>
+    <string name="km">كم</string>
+    <string name="m">م</string>
+    <string name="full_name">الاسم بالكامل</string>
+    <string name="bank_account_number">رقم الحساب البنكي</string>
+    <string name="iban">IBAN</string>
+    <string name="bank_name">اسم البنك</string>
+    <string name="enter_account_number">ادخل رقم الحساب البنكي</string>
+    <string name="enter_iban">أدخل الIBAN</string>
+    <string name="enter_bank_name">أدخل اسم البنك</string>
+    <string name="enter_balance">أدخل الرصيد</string>
+    <string name="save">حفظ</string>
+    <string name="payment_status">حالة الدفع:</string>
+    <string name="when_recieving">عند الاستلام</string>
+    <string name="reciever_number">رقم المستلم:</string>
+    <string name="client_number">رقم العميل:</string>
+    <string name="Seller">بائع</string>
+    <string name="seller_info2">البائع</string>
+    <string name="waiting">المنتظرة</string>
+    <string name="delivery">توصيل</string>
+    <string name="delivery_price_message1">سيقوم مندوب التوصيل بالمهمة بمبلغ</string>
+    <string name="delivery_price_message2">درهم يدفعه العميل</string>
+    <string name="attention">تنبيه!</string>
+    <string name="urdu">اوردو</string>
+    <string name="the_minimum_balance_50">الحد الأدنى لسحب الرصيد هو 50</string>
+
+
+</resources>

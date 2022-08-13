@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بنانا سيلر</string>
+    <string name="skip">چھوڑ دیں</string>
+    <string name="start">شروع کریں</string>
+    <string name="slider_title1">درخواستیں وصول کریں</string>
+    <string name="slider_title2">آفرز دیں</string>
+    <string name="slider_title3">اپنے پیسے وصول کریں</string>
+    <string name="slider_subtitle1">اس ایپلیکیشن کے ذریعے آپ اپنی مصنوعات کے بارے میں بہت سے ذاتی آرڈرز قبول کرسکتے ہیں</string>
+    <string name="slider_subtitle2">اس ایپلیکیشن کے ذریعے آپ اپنے صارفین کو بہترین قیمتوں کے ساتھ آفرز دے سکتے ہیں</string>
+    <string name="slider_subtitle3">ایپلی کیشن کی مدد سے آپ آن لائن اور محفوظ طریقے سے اپنے پیسے وصول کرسکتے ہیں</string>
+    <string name="language">زبان</string>
+    <string name="phone_number">فون نمبر</string>
+    <string name="password"> پاس ورڈ</string>
+    <string name="forgot_password">پاسورڈ بھول گئے ؟</string>
+    <string name="wait">رکو</string>
+    <string name="ok">اوکے</string>
+    <string name="login">لاگ ان کریں</string>
+    <string name="please_enter_you_your_account">براہ کرم اپنا اکاؤنٹ درج کریں</string>
+    <string name="or">یا </string>
+    <string name="don_t_have_an_account">کیا آپ کا اکاؤنٹ نہیں ہے؟</string>
+    <string name="create_one"><u>اکاؤنٹ بنائیں</u></string>
+    <string name="sign_up">سائن اپ</string>
+    <string name="please_create_an_account">براہ کرم ایک اکاؤنٹ بنائیں</string>
+    <string name="name">نام</string>
+    <string name="confirm_password">پاس ورڈ کی تصدیق کریں</string>
+    <string name="already_have_an_account">پہلے سے ہی ایک اکاؤنٹ ہے?</string>
+    <string name="go_login"><u>لاگ ان</u></string>
+    <string name="fruits_and_vegetables">پھل اور سبزیاں</string>
+    <string name="meat_and_fish">گوشت اور مچھلی</string>
+    <string name="baked_goods">بيكري كا سامان</string>
+    <string name="food">کھانا</string>
+    <string name="search">تلاش کریں</string>
+    <string name="confirm">صدیق کریں</string>
+    <string name="cancel">منسوخ کریں</string>
+    <string name="enter_name">نام درج کریں!!</string>
+    <string name="enter_phone">فون نمبر درج کریں</string>
+    <string name="enter_password">پاس ورڈ درج کریں</string>
+    <string name="password_must_greater_than_7">""پاس ورڈ 8 الفاظ سے زیادہ ہونا چاہئے "</string>
+    <string name="enter_confirm_password">تصدیق پاس ورڈ درج کریں!!</string>
+    <string name="password_does_not_match">پاس ورڈ میچ نہیں کرتا!!</string>
+    <string name="account_created_successfully">اکاؤنٹ کامیابی سے تشکیل دے دیا گی</string>
+    <string name="phone_number_already_registered">فون نمبر پہلے ہی رجسٹرڈ ہے</string>
+    <string name="error_occurred_try_again">Aایک خرابی آگئی، دوبارہ کوشش کریں</string>
+
+    <string-array name="weights">
+        <item>کلو</item>
+        <item>گرام</item>
+        <item>اناج</item>
+        <item>لیٹر</item>
+        <item>گیلن</item>
+        <item>درجن</item>
+        <item>بیگ</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>عربي</item>
+        <item>Urdu</item>
+    </string-array>
+
+    <string-array name="order_sort">
+        <item>سب</item>
+        <item>مقدار</item>
+        <item>حال ہی میں شامل کیا گیا ہے</item>
+        <item>ڈیلیوری کی تاریخ</item>
+    </string-array>
+
+    <string-array name="order_filter">
+        <item>سب</item>
+        <item>آرڈرز</item>
+        <item>آخری 12 گھنٹے</item>
+        <item>براہ راست ڈیلیوری</item>
+    </string-array>
+
+    <string name="no_internet">انٹرنیٹ کنکشن  معطل  ہے!</string>
+    <string name="check_internet">براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں</string>
+    <string name="wrong_mobile_number">غلط موبائل نمبر</string>
+    <string name="wrong_password">غلط پاس ورڈ</string>
+    <string name="fruits">پھل</string>
+    <string name="vegetables">سبزیاں</string>
+    <string name="bread">روٹی</string>
+    <string name="sandwiches">سینڈویچ</string>
+    <string name="pies">پیسٹری</string>
+    <string name="croissant">کروسینٹ</string>
+    <string name="commodity">بنیادی مصنوعات</string>
+    <string name="frozen">منجمد</string>
+    <string name="refrigerated">ریفریجریٹڈ</string>
+    <string name="canned_food">کینری</string>
+    <string name="goodies_and_sweets">مٹھائیاں</string>
+    <string name="animal_products">جانوروں کی مصنوعات</string>
+    <string name="fish_products">کھانا دیکھیں</string>
+    <string name="most_wanted">زیادہ تر آرڈرز</string>
+    <string-array name="error_handler">
+        <item>اندرونی سرور کی خرابی</item>
+        <item>کامیابی</item>
+        <item>مجاز نہیں، آپ کو لاگ ان کرنا ہوگا</item>
+        <item>صارف نہیں ملا</item>
+        <item>آپ کا اکاؤنٹ مسدود ہے</item>
+        <item>غلط ڈیٹا</item>
+        <item>فون نمبر پہلے ہی رجسٹرڈ ہے</item>
+        <item>غلط موبائل نمبر یا ای میل</item>
+        <item>غلط پاس ورڈ</item>
+        <item>نہیں ملا</item>
+        <item>ٹوکری خالی ہے</item>
+        <item>آپ آرڈر کے مالک نہیں ہیں</item>
+        <item>آرڈر کی حیثیت</item>
+        <item>پہلے ہی شامل</item>
+        <item>آرڈر کی حیثیت</item>
+        <item>نیا پاس ورڈ پرانے پاس ورڈ سے مماثل ہے</item>
+        <item>نیا موبائل پرانے موبائل سے مماثل ہے</item>
+        <item>آپ کو دوبارہ لاگ ان کرنا ہوگا</item>
+        <item>wwww</item>
+        <item>آفر منسوخ ہو چکی ہے یا آرڈر ختم ہوچکا ہے</item>
+        <item>ادائیگی میں خرابی</item>
+        <item>گاہک نے دكان دار کا انتخاب نہیں کیا</item>
+        <item>گاہک کی ادائیگی میں کچھ ہوا</item>
+        <item>دكان دار ایک ہی آرڈر کے لئے ایک سے زیادہ آفر شامل نہیں کرسکتا</item>
+        <item>آرڈر کے لئے منتخب کردہ آفر نہیں ملی</item>
+        <item>مسئلہ پہلے سے ہی شامل ہوچکا ہے</item>
+        <item>یہ ای میل پہلے ہی اندراج شدہ ہے</item>
+        <item>آپ کو آرڈر قسم کے لئے سند فراہم کرنا چاہئے</item>
+        <item>کاروباری سرگرمی کے کاغذات زیر غور ہیں</item>
+        <item>سرٹیفکیٹ کی میعاد ختم ہوگئی</item>
+        <item>قسم پہلے سے موجود ہے</item>
+        <item>ایس ایم ایس بھیجنے میں خامی</item>
+        <item>غلط موبائل نمبر</item>
+        <item>ایس ایم ایس کریڈٹ نہیں ہے</item>
+        <item>جاری رکھنے کے لئے آپ کو اکاؤنٹ کی تصدیق کرنی ہوگی</item>
+        <item>اجازت نہیں ہے، اکاؤنٹ پہلے ہی ورفے ہے</item>
+        <item>غلط کوڈ</item>
+        <item>توثیقی کوڈ کی میعاد ختم ہوگئی</item>
+        <item>خالی</item>
+        <item>آپ کے بٹوے میں کافی رقم نہیں ہے، براہ کرم چارج کریں</item>
+        <item>آرڈر ختم نہیں ہوا!</item>
+        <item>آپ نے ادائیگی نہیں کی</item>
+        <item>ڈیلیوری کے بعد آرڈر منسوخ نہیں کرسکتے ہیں</item>
+        <item>آرڈر منسوخ ہوگیا!</item>
+        <item>کوئی آفر نہیں ملی!</item>
+        <item>آرڈر پہلے ہی پہنچا دیا گیا ہے</item>
+        <item>گاہک کے ذریعہ آرڈر منسوخ ہوگیا</item>
+        <item>آرڈر نہیں پہنچا</item>
+        <item>آپ کے بٹوے میں کافی رقم نہیں ہ!</item>
+        <item>آرڈر نہیں پہنچا</item>
+        <item>آپ 3 دن کے بعد شکایت نہیں کرسکتے ہیں!</item>
+        <item>يہ قيمت بنانا ڈیلیوری کی قیمت سے کم ہے</item>
+        <item>گیسٹ موڈ میں آپ فلٹر استعمال نہیں کرسکتے</item>
+        <item>آپ کو مقام فراہم کرنا چاہئے</item>
+        <item>اس خصوصیت کو استعمال کرنے کے ل You آپ کو لاگ ان کرنا ہوگا</item>
+    </string-array>
+    <string name="recently_added">حال ہی میں شامل کیا گیا ہے</string>
+    <string name="successfully_added_to_the_cart">کامیابی سے ٹوکری میں شامل ہوگئی</string>
+    <string name="are_you_sure">کیا آپ کو یقین ہے؟</string>
+    <string name="add_to_your_cart">اپنی ٹوکری میں شامل کریں</string>
+    <string name="current">موجودہ</string>
+    <string name="completed">مکمل شدہ</string>
+    <string name="canceled">منسوخ شدہ</string>
+    <string name="order_number">آرڈر نمبر</string>
+    <string name="items">اشیاء</string>
+    <string name="quantity">مقدار</string>
+    <string name="price">قیمت</string>
+    <string name="address">پتہ</string>
+    <string name="delivery_date">خ کا انتخاب کریں:</string>
+    <string name="cancel_order">آرڈر منسوخ کر دیں</string>
+    <string name="make_complaint">شکایت کریں</string>
+    <string name="orders">زیادہ</string>
+    <string name="my_orders">میرے آرڈرز</string>
+    <string name="my_favorites">میرے پسندیدہ</string>
+    <string name="my_wallet">میرا پرس</string>
+    <string name="settings">جائیں</string>
+    <string name="about">ایپ کے ب</string>
+    <string name="complaints">شکایات</string>
+    <string name="logout">لاگ آوٹ</string>
+    <string name="add_new_favorite_list">نئی پسندیدہ فہرست شامل کریں</string>
+    <string name="no_products_found">کوئی مصنوعہ نہیں ملا!</string>
+    <string name="enter_list_name">فہرست کا نام درج کریں:</string>
+    <string name="my_favorite">میرے پسندیدہ</string>
+    <string name="successfully_added">کامیابی کے ساتھ شامل ہوگیا</string>
+    <string name="remove_from_favorites">پسندیدہ سے حذف کریں</string>
+    <string name="successfully_deleted">کامیابی کے ساتھ شامل ہوگیا</string>
+    <string name="choose_your_favorite_list">اپنی پسندیدہ فہرست منتخب کریں:</string>
+    <string name="successfully_added_to_your_favorites">کامیابی کے ساتھ آپ کے پسندیدہ فہرست میں شامل ہوگیا</string>
+    <string name="your_order_successfully_canceled">آپ کا آرڈر کامیابی کے ساتھ منسوخ ہوگیا</string>
+    <string name="no_orders_found">کوئی آرڈر نہیں ملا </string>
+    <string name="shopping_cart">خریداری کی ٹوکری</string>
+    <string name="remove_from_cart">ٹوکری سے ہٹا دیں</string>
+    <string name="add_order">آرڈر شامل کریں</string>
+    <string name="order_created_successfully">آرڈر کامیابی کے ساتھ تشکیل دے دیا گیا</string>
+    <string name="add_product">آرڈر شامل کریں</string>
+    <string name="product_name"> میں درج کریں</string>
+    <string name="notifications">اطلاعات</string>
+    <string name="edit_mobile_number">موبائل نمبر تبدیل کریں</string>
+    <string name="edit_your_name">اپنے نام میں ترمیم کریں</string>
+    <string name="edit_password">پاس ورڈ میں ترمیم کریں</string>
+    <string name="my_addresses">میرے پتے</string>
+    <string name="english">انگریزی</string>
+    <string name="old_mobile_number">پرانا موبائل نمبر:</string>
+    <string name="new_mobile_number">نیا موبائل نمبر:</string>
+    <string name="old_password">پرانا پاس ورڈ:</string>
+    <string name="new_password">نیا پاس ورڈ:</string>
+    <string name="about_us">ہمارے بارے میں</string>
+    <string name="contact_us">ہم سے رابطہ کریں</string>
+    <string name="app_review">ایپ کا جائزہ</string>
+    <string name="sharing">شیئرنگ</string>
+    <string name="tell_us_what_your_suggestion">اپنی تجویز ہمیں بتائیں</string>
+    <string name="email">ای میل</string>
+    <string name="your_suggestion">پ کی تجویز</string>
+    <string name="send">بھیجیں</string>
+    <string name="cause_of_conflict">بھیجیں</string>
+    <string name="add_your_evidence">تنازعہ کی وجہ</string>
+    <string name="dialog_permission_title">اجازت دی جا رہی ہے</string>
+    <string name="dialog_permission_message">اس ایپ کو اس خصوصیت کو استعمال کرنے کے لئے اجازت درکار ہے، آپ اسے ایپ کی سيٹنگ میں دے سکتے ہیں</string>
+    <string name="go_to_settings">سيٹنگ پر جائیں</string>
+    <string name="enter_old_phone">پرانا فون درج کریں</string>
+    <string name="done">ہو گیا</string>
+    <string name="arabic">عربي</string>
+    <string name="id">شناخت:</string>
+    <string name="enter_email">ای میل درج کریں!</string>
+    <string name="enter_your_message">پیغام درج کریں!!</string>
+    <string name="your_requests">آپ کی درخواستیں</string>
+    <string name="enter_order_id">رڈر ID درج کریں!!</string>
+    <string name="enter_cause_of_conflict">تنازعہ کی وجہ درج کریں</string>
+    <string name="enter_your_requests">اپنی درخواستیں درج کریں!</string>
+    <string name="enter_product_name">پروڈکٹ کا نام عربی میں درج کریں</string>
+    <string name="need_location_permission">س ایپ کو مقام کی اجازت درکار ہے، براہ کرم مقام کی خصوصیت کو استعمال کرنے کی اجازت دیں</string>
+    <string name="location_permission_needed">مقام کی اجازت ضروری ہے</string>
+    <string name="mark_your_location">براہ کرم اپنے مقام کو نشان زد کریں!!</string>
+    <string name="add_location">مقام شامل کریں</string>
+    <string name="enter_address_details">پتہ کی تفصیلات درج کریں</string>
+    <string name="enter_address_name">پتہ کا نام درج کریں:</string>
+    <string name="selected_position">منتخب پوزیشن</string>
+    <string name="your_location">شامل کریں</string>
+    <string name="choose_address">منتخب پوزیشن</string>
+    <string name="no_addresses_found">منتخب پوزیشن</string>
+    <string name="you_have_not_added_addresses">ایک پتہ منتخب کریں</string>
+    <string name="work_time">کام کا وقت:</string>
+    <string name="rating">درجہ بندی:</string>
+    <string name="accept_offer">آفر قبول کریں</string>
+    <string name="refuse_offer">آفر مسترد کریں</string>
+    <string name="delivery_service">ڈیلیوری کی خدمت</string>
+    <string name="offers">آفرز</string>
+    <string name="add_new_one">نیا شامل کریں؟?</string>
+    <string name="no_offers_found">کوئی آفر نہیں ملی!</string>
+    <string name="address_details">پتہ کی تفصیلات</string>
+    <string name="time_date">تاریخ اور وقت</string>
+    <string name="direct_delivery">براہ راست ڈیلیوری</string>
+    <string name="data">ڈیٹا</string>
+    <string name="enter_date_time">تاریخ اور وقت</string>
+    <string name="mr_ms">جناب / محترمہ</string>
+    <string name="no_notifications_found">کوئی اطلاع موصول نہیں ہوئی!!</string>
+    <string name="enter_the_code_that_you_received_via_sms">ایس ایم ایس کے ذریعے موصولہ کوڈ درج کریں</string>
+    <string name="resend_code"><u>کوڈ پھر سے بھیجیں</u></string>
+    <string name="seconds">سیکنڈ</string>
+    <string name="seconds_ago">سیکنڈ قبل</string>
+    <string name="minutes_ago">منٹ قبل</string>
+    <string name="hours_ago">گھنٹوں قبل</string>
+    <string name="days_ago">دنوں قبل</string>
+    <string name="today">آج</string>
+    <string name="earlier">پہلے</string>
+    <string name="email_phone">ای میل یا فون</string>
+    <string name="logout_from_other_devices">دوسرے ڈیوائسز سے لاگ آؤٹ؟?</string>
+    <string name="no">نہیں</string>
+    <string name="yes">جی ہاں</string>
+    <string name="choose_your_favorite_avatar">اپنا اوتار چنیں</string>
+    <string name="register">رجسٹر کریں</string>
+    <string name="enter_email_phone">ای میل یا فون درج کریں</string>
+    <string name="remove_favorite_list">پسندیدہ فہرست کو ہٹا دیں</string>
+    <string name="ago">"پہلے "</string>
+    <string name="enter_your_mobile_number">اپنے موبائل فون کا نمبر درج کریں</string>
+    <string name="mobile_number">موبائل فون کا نمبر</string>
+    <string name="united_arab_emirates">متحدہ عرب امارات</string>
+    <string name="invalid_code">غلط کوڈ!</string>
+    <string name="We_well_send_code_to_this_phone_number">ہم اس فون نمبر پر کوڈ بھیجیں گے</string>
+    <string name="this_or_edit">یا یہ ٹھیک ہے، یا آپ اس نمبر میں ترمیم کرنا چاہیں گے؟</string>
+    <string name="edit">ترمیم</string>
+    <string name="choose_country">اپنے ملک کا انتخاب کریں!</string>
+    <string name="choose_conflict_reason">تنازعہ کی وجہ کا انتخاب کریں</string>
+    <string name="invalid_phone_number">غلط فون نمبر</string>
+    <string name="activate_your_account_now">اپنا اکاؤنٹ ابھی ایکٹیویٹ کریں؟</string>
+    <string name="account_activated">اکاؤنٹ ایکٹیویٹ ہوگیا</string>
+    <string name="code_sent">توثیقی کوڈ آپ کے فون پر بھیجا گیا ہے</string>
+    <string name="add_new_pass">نیا پاس ورڈ درج کریں</string>
+    <string name="seller_app">دكان دار ایپ</string>
+    <string name="choose_your_field">کاروبار کا انتخاب کریں </string>
+    <string name="edit_my_activities">کاروبار میں ترمیم کریں </string>
+    <string name="my_commercial_license">میرا تجارتی لائسنس</string>
+    <string name="orders_number">آرڈر نمبر:</string>
+    <string name="distance">فاصلہ</string>
+    <string name="add_offer">آفر شامل کریں</string>
+    <string name="from">سے</string>
+    <string name="enter_mobile_number">موبائل نمبر درج کریں:</string>
+    <string name="gps_network_not_enabled">GPS خدمات فعال نہیں ہیں</string>
+    <string name="about_us_body">بنانا ايپ ایک بااختیار انٹرپرائز ہے جو کھانے پينے کے تاجروں اور صارفین کو منسلک کرنے میں سہولت فراہم کرتا ہے بہترین قیمتوں اور ہموار سروس کے ساتھ، ہم ایک انوکھی اور بے مثال خدمت مہیا کرتے ہیں، ہم متحدہ عرب امارات سے پوری دنیا تک بڑھتے ہیں، ہمارے وژن کا مقصد وقت اور پیسہ بچانا اور کھانے پينے کی بڑھتی تجارت میں حصہ ڈالنا ہے</string>
+    <string name="acceptt">قبول کر لیا</string>
+    <string name="terms"><u>شرائط، ضوابط</u> and</string>
+    <string name="privacy"><u>رازداری کی پالیسی</u>.</string>
+    <string name="all_notifications">تمام اطلاعات</string>
+    <string name="nearly_orders">تمام اطلاعات</string>
+    <string name="discounts">ڈسکاؤنٹ</string>
+    <string name="orders_status">آرڈرز کی حیثیت</string>
+    <string name="updates">تازہ ترین</string>
+    <string name="notification_settings">اطلاعات کی سيٹنگ</string>
+    <string name="terms_conditions">شرائط و ضوابط</string>
+    <string name="privacy_policy">رازداری کی پالیسی</string>
+    <string name="terms_error">آپ کو شرائط و ضوابط اور رازداری کی پالیسی سے اتفاق کرنا ہوگا.</string>
+    <string name="by_date">حال ہی میں شامل کیا گیا ہے</string>
+    <string name="by_amount">رقم سے</string>
+    <string name="add_your_certificate">اپنا سرٹیفکیٹ شامل کریں</string>
+    <string name="expiry_date">میعاد ختم ہونے کی تاریخ</string>
+    <string name="working_time">کام کرنے کا وقت</string>
+    <string name="seller_info">دكان دار کی معلومات</string>
+    <string name="seller_info2">دكان دار كى</string>
+    <string name="to">کرنا</string>
+    <string name="working_from">منجانب</string>
+    <string name="working_to">کام ہو رہا ہے:</string>
+    <string name="enter_date">تاریخ درج کریں</string>
+    <string name="enter_time">وقت درج کریں</string>
+    <string name="total_price">کل قیمت</string>
+    <string name="banana_delivery">کمپنی کی ڈیلیوری </string>
+    <string name="my_delivery">میری ڈیلیوری</string>
+    <string name="order_location">آرڈر لوکیشن</string>
+    <string name="empty_offer">آفر قبول کریں</string>
+    <string name="enter_total_price">کل قیمت درج کریں</string>
+    <string name="delivered">پہنچا دیا گیا</string>
+    <string name="not_delivered">حوالے نہیں ہوسکی</string>
+    <string name="binding">زیر التواء</string>
+    <string name="client_info"> معلومات</string>
+    <string name="my_offers">میری آفرز</string>
+    <string name="balance">بیلنس </string>
+    <string name="my_last_transactions">آخری ٹرانزیکشنز:</string>
+    <string name="current_balance">موجودہ بيلنس</string>
+    <string name="withdrawal">بیلنس</string>
+    <string name="charge">چارج کریں</string>
+    <string name="no_transactions_found">کوئی ٹرانزیکشن نہیں ملا</string>
+    <string name="refund">واپس کرنا</string>
+    <string name="deposit">ڈپازٹ</string>
+    <string name="mobile_number2">موبائل نمبر :</string>
+    <string name="tap_to_show_order_location">آرڈر کا مقام ظاہر کرنے کیلئے ٹیپ کریں</string>
+    <string name="accepted">قبول کر لیا</string>
+    <string name="offer_number">آفر نمبر:</string>
+    <string name="conflict_reason">تنازعہ کی وجہ:</string>
+    <string name="requests">درخواستیں</string>
+    <string name="evidence">شواہد</string>
+    <string name="accept">قبول کریں</string>
+    <string name="refuse">مسترد کریں</string>
+    <string name="complaint_details">شکایت کی تفصیلات</string>
+    <string name="no_complaints_found">کوئی شکایت نہیں ملی!</string>
+    <string name="my_fields">میرے فیلڈز</string>
+    <string name="other_fields">دوسرے فیلڈز </string>
+    <string name="edit_my_fields">میری سرگرمی میں ترمیم کریں</string>
+    <string name="from2">سے:</string>
+    <string name="to2">تک:</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="false">BananaSeller</string>
+    <string name="your_field_will_be_deleted">آپ کا فیلڈ حذف ہوجائے گا</string>
+    <string name="your_licence_will_be_deleted_you_shoud_send_new_one">آپ کا لائسنس حذف ہوجائے گا آپ کو نیا بھیجنا چاہئے</string>
+    <string name="must_be_greater_than_15">قیمت 15 AED سے زیادہ ہونی چاہئے</string>
+    <string name="km">KM</string>
+    <string name="m">M</string>
+    <string name="full_name">پورا نام</string>
+    <string name="bank_account_number">بینک اکاؤنٹ نمبر</string>
+    <string name="iban">IBAN</string>
+    <string name="bank_name">بینک کا نام </string>
+    <string name="enter_account_number">بینک اکاؤنٹ نمبر</string>
+    <string name="enter_iban">اپنا IBAN درج کریں</string>
+    <string name="enter_bank_name">بینک کا نام درج کریں</string>
+    <string name="enter_balance">بیلنس کی رقم درج کریں</string>
+    <string name="save">محفوظ کریں</string>
+    <string name="payment_status">ادائیگی کی حالت:</string>
+    <string name="when_recieving">پہنچانے پر</string>
+    <string name="reciever_number">وصول کنندہ نمبر:</string>
+    <string name="client_number">کلائنٹ نمبر:</string>
+    <string name="Seller">دكان دار کی </string>
+    <string name="delivery">ڈیلیوری</string>
+    <string name="waiting">انتظار کر رہا ہے</string>
+    <string name="delivery_price_message1">ڈلیوری والے 20 درہم میں کام مكمل کرے گے جو کہ کسٹمر سے وصول کیا جاۓ گا</string>
+    <string name="delivery_price_message2">کسٹمرجو پیمنٹ کرے گا  </string>
+    <string name="attention">توجہ!</string>
+    <string name="urdu">اردو</string>
+    <string name="the_minimum_balance_50">کم سے کم بیلنس وٹہدروال کی رقم 50 ہے</string>
+
+</resources>

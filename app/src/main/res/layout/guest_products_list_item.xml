@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_margin="@dimen/_4sdp"
+    app:cardCornerRadius="@dimen/_8sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/products_item_iv_image"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:src="@drawable/banana_logo"
+            android:layout_margin="@dimen/_8sdp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/products_item_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="fesh"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

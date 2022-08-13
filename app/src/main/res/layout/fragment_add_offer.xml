@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.homeCycle.home.AddOfferFragment">
+
+    <include layout="@layout/app_bar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_add_offer_rc_items"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_8sdp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_add_offer_til_total_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_32sdp"
+        android:theme="@style/TextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="1234567890"
+            android:hint="@string/total_price"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:drawableEnd="@drawable/ic_price"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/_13ssp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/fragment_add_offer_rg_delivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/fragment_add_offer_rb_banana_delivery"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/fragment_add_offer_rb_banana_delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text="@string/banana_delivery" />
+
+        <RadioButton
+            android:id="@+id/fragment_add_offer_rb_my_delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="@string/my_delivery" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/fragment_add_offer_btn_add_offer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="@font/cairo_bold"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="@string/add_offer"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11ssp" />
+
+</LinearLayout>

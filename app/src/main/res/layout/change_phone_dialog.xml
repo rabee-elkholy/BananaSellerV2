@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_mobile_number"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/cairo_semibold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:gravity="center_vertical">
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_textSize="@dimen/_12ssp"
+            app:ccp_autoDetectLanguage="true"
+            app:ccp_countryPreference="ae" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textColor="@color/title_color" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/button_shape"
+        android:fontFamily="@font/cairo_bold"
+        android:paddingVertical="@dimen/_8sdp"
+        android:text="@string/confirm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11ssp" />
+
+</LinearLayout>

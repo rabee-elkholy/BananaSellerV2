@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".view.fragment.userCycle.LoginFragment">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:src="@drawable/banana_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="@string/register"
+            android:textColor="@color/title_color"
+            android:textSize="@dimen/_20ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="@string/please_create_an_account"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/_14ssp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_13ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+
+                android:textColor="@color/title_color"
+
+                android:textSize="@dimen/_13ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_sign_up_tit_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:drawableEnd="@drawable/ic_arrow_drop_down"
+                android:focusable="false"
+                android:hint="@string/choose_your_field"
+                android:textColor="@color/title_color"
+
+                android:textSize="@dimen/_13ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center_vertical">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/fragment_sign_up_ccp_code"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:gravity="center"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_autoDetectLanguage="true"
+                app:ccp_autoFormatNumber="true"
+                app:ccp_clickable="false"
+                app:ccp_countryPreference="ae"
+                app:ccp_padding="0dp"
+                app:ccp_showArrow="false"
+                app:ccp_showNameCode="false"
+                app:ccp_showPhoneCode="false"
+                app:ccp_textSize="@dimen/_13sdp"
+                app:ccp_useFlagEmoji="true" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInputLayout">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_sign_up_et_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:singleLine="true"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_13ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_sign_up_et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInputLayout">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number"
+                    android:singleLine="true"
+                    android:inputType="phone"
+                    android:digits="1234567890 "
+                    android:textColor="@color/title_color"
+
+                    android:textSize="@dimen/_13ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:theme="@style/TextInputLayout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_13ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:theme="@style/TextInputLayout"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_13ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:gravity="center">
+
+            <CheckBox
+                android:id="@+id/fragment_sign_up_cb_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:text="@string/acceptt"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_10ssp" />
+
+
+            <TextView
+                android:id="@+id/fragment_sign_up_tv_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:text="@string/terms"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_10ssp" />
+
+            <TextView
+                android:id="@+id/fragment_sign_up_tv_privacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_10ssp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
+
+        <Button
+            android:id="@+id/fragment_sign_up_btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:background="@drawable/button_shape"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingVertical="@dimen/_6sdp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_8sdp"
+            android:gravity="center">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_11ssp" />
+
+            <TextView
+                android:id="@+id/fragment_sign_up_tv_go_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/go_login"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

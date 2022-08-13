@@ -1,0 +1,393 @@
+<resources>
+    <string name="app_name">Banana Seller</string>
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+
+    <string name="slider_title1">Receive requests</string>
+    <string name="slider_title2">Make offers</string>
+    <string name="slider_title3">Receive your money</string>
+    <string name="slider_subtitle1">Through the application, you can receiving many requests for your products</string>
+    <string name="slider_subtitle2">Through the application, you can present offers to customers at the best prices</string>
+    <string name="slider_subtitle3">Through the application you can receive your money online and in a safe way</string>
+
+    <string name="language">Language</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="wait">Wait</string>
+    <string name="ok">OK</string>
+    <string name="login">Login</string>
+    <string name="please_enter_you_your_account">Please enter you your account</string>
+    <string name="or">OR</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create_one"><u>Create one</u></string>
+    <string name="sign_up">SignUp</string>
+    <string name="please_create_an_account">Please create an account</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="go_login"><u>Go login</u></string>
+    <string name="fruits_and_vegetables">Fruits and vegetables</string>
+    <string name="meat_and_fish">Meat and fish</string>
+    <string name="baked_goods">Baked goods</string>
+    <string name="food">Food</string>
+    <string name="search">Search</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_name">Enter name!</string>
+    <string name="enter_phone">Enter phone number!</string>
+    <string name="enter_password">Enter password</string>
+    <string name="password_must_greater_than_7">"Password must greater than 7 "</string>
+    <string name="enter_confirm_password">Enter confirm password!</string>
+    <string name="password_does_not_match">Password does not match!</string>
+    <string name="account_created_successfully">Account created successfully</string>
+    <string name="phone_number_already_registered">Phone number already registered</string>
+    <string name="error_occurred_try_again">An error occurred please try again</string>
+
+
+    <string-array name="weights">
+        <item>kg</item>
+        <item>gram</item>
+        <item>grain</item>
+        <item>Liter</item>
+        <item>Gallon</item>
+        <item>drzn</item>
+        <item>bag</item>
+    </string-array>
+
+    <string-array name="languages">
+        <item>English</item>
+        <item>عربي</item>
+        <item>اردو</item>
+    </string-array>
+
+    <string-array name="order_sort">
+        <item>All</item>
+        <item>Quantity</item>
+        <item>Recently added</item>
+        <item>Delivery date</item>
+    </string-array>
+
+    <string-array name="order_filter">
+        <item>All</item>
+        <item>Nearly</item>
+        <item>Last 12 hours</item>
+        <item>Direct delivery</item>
+    </string-array>
+
+
+    <string name="no_internet">No internet connection!</string>
+    <string name="check_internet">Please check your internet connection try again.</string>
+    <string name="wrong_mobile_number">Wrong mobile number</string>
+    <string name="wrong_password">Wrong password</string>
+
+
+    <string name="fruits">Fruits</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="bread">Bread</string>
+    <string name="sandwiches">Sandwiches</string>
+    <string name="pies">Pies</string>
+    <string name="croissant">Croissant</string>
+    <string name="commodity">Commodity</string>
+    <string name="frozen">Frozen</string>
+    <string name="refrigerated">Refrigerated</string>
+    <string name="canned_food">Canned food</string>
+    <string name="goodies_and_sweets">Goodies and sweets</string>
+    <string name="animal_products">Animal orderProducts</string>
+    <string name="fish_products">Fish orderProducts</string>
+    <string name="most_wanted">Most wanted</string>
+    <string-array name="error_handler">
+        <item>Internal server error</item>
+        <item>Success</item>
+        <item>Not authorized you must login</item>
+        <item>User not found</item>
+        <item>Your account blocked</item>
+        <item>Wrong data</item>
+        <item>Phone number already registered</item>
+        <item>Wrong mobile number or email</item>
+        <item>Wrong password</item>
+        <item>Not found</item>
+        <item>Cart is empty</item>
+        <item>You are not the order owner!!</item>
+        <item>The order status != started</item>
+        <item>Already Added!</item>
+        <item>The order status != ended</item>
+        <item>The new is password identical with the old password</item>
+        <item>The new is mobile identical with the old mobile</item>
+        <item>You must login again</item>
+        <item>wwww</item>
+        <item>Offer is canceled or the order is ended</item>
+        <item>Payment error</item>
+        <item>client didn\'t select the seller\'s offer</item>
+        <item>some thing happend in client payment</item>
+        <item>seller can\'t add more than offer for the same order</item>
+        <item>can\'t find selected offer for the order</item>
+        <item>Issue already created</item>
+        <item>This email is already registered</item>
+        <item>you should provide certificate for order category</item>
+        <item>Business activity papers are under review</item>
+        <item>certificate expired</item>
+        <item>category already exists</item>
+        <item>error sending sms</item>
+        <item>invalid mobile number</item>
+        <item>no sms Credi</item>
+        <item>you must verfy the account to countenue</item>
+        <item>not allowed url accout allready verfied</item>
+        <item>wrong code</item>
+        <item>validation code expired</item>
+        <item>empty</item>
+        <item>Not enough money in your wallet please charge!</item>
+        <item>The order not ended!</item>
+        <item>You didn\'t pay!</item>
+        <item>Can\'t cancel order after delivered!</item>
+        <item>Order Canceled!</item>
+        <item>No offer found!</item>
+        <item>Order already delivered!</item>
+        <item>Order canceled by the client!</item>
+        <item>Order didn\'t delivered</item>
+        <item>Not enough balance in your wallet!</item>
+        <item>order didn\'t delivered</item>
+        <item>You can\'t make a complaint after 3 days!</item>
+        <item>price less than banana delivery price</item>
+        <item>You can\'t filter with location in guest</item>
+        <item>You should provide location</item>
+        <item>You must be logged in to use this feature</item>
+
+    </string-array>
+    <string name="recently_added">Recently added</string>
+
+    <string name="successfully_added_to_the_cart">Successfully added to the cart</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="add_to_your_cart">Add to your cart</string>
+
+
+    <string name="current">Current</string>
+    <string name="completed">Completed</string>
+    <string name="canceled">Canceled</string>
+    <string name="order_number">Order Number:</string>
+    <string name="items">Items:</string>
+    <string name="quantity">Quantity:</string>
+    <string name="price">Price:</string>
+    <string name="address">Address:</string>
+    <string name="delivery_date">Delivery Date:</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="make_complaint">Make Complaint</string>
+    <string name="orders">Orders</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_favorites">My Favorites</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="complaints">Complaints</string>
+    <string name="logout">Logout</string>
+    <string name="add_new_favorite_list">Add New Favorite List</string>
+    <string name="no_products_found">No products found!</string>
+    <string name="enter_list_name">Enter List Name:</string>
+    <string name="my_favorite">My favorite</string>
+    <string name="successfully_added">Successfully added</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="successfully_deleted">Successfully deleted</string>
+    <string name="choose_your_favorite_list">Choose your favorite list:</string>
+    <string name="successfully_added_to_your_favorites">Successfully added to your favorites</string>
+    <string name="your_order_successfully_canceled">Your order successfully canceled</string>
+    <string name="no_orders_found">"No orders found "</string>
+    <string name="shopping_cart">Shopping cart</string>
+    <string name="remove_from_cart">Remove from cart</string>
+    <string name="add_order">Add Order</string>
+    <string name="order_created_successfully">Order created successfully</string>
+    <string name="add_product">Add Product</string>
+    <string name="product_name">Product name</string>
+    <string name="notifications">Notifications</string>
+    <string name="edit_mobile_number">Edit mobile number</string>
+    <string name="edit_your_name">Edit your name</string>
+    <string name="edit_password">Edit password</string>
+    <string name="my_addresses">My addresses</string>
+    <string name="english">English</string>
+    <string name="old_mobile_number">Old mobile number:</string>
+    <string name="new_mobile_number">New mobile number:</string>
+    <string name="old_password">Old password:</string>
+    <string name="new_password">New password:</string>
+    <string name="about_us">About us</string>
+    <string name="contact_us">Contact us</string>
+    <string name="app_review">App review</string>
+    <string name="sharing">Sharing</string>
+    <string name="tell_us_what_your_suggestion">Tell us what your suggestion</string>
+    <string name="email">Email</string>
+    <string name="your_suggestion">Your suggestion</string>
+    <string name="send">Send</string>
+    <string name="cause_of_conflict">Cause of conflict</string>
+    <string name="add_your_evidence">Add your evidence</string>
+
+    <string name="dialog_permission_title">Granting permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can give them in the app settings.</string>
+    <string name="go_to_settings">Go to settings</string>
+    <string name="enter_old_phone">Enter old phone!</string>
+    <string name="done">Done</string>
+    <string name="arabic">Arabic</string>
+    <string name="id">Id:</string>
+    <string name="enter_email">Enter email!</string>
+    <string name="enter_your_message">Enter your message!</string>
+    <string name="your_requests">Your requests</string>
+    <string name="enter_order_id">Enter order id!</string>
+    <string name="enter_cause_of_conflict">Enter cause of conflict!</string>
+    <string name="enter_your_requests">Enter your requests!</string>
+    <string name="enter_product_name">Enter product name:</string>
+    <string name="need_location_permission">This app needs the Location permission, please accept to use location functionality</string>
+    <string name="location_permission_needed">Location Permission Needed</string>
+    <string name="mark_your_location">Please mark your location!</string>
+    <string name="add_location">Add location</string>
+    <string name="enter_address_details">Enter address details:</string>
+    <string name="enter_address_name">Enter address name:</string>
+    <string name="selected_position">Selected Position</string>
+    <string name="your_location">Your Location</string>
+    <string name="choose_address">Choose an address</string>
+    <string name="no_addresses_found">No addresses found</string>
+    <string name="you_have_not_added_addresses">You have no addresses!</string>
+    <string name="work_time">Work time:</string>
+    <string name="rating">Rating:</string>
+    <string name="accept_offer">Accept Offer</string>
+    <string name="refuse_offer">Refuse Offer</string>
+    <string name="delivery_service">Delivery service</string>
+    <string name="offers">Offers</string>
+    <string name="add_new_one">Add new one?</string>
+    <string name="no_offers_found">No offers found!</string>
+    <string name="address_details">Address Details</string>
+    <string name="time_date"><![CDATA[Date & Time]]></string>
+    <string name="direct_delivery">Direct Delivery</string>
+    <string name="data">Data</string>
+    <string name="enter_date_time"><![CDATA[Enter date & time!]]></string>
+    <string name="mr_ms">Me/Ms</string>
+    <string name="no_notifications_found">No notifications found!</string>
+    <string name="enter_the_code_that_you_received_via_sms">Enter the code that you received via SMS</string>
+    <string name="resend_code"><u>Resend Code</u></string>
+    <string name="seconds">seconds</string>
+    <string name="seconds_ago">Seconds ago</string>
+    <string name="minutes_ago">Minutes ago</string>
+    <string name="hours_ago">Hours ago</string>
+    <string name="days_ago">Days ago</string>
+    <string name="today">Today</string>
+    <string name="earlier">Earlier</string>
+    <string name="email_phone">Email or phone</string>
+    <string name="logout_from_other_devices">Logout from other devices?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="choose_your_favorite_avatar">Choose your avatar</string>
+    <string name="register">Register</string>
+    <string name="enter_email_phone">Enter email or phone!</string>
+    <string name="remove_favorite_list">Remove favorite list</string>
+    <string name="ago">"ago "</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="united_arab_emirates">United Arab Emirates</string>
+    <string name="invalid_code">invalid code!</string>
+    <string name="We_well_send_code_to_this_phone_number">We well send code to this phone number:</string>
+    <string name="this_or_edit">\n\nIs this OK, or would you like edit the number?</string>
+    <string name="edit">EDIT</string>
+    <string name="choose_country">Choose your country!</string>
+    <string name="choose_conflict_reason">Choose conflict reason</string>
+    <string name="invalid_phone_number">Invalid phone number</string>
+    <string name="activate_your_account_now">Activate your account now?</string>
+    <string name="account_activated">Account activated</string>
+    <string name="code_sent">Verification code sent to you phone</string>
+    <string name="add_new_pass">Add New Password</string>
+    <string name="seller_app">Seller App</string>
+    <string name="choose_your_field">Choose your activity</string>
+    <string name="edit_my_activities">Edit my activity</string>
+    <string name="my_commercial_license">My commercial license</string>
+    <string name="orders_number">Orders Number:</string>
+    <string name="distance">Distance:</string>
+    <string name="add_offer">Add Offer</string>
+    <string name="from">from</string>
+    <string name="enter_mobile_number">Enter mobile number:</string>
+    <string name="gps_network_not_enabled">GPS services is not enabled</string>
+    <string name="about_us_body">Banana is a promising individual enterprise working in facilitating access and linking food merchants and customers with the best price and smooth service. We provide a unique and unprecedented service. We proceed from the UAE to the world. Our vision aims to save time and money and contribute to raising commercial competitiveness in the food trade.</string>
+    <string name="acceptt">Accept</string>
+    <string name="terms"><u>terms, conditions</u> and</string>
+    <string name="privacy"><u>privacy policy</u>.</string>
+    <string name="all_notifications">All Notifications</string>
+    <string name="nearly_orders">Nearly Orders</string>
+    <string name="discounts">Discounts</string>
+    <string name="orders_status">Orders Status</string>
+    <string name="updates">Updates</string>
+    <string name="notification_settings">Notification Settings</string>
+    <string name="terms_conditions">Terms and conditions</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_error">You must agree to the terms and conditions and the privacy policy.</string>
+    <string name="by_date">Recently added</string>
+    <string name="by_amount">By amount</string>
+    <string name="add_your_certificate">Add your certificate</string>
+    <string name="expiry_date">Expiry date</string>
+    <string name="working_time">Working times</string>
+    <string name="seller_info">Seller Information</string>
+    <string name="seller_info2">Seller</string>
+    <string name="to">To</string>
+    <string name="working_from">Working from:</string>
+    <string name="working_to">Working to:</string>
+    <string name="enter_date">Enter Date!</string>
+    <string name="enter_time">Enter time</string>
+    <string name="total_price">Total Price</string>
+    <string name="banana_delivery">Company Delivery</string>
+    <string name="my_delivery">My Delivery</string>
+    <string name="order_location">Order Location</string>
+    <string name="empty_offer">Empty Offer!</string>
+    <string name="enter_total_price">Enter total price!</string>
+    <string name="delivered">Delivered</string>
+    <string name="not_delivered">Not delivered</string>
+    <string name="binding">Pending</string>
+    <string name="client_info">Client</string>
+    <string name="my_offers">My Offers</string>
+    <string name="balance">Balance</string>
+    <string name="my_last_transactions">Last Transactions:</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="withdrawal">Withdrawal</string>
+    <string name="charge">Charge</string>
+    <string name="no_transactions_found">No transactions found!</string>
+    <string name="refund">Refund</string>
+    <string name="deposit">Deposit</string>
+    <string name="mobile_number2">Mobile Number:</string>
+    <string name="time_date2"><![CDATA[Time & Date:]]></string>
+    <string name="tap_to_show_order_location">Tap to show order location</string>
+    <string name="accepted">Accepted</string>
+    <string name="offer_number">Offer number:</string>
+    <string name="conflict_reason">Conflict reason:</string>
+    <string name="requests">Requests</string>
+    <string name="evidence">Evidences</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="complaint_details">Complaint Details</string>
+    <string name="no_complaints_found">No complaints found!</string>
+    <string name="my_fields">My Fields</string>
+    <string name="other_fields">Other Fields</string>
+    <string name="edit_my_fields">Edit my field</string>
+    <string name="from2">From:</string>
+    <string name="to2">To:</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="false">BananaSeller</string>
+
+    <string name="your_field_will_be_deleted">Your field will be deleted</string>
+    <string name="your_licence_will_be_deleted_you_shoud_send_new_one">Your licence will be deleted you should send new one</string>
+    <string name="must_be_greater_than_15">Must be greater than 15</string>
+    <string name="km">KM</string>
+    <string name="m">M</string>
+    <string name="full_name">Full Name</string>
+    <string name="bank_account_number">Bank Account number</string>
+    <string name="iban">IBAN</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="enter_account_number">Enter Account number</string>
+    <string name="enter_iban">Enter IBAN</string>
+    <string name="enter_bank_name">Enter bank name</string>
+    <string name="enter_balance">Enter balance</string>
+    <string name="save">Save</string>
+    <string name="payment_status">Payment Status:</string>
+    <string name="when_recieving">When Recieving</string>
+    <string name="reciever_number">Receiver number:</string>
+    <string name="client_number">Client Number:</string>
+    <string name="Seller">Seller</string>
+    <string name="delivery">Delivery</string>
+    <string name="waiting">Waiting</string>
+    <string name="delivery_price_message1">The delivery representation will do the job with</string>
+    <string name="delivery_price_message2">AED to be paid by the customer</string>
+    <string name="attention">Attention!</string>
+    <string name="urdu">Urdu</string>
+    <string name="the_minimum_balance_50">The minimum balance withdrawal amount is 50</string>
+</resources>

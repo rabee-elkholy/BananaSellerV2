@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.homeCycle.home.settings.SellerInfoFragment">
+
+    <include layout="@layout/app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fragment_seller_info_tv_add_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="@string/add_your_certificate"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_11ssp"
+                    app:drawableStartCompat="@drawable/ic_add_file" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_seller_info_rv_images_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_8sdp" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_seller_info_til_ex_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:theme="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_seller_info_tit_ex_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down"
+                    android:focusable="false"
+                    android:hint="@string/expiry_date"
+                    android:inputType="date"
+                    android:singleLine="true"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_13ssp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_seller_info_til_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:theme="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/address_details"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_13ssp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_seller_info_til_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:theme="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_seller_info_tit_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_location"
+                    android:focusable="false"
+                    android:hint="@string/your_location"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_13ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_seller_info_til_working_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:theme="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_seller_info_tit_working_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:drawableEnd="@drawable/ic_clock"
+                    android:focusable="false"
+                    android:hint="@string/working_time"
+                    android:textColor="@color/title_color"
+                    android:textSize="@dimen/_13ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/fragment_seller_info_btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_32sdp"
+                android:background="@drawable/button_shape"
+                android:fontFamily="@font/cairo_bold"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

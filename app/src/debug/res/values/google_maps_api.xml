@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=59:55:D9:89:70:77:1D:DF:E1:53:61:F0:5F:25:CC:4A:0E:DC:92:D7%3Bcom.androdu.banana.view.fragment.homeCycle
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.androdu.banana.view.fragment.homeCycle
+
+    SHA-1 certificate fingerprint:
+    59:55:D9:89:70:77:1D:DF:E1:53:61:F0:5F:25:CC:4A:0E:DC:92:D7
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA36rmPsGzw0K19HGhPbVen-IHhyTdUq8I</string>
+</resources>

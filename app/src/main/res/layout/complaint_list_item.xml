@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_8sdp"
+    android:background="@color/white"
+    app:cardCornerRadius="@dimen/_8sdp">
+
+    <TextView
+        android:id="@+id/complaint_item_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:fontFamily="@font/cairo_semibold"
+        android:text="fesh"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11ssp" />
+
+</androidx.cardview.widget.CardView>

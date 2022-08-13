@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:padding="@dimen/_2sdp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_edit_text">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_tit_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_6sdp"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/_11ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/filter_btn_search"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:src="@drawable/ic_search" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/filter_btn_filters"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_edit_text"
+        android:src="@drawable/ic_filter" />
+
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/fragment_delivery_list_srl_swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_8sdp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_delivery_list_rv_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            android:id="@+id/fragment_delivery_load_more"
+            layout="@layout/item_load_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/fragment_delivery_list_pb_progress"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/fragment_delivery_list_tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11ssp" />
+
+</RelativeLayout>

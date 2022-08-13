@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.homeCycle.home.ProductsFragment">
+
+    <include
+        android:id="@+id/fragment_products_app_bar"
+        layout="@layout/app_bar" />
+
+    <include
+        android:id="@+id/fragment_products_filter"
+        layout="@layout/filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_products_app_bar"
+        android:layout_margin="@dimen/_8sdp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_products_filter"
+        android:orientation="vertical">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/fragment_products_srl_swipe"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_products_rv_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            android:id="@+id/fragment_products_load_more"
+            layout="@layout/item_load_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/fragment_products_btn_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_16sdp"
+            android:background="@drawable/button_shape"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingVertical="@dimen/_8sdp"
+            android:visibility="gone"
+            android:text="@string/add_product"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/home_fragment_pb_progress_bar"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/products_fragment_tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11ssp" />
+</RelativeLayout>

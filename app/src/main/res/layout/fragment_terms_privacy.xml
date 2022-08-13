@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"/>
+
+
+    <ScrollView
+        android:id="@+id/SCROLLER_ID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_below="@id/app_bar"
+        android:paddingBottom="@dimen/_16sdp"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/fragment_terms_privacy_tv_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/fragment_orders_pb_progress_bar"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+</RelativeLayout>

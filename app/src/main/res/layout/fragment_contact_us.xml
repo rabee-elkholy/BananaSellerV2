@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp" />
+
+            <EditText
+                android:id="@+id/fragment_contact_us_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="text"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp" />
+
+            <EditText
+                android:id="@+id/fragment_contact_us_et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="@string/your_suggestion"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp" />
+
+            <EditText
+                android:id="@+id/fragment_contact_us_et_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:padding="@dimen/_4sdp"
+                android:textSize="@dimen/_13ssp" />
+
+
+            <Button
+                android:id="@+id/fragment_contact_us_btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_32sdp"
+                android:background="@drawable/button_shape"
+                android:fontFamily="@font/cairo_bold"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

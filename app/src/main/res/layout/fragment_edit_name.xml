@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar" />
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fragment_edit_name_civ_image"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:clickable="true"
+            android:layout_centerHorizontal="true"
+            android:focusable="true" />
+
+        <ImageButton
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/ic_add_image"
+            android:layout_alignEnd="@id/fragment_edit_name_civ_image"
+            android:layout_marginEnd="@dimen/_minus8sdp"
+            android:scaleType="centerCrop"
+            android:background="@null"/>
+
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold"/>
+
+            <EditText
+                android:id="@+id/fragment_edit_name_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:padding="@dimen/_8sdp"
+                android:elevation="@dimen/_4sdp"
+                android:textSize="@dimen/_13ssp" />
+
+
+            <Button
+                android:id="@+id/fragment_edit_name_btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_32sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/button_shape"
+                android:fontFamily="@font/cairo_bold"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

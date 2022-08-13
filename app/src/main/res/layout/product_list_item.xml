@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_4sdp"
+    android:background="@color/white"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:contentPadding="@dimen/_16sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/product_item_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+            android:fontFamily="@font/cairo_semibold"
+            android:text="fesh"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp" />
+
+        <ImageButton
+            android:id="@+id/product_item_btn_increment"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@color/white"
+            android:src="@drawable/ic_add" />
+
+
+        <EditText
+            android:id="@+id/product_item_et_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:background="@color/white"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:text="1 Kg" />
+
+        <ImageButton
+            android:id="@+id/product_item_btn_decrement"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@color/white"
+            android:src="@drawable/ic_remove" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

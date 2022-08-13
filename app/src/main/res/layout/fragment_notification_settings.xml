@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.homeCycle.home.settings.NotificationSettingsFragment">
+
+    <include layout="@layout/app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:text="@string/all_notifications"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fragment_settings_sw_all_notifications"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@color/gray_btn_bg_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:text="@string/nearly_orders"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fragment_settings_sw_nearly_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@color/gray_btn_bg_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:text="@string/complaints"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fragment_settings_sw_issues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@color/gray_btn_bg_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:text="@string/orders_status"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fragment_settings_sw_orders_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@color/gray_btn_bg_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:text="@string/updates"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/fragment_settings_sw_updates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@color/gray_btn_bg_color" />
+
+            <Button
+                android:id="@+id/fragment_settings_btn_add_balance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:background="@drawable/button_shape"
+                android:fontFamily="@font/cairo_bold"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

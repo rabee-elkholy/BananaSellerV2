@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold" />
+
+            <EditText
+                android:id="@+id/fragment_payment_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="textPersonName"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/phone_number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold" />
+
+            <EditText
+                android:id="@+id/fragment_payment_et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:digits="0123456789"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="phone"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/address_details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold"/>
+
+            <EditText
+                android:id="@+id/fragment_payment_et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:elevation="@dimen/_4sdp"
+                android:inputType="text"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/time_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold"/>
+
+            <EditText
+                android:id="@+id/fragment_payment_et_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/shape_edit_text2"
+                android:cursorVisible="false"
+                android:elevation="@dimen/_4sdp"
+                android:focusable="false"
+                android:padding="@dimen/_8sdp"
+                android:textSize="@dimen/_13ssp" />
+
+            <CheckBox
+                android:id="@+id/fragment_payment_cb_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/direct_delivery"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp"
+                android:fontFamily="@font/cairo_semibold" />
+
+            <Button
+                android:id="@+id/fragment_payment_btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_32sdp"
+                android:background="@drawable/button_shape"
+                android:fontFamily="@font/cairo_bold"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="@string/confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
