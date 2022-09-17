@@ -21,6 +21,7 @@ public class ApiErrorHandler {
         GeneralResponse errorData;
         Gson gson = new Gson();
         try {
+            assert response.errorBody() != null;
             errorData = gson.fromJson(response.errorBody().string(), GeneralResponse.class);
             Log.d("error_handler", "showErrorMessage: " + errorData.getState());
 

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.androdu.bananaSeller.R;
@@ -40,6 +42,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogClos
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 import static com.androdu.bananaSeller.helper.Validation.editPassword;
 
+@SuppressLint("NonConstantResourceId")
 public class EditPasswordFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -54,7 +57,6 @@ public class EditPasswordFragment extends Fragment {
     EditText fragmentEditPasswordEtConfirmPassword;
     @BindView(R.id.fragment_edit_password_btn_confirm)
     Button fragmentEditPasswordBtnConfirm;
-    private View view;
     private String currentPassword;
     private boolean logout;
 
@@ -67,7 +69,7 @@ public class EditPasswordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_edit_password, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_password, container, false);
         ButterKnife.bind(this, view);
 
         init();
@@ -83,11 +85,11 @@ public class EditPasswordFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
 
                 break;
             case R.id.fragment_edit_password_btn_confirm:
-                disappearKeypad(getActivity());
+                disappearKeypad(requireActivity());
                 if (editPassword(getActivity(),
                         currentPassword,
                         fragmentEditPasswordEtOldPassword,
@@ -95,24 +97,19 @@ public class EditPasswordFragment extends Fragment {
                         fragmentEditPasswordEtConfirmPassword)) {
                     logout = false;
 
-                    SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE);
+                    SweetAlertDialog dialog = new SweetAlertDialog(requireActivity(), SweetAlertDialog.WARNING_TYPE);
                     dialog.setTitleText(getString(R.string.logout_from_other_devices));
                     dialog.setCancelText(getString(R.string.no));
                     dialog.setConfirmText(getString(R.string.yes));
-                    dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            logout = true;
-                            sweetAlertDialog.dismiss();
-                            changePassword();
-                        }
+                    dialog.setConfirmClickListener(sweetAlertDialog -> {
+                        logout = true;
+                        sweetAlertDialog.dismiss();
+                        changePassword();
                     });
-                    dialog.setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                        @Override
-                        public void onClick(SweetAlertDialog sweetAlertDialog) {
-                            sweetAlertDialog.dismiss();
-                            changePassword();
-                        }
+                    dialog.setCancelClickListener(sweetAlertDialog -> {
+                        logout = false;
+                        sweetAlertDialog.dismiss();
+                        changePassword();
                     });
                     dialog.setCancelable(false);
                     dialog.show();
@@ -128,25 +125,29 @@ public class EditPasswordFragment extends Fragment {
 
             showProgressDialog(getActivity());
             getClient().editPassword(loadDataString(getActivity(), TOKEN), new EditPasswordRequestBody(currentPassword,
-                    fragmentEditPasswordEtNewPassword.getText().toString().trim(),
-                    fragmentEditPasswordEtNewPassword.getText().toString().trim(),
-                    logout))
+                            fragmentEditPasswordEtNewPassword.getText().toString().trim(),
+                            fragmentEditPasswordEtNewPassword.getText().toString().trim(),
+                            logout))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             enableView(fragmentEditPasswordBtnConfirm);
                             if (response.isSuccessful()) {
-                                showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
                                 saveDataString(getActivity(), USER_PASSWORD, fragmentEditPasswordEtNewPassword.getText().toString());
+                                if (logout) {
+                                    assert response.body() != null;
+                                    saveDataString(getActivity(), TOKEN, "hh " + response.body().getData());
+                                }
+                                showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                ApiErrorHandler.showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
                             dismissProgressDialog();
                             enableView(fragmentEditPasswordBtnConfirm);
                             showErrorDialog(getActivity(), t.getMessage());

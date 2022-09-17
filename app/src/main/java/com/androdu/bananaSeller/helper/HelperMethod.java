@@ -52,7 +52,7 @@ public class HelperMethod {
 
 
     public static String loadJSONFromAsset(Activity activity) {
-        String json = null;
+        String json;
         try {
             InputStream is = activity.getAssets().open("countries_data.json");
             int size = is.available();
@@ -77,7 +77,7 @@ public class HelperMethod {
             pDialog.show();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -90,7 +90,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -134,20 +134,6 @@ public class HelperMethod {
 //        }
 //    }
 
-    private static void setLanguageArabic(Activity activity) {
-        Intent intent = new Intent(activity, SplashActivity.class);
-        LanguageManager.setNewLocale(activity, LanguageManager.LANGUAGE_KEY_ARABIC);
-        activity.startActivity(intent);
-        activity.finish();
-    }
-
-    private static void setLanguageEnglish(Activity activity) {
-        Intent intent = new Intent(activity, SplashActivity.class);
-        LanguageManager.setNewLocale(activity, LanguageManager.LANGUAGE_KEY_ENGLISH);
-        activity.startActivity(intent);
-        activity.finish();
-    }
-
     public static void showSuccessDialogCloseActivity(final Activity activity, String message) {
         try {
 
@@ -158,7 +144,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -175,7 +161,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -188,6 +174,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }
@@ -203,6 +190,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }
@@ -218,6 +206,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }
@@ -237,6 +226,7 @@ public class HelperMethod {
             dialog.show();
 
         } catch (Exception e) {
+            e.printStackTrace();
 
         }
     }
@@ -265,29 +255,6 @@ public class HelperMethod {
     }
 
 
-//    public static boolean loginValidation(Activity activity, TextInputLayout... textInputLayouts) {
-//
-//        if (textInputLayouts[0].getEditText().getText().toString().isEmpty()
-//                || !textInputLayouts[0].getEditText().getText().toString().contains("@")) {
-//            textInputLayouts[0].setHelperTextEnabled(true);
-//            textInputLayouts[0].setHelperText(activity.getString(R.string.make_sure_you_enter_your_email));
-//            textInputLayouts[0].requestFocus();
-//            return false;
-//        }
-//        textInputLayouts[0].setHelperTextEnabled(false);
-//
-//        if (textInputLayouts[1].getEditText().getText().toString().isEmpty()
-//                || textInputLayouts[1].getEditText().getText().toString().length() < 6) {
-//            textInputLayouts[1].setHelperText(activity.getString(R.string.make_sure_you_enter_your_password));
-//            textInputLayouts[1].requestFocus();
-//            return false;
-//        }
-//        textInputLayouts[1].setHelperTextEnabled(false);
-//
-//        return true;
-//    }
-
-
     public static void disappearKeypad(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -302,8 +269,7 @@ public class HelperMethod {
     public static RequestBody convertToRequestBody(String part) {
         try {
             if (!part.equals("")) {
-                RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), part);
-                return requestBody;
+                return RequestBody.create(MediaType.parse("multipart/form-data"), part);
             } else {
                 return null;
             }
@@ -317,8 +283,7 @@ public class HelperMethod {
     public static RequestBody convertToRequestBody2(byte part) {
         byte[] bytes = {part};
         try {
-            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), bytes);
-            return requestBody;
+            return RequestBody.create(MediaType.parse("multipart/form-data"), bytes);
 
         } catch (Exception e) {
             Log.d("error", "convertToRequestBody: ");
@@ -342,9 +307,8 @@ public class HelperMethod {
     public static MultipartBody.Part convertFileToMultipart(String pathImageFile, String Key) {
         if (pathImageFile != null) {
             File file = new File(pathImageFile);
-            RequestBody reqFileselect = RequestBody.create(MediaType.parse("image/jpeg"), file);
-            MultipartBody.Part Imagebody = MultipartBody.Part.createFormData(Key, "image.jpeg", reqFileselect);
-            return Imagebody;
+            RequestBody reqFileSelect = RequestBody.create(MediaType.parse("image/jpeg"), file);
+            return MultipartBody.Part.createFormData(Key, "image.jpeg", reqFileSelect);
         } else {
             Log.d("error", "convertFileToMultipart: ");
             return null;
@@ -354,9 +318,8 @@ public class HelperMethod {
     public static MultipartBody.Part convertFileToMultipartVideo(String pathImageFile, String Key) {
         if (pathImageFile != null) {
             File file = new File(pathImageFile);
-            RequestBody reqFileselect = RequestBody.create(MediaType.parse("video/mp4"), file);
-            MultipartBody.Part Imagebody = MultipartBody.Part.createFormData(Key, "video.mp4", reqFileselect);
-            return Imagebody;
+            RequestBody reqFileSelect = RequestBody.create(MediaType.parse("video/mp4"), file);
+            return MultipartBody.Part.createFormData(Key, "video.mp4", reqFileSelect);
         } else {
             Log.d("error", "convertFileToMultipart: ");
             return null;
@@ -422,15 +385,6 @@ public class HelperMethod {
                 }
             }
 
-            //DownloadsProvider
-//            else if (isDownloadsDocument(uri)) {
-//
-//                final String id = DocumentsContract.getDocumentId(uri);
-//                final Uri contentUri = ContentUris.withAppendedId(
-//                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-//
-//                return getDataColumn(context, contentUri, null, null);
-//            }
 
             // MediaProvider
             else if (isMediaDocument(uri)) {

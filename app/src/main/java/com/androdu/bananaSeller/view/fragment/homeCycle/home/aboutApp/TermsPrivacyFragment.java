@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.aboutApp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
 import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
 import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showView;
@@ -30,6 +32,7 @@ import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ENGLI
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class TermsPrivacyFragment extends Fragment {
 
     @BindView(R.id.fragment_orders_pb_progress_bar)
@@ -41,7 +44,6 @@ public class TermsPrivacyFragment extends Fragment {
     TextView appBarTitle;
     @BindView(R.id.fragment_terms_privacy_tv_body)
     TextView fragmentTermsPrivacyTvBody;
-    private View view;
 
     public TermsPrivacyFragment() {
         // Required empty public constructor
@@ -56,7 +58,7 @@ public class TermsPrivacyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_terms_privacy, container, false);
+        View view = inflater.inflate(R.layout.fragment_terms_privacy, container, false);
         ButterKnife.bind(this, view);
 
         init();
@@ -84,6 +86,7 @@ public class TermsPrivacyFragment extends Fragment {
                             hideView(fragmentOrdersPbProgressBar);
 
                             if (response.isSuccessful()) {
+                                assert response.body() != null;
                                 if (response.body().getTermsPrivacy() != null)
 
                                     if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ENGLISH))
@@ -95,7 +98,7 @@ public class TermsPrivacyFragment extends Fragment {
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
@@ -118,6 +121,7 @@ public class TermsPrivacyFragment extends Fragment {
                         @Override
                         public void onResponse(Call<TermsPrivacyResponse> call, Response<TermsPrivacyResponse> response) {
                             hideView(fragmentOrdersPbProgressBar);
+                            assert response.body() != null;
                             if (response.body().getTermsPrivacy() != null)
                                 if (response.isSuccessful()) {
                                     if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ENGLISH))
@@ -128,7 +132,7 @@ public class TermsPrivacyFragment extends Fragment {
                                         fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getUr());
                                 } else {
                                     Log.d("error_handler", "onResponse: " + response.message());
-                                    ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                    showErrorMessage(requireActivity(), response);
                                 }
                         }
 

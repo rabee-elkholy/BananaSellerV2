@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.activity;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -20,10 +21,8 @@ import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_T
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataBoolean;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends BaseActivity {
-
-    private final long SPLASH_TIME = 1000;
-    private Bitmap bitmap;
 
 
     @Override
@@ -58,6 +57,7 @@ public class SplashActivity extends BaseActivity {
         }
 
 
+        long SPLASH_TIME = 1000;
         new Handler().postDelayed(() -> {
             Intent intent;
             if (loadDataString(SplashActivity.this, FIRST_TIME) == null) {
@@ -77,18 +77,5 @@ public class SplashActivity extends BaseActivity {
             finish();
         }, SPLASH_TIME);
 
-//        // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
-//        QRGEncoder qrgEncoder = new QRGEncoder("rabee elkholy", null, QRGContents.Type.TEXT, 256);
-//        qrgEncoder.setColorBlack(Color.BLACK);
-//        qrgEncoder.setColorWhite(Color.WHITE);
-//        try {
-//            // Getting QR-Code as Bitmap
-//            bitmap = qrgEncoder.getBitmap();
-//            // Setting Bitmap to ImageView
-//            ImageView imageView = findViewById(R.id.logo);
-//            imageView.setImageBitmap(bitmap);
-//        } catch (Exception e) {
-//            Log.v("TAG", e.toString());
-//        }
     }
 }

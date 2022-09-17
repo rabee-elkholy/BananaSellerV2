@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -20,34 +22,33 @@ import butterknife.ButterKnife;
 public class EditFieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private int type;
-    private Activity activity;
-    private List<Filter> modelList;
+    private final int type;
+    private final List<Filter> modelList;
     private EditFieldsAdapter.OnItemClickListener mItemClickListener;
 
 
-    public EditFieldsAdapter(Activity activity, List<Filter> modelList, int type) {
-        this.activity = activity;
+    public EditFieldsAdapter(List<Filter> modelList, int type) {
         this.modelList = modelList;
         this.type = type;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fields_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.fields_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Filter model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
-            genericViewHolder.favoriteListsItemTvTitle.setText(model.getName());
+            ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.favoriteListsItemTvTitle.setText(model.getName());
 
         }
     }
@@ -73,6 +74,7 @@ public class EditFieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.favorite_lists_item_tv_title)
         TextView favoriteListsItemTvTitle;
@@ -83,20 +85,9 @@ public class EditFieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            if (type == 1)
-                favoriteListsItemBtnRemove.setVisibility(View.GONE);
-            else {
-                favoriteListsItemBtnRemove.setVisibility(View.VISIBLE);
+            favoriteListsItemBtnRemove.setImageResource(type == 1 ? R.drawable.ic_check : R.drawable.ic_arrow_up);
 
-                favoriteListsItemBtnRemove.setImageResource(R.drawable.ic_add);
-            }
-
-            favoriteListsItemBtnRemove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onClick(getAdapterPosition(), modelList.get(getAdapterPosition()));
-                }
-            });
+            favoriteListsItemBtnRemove.setOnClickListener(v -> mItemClickListener.onClick(getAdapterPosition(), modelList.get(getAdapterPosition())));
         }
     }
 }

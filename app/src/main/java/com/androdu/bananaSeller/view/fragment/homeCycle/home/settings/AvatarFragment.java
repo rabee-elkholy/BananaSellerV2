@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import butterknife.OnClick;
 
 import static com.androdu.bananaSeller.helper.Constants.sellerAvatars;
 
-
+@SuppressLint("NonConstantResourceId")
 public class AvatarFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -35,7 +36,6 @@ public class AvatarFragment extends Fragment {
     ImageButton appBarFilter;
     @BindView(R.id.fragment_avatar_rv_recycler_view)
     RecyclerView fragmentAvatarRvRecyclerView;
-    private View view;
     private OnClickListener mOnClickListener;
 
     public AvatarFragment() {
@@ -52,7 +52,7 @@ public class AvatarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_avatar, container, false);
+        View view = inflater.inflate(R.layout.fragment_avatar, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -60,14 +60,11 @@ public class AvatarFragment extends Fragment {
 
     private void init() {
         appBarTitle.setText(getString(R.string.choose_your_favorite_avatar));
-        AvatarAdapter avatarAdapter = new AvatarAdapter(getActivity(), Arrays.asList(sellerAvatars));
-        avatarAdapter.SetOnItemClickListener(new AvatarAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, Integer model) {
-                mOnClickListener.onClick(model, position);
-                Log.d("avatar", "onItemClick: " + R.drawable.banana_logo + " " + model);
-                getActivity().onBackPressed();
-            }
+        AvatarAdapter avatarAdapter = new AvatarAdapter(Arrays.asList(sellerAvatars));
+        avatarAdapter.SetOnItemClickListener((position, model) -> {
+            mOnClickListener.onClick(model, position);
+            Log.d("avatar", "onItemClick: " + R.drawable.banana_logo + " " + model);
+            requireActivity().onBackPressed();
         });
 
         fragmentAvatarRvRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
@@ -78,7 +75,7 @@ public class AvatarFragment extends Fragment {
 
     @OnClick(R.id.app_bar_back)
     public void onViewClicked() {
-        getActivity().onBackPressed();
+        requireActivity().onBackPressed();
     }
 
     public interface OnClickListener {

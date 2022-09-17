@@ -19,6 +19,9 @@ public class GeneralResponse {
     @SerializedName("code")
     @Expose
     private String code;
+    @SerializedName("data")
+    @Expose
+    private String data;
 
     public Integer getState() {
         return state;
@@ -58,5 +61,9 @@ public class GeneralResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getData() {
+        return data;
     }
 }

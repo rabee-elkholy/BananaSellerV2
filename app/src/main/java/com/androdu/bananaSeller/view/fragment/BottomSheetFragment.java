@@ -181,7 +181,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     private void setClick(List<Filter> filters) {
 //        primaryFilter.addAll(0, filters);
         Log.d("error_", "setClick: " + primaryFilter.size());
-        FieldsAdapter fieldsAdapter = new FieldsAdapter(getActivity(), primaryFilter);
+        FieldsAdapter fieldsAdapter = new FieldsAdapter(primaryFilter);
         fragmentBottomSheetList.setAdapter(fieldsAdapter);
 
         fragmentBottomSheetTvConfirm.setOnClickListener(new View.OnClickListener() {
@@ -196,7 +196,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     private void setClick2(List<Filter> filters) {
         primaryFilter.addAll(0, filters);
         Log.d("error_", "setClick: " + primaryFilter.size());
-        BottomSheetAdapter filtersAdapter = new BottomSheetAdapter(getActivity(), primaryFilter);
+        BottomSheetAdapter filtersAdapter = new BottomSheetAdapter(primaryFilter);
         fragmentBottomSheetList.setAdapter(filtersAdapter);
 
         fragmentBottomSheetTvConfirm.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +302,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private void typeOrders() {
         List<String> filters = Arrays.asList(getResources().getStringArray(R.array.order_sort));
-        OrdersFilterAdapter adapter = new OrdersFilterAdapter(getActivity(), filters, lastCheck);
+        OrdersFilterAdapter adapter = new OrdersFilterAdapter( filters, lastCheck);
         fragmentBottomSheetList.setAdapter(adapter);
         List<Integer> filterKeys = new ArrayList<>();
         filterKeys.add(0);

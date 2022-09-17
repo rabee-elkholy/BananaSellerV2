@@ -29,11 +29,11 @@ import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
 import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.hbb20.CCPCountry;
 import com.hbb20.CountryCodePicker;
 
 import butterknife.BindView;
@@ -45,9 +45,9 @@ import retrofit2.Response;
 
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.FCM;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TYPE_DELIVERY;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TYPE_SELLER;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_AVATAR;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_FIELD;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_NAME;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_PASSWORD;
@@ -72,8 +72,10 @@ public class LoginFragment extends Fragment {
     LinearLayout fragmentLoginLinLang;
     @BindView(R.id.fragment_login_tv_skip)
     TextView fragmentLoginTvSkip;
-    @BindView(R.id.fragment_login_til_email_or_phone)
-    TextInputLayout fragmentLoginTilEmailOrPhone;
+    @BindView(R.id.fragment_login_til_phone)
+    TextInputLayout fragmentLoginTilPhone;
+    @BindView(R.id.fragment_login_ccp_code)
+    CountryCodePicker fragmentLoginCcpCode;
     @BindView(R.id.fragment_login_til_password)
     TextInputLayout fragmentLoginTilPassword;
     @BindView(R.id.fragment_login_tv_forgot_password)
@@ -86,7 +88,6 @@ public class LoginFragment extends Fragment {
     RadioGroup fragmentLoginRgUserType;
 
     private View view;
-    private CountryCodePicker ccpCountry;
     private final int SELLER_TYPE = 1;
     private final int DELIVERY_TYPE = 2;
     private int loginType = SELLER_TYPE;
@@ -119,14 +120,24 @@ public class LoginFragment extends Fragment {
 //
 //            }
 //        });
-        EditText phoneOrEmailEt = fragmentLoginTilEmailOrPhone.getEditText();
-        ccpCountry = new CountryCodePicker(getContext());
-//        ccpCountry.setDefaultCountryUsingNameCode("ae");
-        ccpCountry.setCountryForNameCode("eg");
-        ccpCountry.registerCarrierNumberEditText(phoneOrEmailEt);
-        ccpCountry.setPhoneNumberValidityChangeListener(isValidNumber -> {
+;
+
+        EditText phoneEt = fragmentLoginTilPhone.getEditText();
+        String countryCode = fragmentLoginCcpCode.getSelectedCountryCodeWithPlus();
+
+        fragmentLoginCcpCode.registerCarrierNumberEditText(phoneEt);
+        fragmentLoginCcpCode.setPhoneNumberValidityChangeListener(isValidNumber -> {
             validNum = isValidNumber;
+            if (validNum) {
+                StringBuilder e = new StringBuilder(fragmentLoginCcpCode.getFormattedFullNumber());
+                phoneEt.setText(e.substring(countryCode.length() + 1));
+            } else {
+                phoneEt.setText(phoneEt.getText().toString().replaceAll(" ", ""));
+            }
+            phoneEt.setSelection(phoneEt.getText().length());
         });
+
+        phoneEt.setText("");
     }
 
     @OnClick({R.id.fragment_login_tv_go_sign_up, R.id.fragment_login_btn_login, R.id.fragment_login_lin_lang, R.id.fragment_login_tv_skip, R.id.fragment_login_tv_forgot_password})
@@ -154,16 +165,13 @@ public class LoginFragment extends Fragment {
                 break;
 
             case R.id.fragment_login_btn_login:
-                Log.d("error_", "onViewClicked: " + ccpCountry.getFullNumber() + validNum);
 
                 if (Validation.login(getActivity(),
-                        fragmentLoginTilEmailOrPhone,
+                        validNum,
+                        fragmentLoginTilPhone,
                         fragmentLoginTilPassword)) {
                     HelperMethod.disappearKeypad(getActivity());
-//                    if (loginType == SELLER_TYPE)
                     getToken();
-//                    else
-//                        deliveryLogin();
 
                 }
                 break;
@@ -172,11 +180,8 @@ public class LoginFragment extends Fragment {
 
     private void login(String fcm) {
         if (isConnected(getContext())) {
-            String phone;
-            if (validNum)
-                phone = ccpCountry.getFullNumber();
-            else
-                phone = fragmentLoginTilEmailOrPhone.getEditText().getText().toString().trim();
+
+            String phone = fragmentLoginCcpCode.getFullNumber();
 
             String password = fragmentLoginTilPassword.getEditText().getText().toString().trim();
 
@@ -221,12 +226,12 @@ public class LoginFragment extends Fragment {
         } else
             enableView(fragmentLoginBtnLogin);
     }
-
+/*
     private void deliveryLogin() {
         if (isConnected(getContext())) {
             disableView(fragmentLoginBtnLogin);
             showProgressDialog(getActivity());
-            String phone = fragmentLoginTilEmailOrPhone.getEditText().getText().toString().trim();
+            String phone = fragmentSignUpTilPhone.getEditText().getText().toString().trim();
             String password = fragmentLoginTilPassword.getEditText().getText().toString().trim();
 
             ApiService.getClient().loginDelivery(new DeliveryLoginRequestBody(phone, password))
@@ -262,41 +267,36 @@ public class LoginFragment extends Fragment {
                     });
         }
     }
+    */
 
     private void getToken() {
         if (isConnected(getContext())) {
             disableView(fragmentLoginBtnLogin);
             showProgressDialog(getActivity());
             FirebaseMessaging.getInstance().subscribeToTopic("bananaSeller")
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseInstanceId.getInstance().getInstanceId()
-                                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                                if (!task.isSuccessful()) {
-                                                    Log.w("login", "getInstanceId failed", task.getException());
-                                                    dismissProgressDialog();
-                                                    fragmentLoginBtnLogin.setEnabled(true);
-                                                    showErrorDialog(getActivity(), task.getException().getMessage());
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (!task1.isSuccessful()) {
+                                            Log.w("login", "getInstanceId failed", task1.getException());
+                                            dismissProgressDialog();
+                                            fragmentLoginBtnLogin.setEnabled(true);
+                                            showErrorDialog(getActivity(), task1.getException().getMessage());
 
-                                                    return;
-                                                }
+                                            return;
+                                        }
 
-                                                // Get new Instance ID token
-                                                String token = task.getResult().getToken();
-                                                Log.d("login", "token: " + token);
+                                        // Get new Instance ID token
+                                        String token = task1.getResult().getToken();
+                                        Log.d("login", "token: " + token);
 
-                                                login(token);
-                                            }
-                                        });
-                            } else {
-                                fragmentLoginBtnLogin.setEnabled(true);
-                                dismissProgressDialog();
-                                showErrorDialog(getActivity(), task.getException().getMessage());
-                            }
+                                        login(token);
+                                    });
+                        } else {
+                            fragmentLoginBtnLogin.setEnabled(true);
+                            dismissProgressDialog();
+                            showErrorDialog(getActivity(), task.getException().getMessage());
                         }
                     });
         }

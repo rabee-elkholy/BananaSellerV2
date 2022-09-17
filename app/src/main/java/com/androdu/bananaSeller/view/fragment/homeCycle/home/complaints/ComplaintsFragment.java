@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.complaints;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+@SuppressLint("NonConstantResourceId")
 public class ComplaintsFragment extends Fragment {
     @BindView(R.id.app_bar_title)
     TextView appBarTitle;
@@ -28,7 +31,6 @@ public class ComplaintsFragment extends Fragment {
     TabLayout fragmentComplaintsTlTabLayout;
     @BindView(R.id.fragment_complaints_vp_view_pager)
     ViewPager2 fragmentComplaintsVpViewPager;
-    private View view;
 
     public ComplaintsFragment() {
         // Required empty public constructor
@@ -38,7 +40,7 @@ public class ComplaintsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_complaints, container, false);
+        View view = inflater.inflate(R.layout.fragment_complaints, container, false);
         ButterKnife.bind(this, view);
         init();
 
@@ -51,21 +53,19 @@ public class ComplaintsFragment extends Fragment {
         fragmentComplaintsVpViewPager.setAdapter(complaintsTabsAdapter);
         fragmentComplaintsTlTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         new TabLayoutMediator(fragmentComplaintsTlTabLayout, fragmentComplaintsVpViewPager,
-                new TabLayoutMediator.TabConfigurationStrategy() {
-                    @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        if (position == 0) {
-                            tab.setText(R.string.binding);
-                        } else if (position == 1) {
-                            tab.setText(R.string.accepted);
-                        } else {
-                            tab.setText(R.string.canceled);
-                        }
+                (tab, position) -> {
+                    if (position == 0) {
+                        tab.setText(R.string.binding);
+                    } else if (position == 1) {
+                        tab.setText(R.string.accepted);
+                    } else {
+                        tab.setText(R.string.canceled);
                     }
                 }).attach();
     }
 
     @OnClick(R.id.app_bar_back)
     public void onViewClicked() {
-        getActivity().onBackPressed();
+        requireActivity().onBackPressed();
     }
 }

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -29,10 +31,10 @@ import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
 public class MyOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Activity activity;
-    private List<Offer> modelList;
+    private final Activity activity;
+    private final List<Offer> modelList;
     private OnItemClickListener mItemClickListener;
-    private String type;
+    private final String type;
 
     public MyOffersAdapter(Activity activity, List<Offer> modelList, String type) {
         this.activity = activity;
@@ -40,6 +42,7 @@ public class MyOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.type = type;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
@@ -49,17 +52,16 @@ public class MyOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Offer model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
 
-            genericViewHolder.offersListItemTvOfferNum.setText(model.getId());
+            viewHolder.offersListItemTvOfferNum.setText(model.getId());
 
-            genericViewHolder.offersListItemTvQuantity.setText("");
-            genericViewHolder.offersListItemTvItems.setText("");
+            viewHolder.offersListItemTvQuantity.setText("");
+            viewHolder.offersListItemTvItems.setText("");
             String local = getLanguagePref(activity);
             String productsStr = "";
             String unitsStr = "";
@@ -83,28 +85,29 @@ public class MyOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 }
 
-                genericViewHolder.offersListItemTvItems.setText(productsStr.substring(0, productsStr.length() - 2));
-                genericViewHolder.offersListItemTvQuantity.setText(unitsStr.substring(0, unitsStr.length() - 2));
+                viewHolder.offersListItemTvItems.setText(productsStr.substring(0, productsStr.length() - 2));
+                viewHolder.offersListItemTvQuantity.setText(unitsStr.substring(0, unitsStr.length() - 2));
 
 
-                genericViewHolder.offersListItemTvPrice.setText(model.getPrice() + "");
+                viewHolder.offersListItemTvPrice.setText(String.valueOf(model.getPrice()));
 
-                genericViewHolder.offersListItemTvAddress.setText(model.getOrder().getLocationDetails().getStringAdress());
+                viewHolder.offersListItemTvAddress.setText(model.getOrder().getLocationDetails().getStringAdress());
 
                 if (model.getOrder().getArriveDate() == 0)
-                    genericViewHolder.offersListItemTvDeliveryDate.setText(R.string.direct_delivery);
+                    viewHolder.offersListItemTvDeliveryDate.setText(R.string.direct_delivery);
                 else {
+                    @SuppressLint("SimpleDateFormat")
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(model.getOrder().getArriveDate());
-                    genericViewHolder.offersListItemTvDeliveryDate.setText(formatter.format(calendar.getTime()) + " ");
+                    viewHolder.offersListItemTvDeliveryDate.setText(String.format("%s ", formatter.format(calendar.getTime())));
                 }
 
                 if (type.equals(Constants.OFFER_STATUS_STARTED)) {
                     if (model.getBananaDelivery())
-                        genericViewHolder.offersListItemBtnDelivered.setVisibility(View.GONE);
+                        viewHolder.offersListItemBtnDelivered.setVisibility(View.GONE);
                     else
-                        genericViewHolder.offersListItemBtnDelivered.setVisibility(View.VISIBLE);
+                        viewHolder.offersListItemBtnDelivered.setVisibility(View.VISIBLE);
                 }
             }catch (Exception ignored){
 
@@ -133,7 +136,7 @@ public class MyOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return modelList.get(position);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.offers_list_item_tv_offer_num)
         TextView offersListItemTvOfferNum;

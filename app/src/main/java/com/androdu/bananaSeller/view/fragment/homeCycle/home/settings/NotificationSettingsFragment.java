@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
@@ -28,14 +30,15 @@ import retrofit2.Response;
 import static com.androdu.bananaSeller.data.api.ApiService.getClient;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
 import static com.androdu.bananaSeller.helper.HelperMethod.dismissProgressDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialog;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class NotificationSettingsFragment extends Fragment {
-
 
     @BindView(R.id.app_bar_back)
     ImageView appBarBack;
@@ -52,8 +55,6 @@ public class NotificationSettingsFragment extends Fragment {
     @BindView(R.id.fragment_settings_sw_updates)
     SwitchCompat fragmentSettingsSwUpdates;
 
-    private View view;
-
     public NotificationSettingsFragment() {
         // Required empty public constructor
     }
@@ -63,7 +64,7 @@ public class NotificationSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_notification_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_notification_settings, container, false);
         ButterKnife.bind(this, view);
         init();
         getNotificationSettings();
@@ -78,7 +79,7 @@ public class NotificationSettingsFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
 
             case R.id.fragment_settings_btn_add_balance:
@@ -99,24 +100,24 @@ public class NotificationSettingsFragment extends Fragment {
                             fragmentSettingsSwUpdates.isChecked()))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
                             dismissProgressDialog();
 
                             if (response.isSuccessful()) {
-                                showSuccessDialog(getActivity(), getString(R.string.done));
+                                showSuccessDialog(requireActivity(), getString(R.string.done));
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
                             dismissProgressDialog();
                             Log.d("error_handler", "onFailure: " + t.getMessage());
                             t.printStackTrace();
 
-                            showErrorDialog(getActivity(), t.getMessage());
+                            showErrorDialog(requireActivity(), t.getMessage());
                         }
                     });
 
@@ -141,7 +142,7 @@ public class NotificationSettingsFragment extends Fragment {
                                 fragmentSettingsSwUpdates.setChecked(sendNotfication.getUpdate());
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 

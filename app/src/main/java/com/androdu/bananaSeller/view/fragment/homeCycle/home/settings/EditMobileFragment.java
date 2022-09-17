@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 import static com.androdu.bananaSeller.helper.Validation.editMobileNumber;
 
+@SuppressLint("NonConstantResourceId")
 public class EditMobileFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -50,16 +52,14 @@ public class EditMobileFragment extends Fragment {
     EditText fragmentEditMobileEtOld;
     @BindView(R.id.fragment_edit_mobile_et_new)
     EditText fragmentEditMobileEtNew;
-    @BindView(R.id.fragment_edit_mobile_et_code)
-    EditText fragmentEditMobileEtCode;
     @BindView(R.id.fragment_edit_mobile_btn_confirm)
     Button fragmentEditMobileBtnConfirm;
-    @BindView(R.id.fragment_edit_mobile_ccp_code)
-    CountryCodePicker fragmentEditMobileCcpCode;
-    private View view;
+    @BindView(R.id.fragment_edit_mobile_ccp_code_new)
+    CountryCodePicker fragmentEditMobileCcpCodeNew;
+    @BindView(R.id.fragment_edit_mobile_ccp_code_old)
+    CountryCodePicker fragmentEditMobileCcpCodeOld;
 
     private String currentPhoneNum;
-    CountryCodePicker oldCountryCode;
 
     private boolean validNewNum, validOldNum;
 
@@ -71,7 +71,7 @@ public class EditMobileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_edit_mobile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_mobile, container, false);
         ButterKnife.bind(this, view);
 
         init();
@@ -84,25 +84,31 @@ public class EditMobileFragment extends Fragment {
 
         currentPhoneNum = loadDataString(getActivity(), USER_PHONE);
 
-        String countryCode = fragmentEditMobileCcpCode.getSelectedCountryCodeWithPlus();
+        String oldCountryCode = fragmentEditMobileCcpCodeOld.getSelectedCountryCodeWithPlus();
+        String newCountryCode = fragmentEditMobileCcpCodeNew.getSelectedCountryCodeWithPlus();
 
-        oldCountryCode = new CountryCodePicker(getContext());
-        oldCountryCode.setCountryForNameCode("eg");
-        oldCountryCode.registerCarrierNumberEditText(fragmentEditMobileEtOld);
-        oldCountryCode.setPhoneNumberValidityChangeListener(isValidNumber -> {
-            validOldNum = currentPhoneNum.equals(oldCountryCode.getFullNumber()) && isValidNumber;
-            Log.d("error_", "init: " + validOldNum + " : " + currentPhoneNum + " : " + oldCountryCode.getFullNumber());
+        fragmentEditMobileCcpCodeOld.registerCarrierNumberEditText(fragmentEditMobileEtOld);
+        fragmentEditMobileCcpCodeOld.setPhoneNumberValidityChangeListener(isValidNumber -> {
+            validOldNum = isValidNumber;
+            if (validOldNum) {
+                StringBuilder e = new StringBuilder(fragmentEditMobileCcpCodeOld.getFormattedFullNumber());
+                fragmentEditMobileEtOld.setText(e.substring(oldCountryCode.length() + 1));
+            } else {
+                fragmentEditMobileEtOld.setText(fragmentEditMobileEtOld.getText().toString().replaceAll(" ", ""));
+            }
+            fragmentEditMobileEtOld.setSelection(fragmentEditMobileEtOld.getText().length());
 
         });
-//
-        fragmentEditMobileEtCode.setText(countryCode);
-        fragmentEditMobileCcpCode.registerCarrierNumberEditText(fragmentEditMobileEtNew);
-        fragmentEditMobileCcpCode.setPhoneNumberValidityChangeListener(isValidNumber -> {
+        fragmentEditMobileEtOld.setText("");
+
+
+
+        fragmentEditMobileCcpCodeNew.registerCarrierNumberEditText(fragmentEditMobileEtNew);
+        fragmentEditMobileCcpCodeNew.setPhoneNumberValidityChangeListener(isValidNumber -> {
             validNewNum = isValidNumber;
             if (validNewNum) {
-                StringBuilder e = new StringBuilder(fragmentEditMobileCcpCode.getFormattedFullNumber());
-                fragmentEditMobileEtNew.setText(e.substring(countryCode.length() + 1));
-//                Log.d("error_", "init: " + fragmentSignUpCcpCode.getFormattedFullNumber());
+                StringBuilder e = new StringBuilder(fragmentEditMobileCcpCodeNew.getFormattedFullNumber());
+                fragmentEditMobileEtNew.setText(e.substring(newCountryCode.length() + 1));
             } else {
                 fragmentEditMobileEtNew.setText(fragmentEditMobileEtNew.getText().toString().replaceAll(" ", ""));
             }
@@ -117,45 +123,40 @@ public class EditMobileFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_edit_mobile_btn_confirm:
-                disappearKeypad(getActivity());
+                disappearKeypad(requireActivity());
                 if (editMobileNumber(getActivity(),
+                        currentPhoneNum,
+                        fragmentEditMobileCcpCodeOld.getFullNumber(),
                         validOldNum,
                         validNewNum,
                         fragmentEditMobileEtOld,
                         fragmentEditMobileEtNew)) {
 
-                    String phone = fragmentEditMobileCcpCode.getFullNumber();
-                    String code = fragmentEditMobileCcpCode.getSelectedCountryCode();
+                    String phone = fragmentEditMobileCcpCodeNew.getFullNumber();
 
-                    editMobile(phone, code);
+                    editMobile(phone);
 
                 }
                 break;
         }
     }
 
-    private void editMobile(String phone, String code) {
+    private void editMobile(String phone) {
         if (isConnected(getContext())) {
             disableView(fragmentEditMobileBtnConfirm);
 
             showProgressDialog(getActivity());
-            getClient().profileEditMobileNum(loadDataString(getActivity(), TOKEN), new ChangePhoneRequestBody(phone, code))
+            getClient().profileEditMobileNum(loadDataString(getActivity(), TOKEN), new ChangePhoneRequestBody(phone))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
                         public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             enableView(fragmentEditMobileBtnConfirm);
                             if (response.isSuccessful()) {
-                                fragmentEditMobileEtOld.setText("");
-                                fragmentEditMobileEtNew.setText("");
-                                Intent intent = new Intent(getContext(), SecondHomeActivity.class);
-                                intent.putExtra("id", 10);
-                                intent.putExtra("type", 3);
-                                intent.putExtra("phone", phone);
-                                startActivity(intent);
+                                onEditSuccess(phone);
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
                                 ApiErrorHandler.showErrorMessage(getActivity(), response);
@@ -170,5 +171,15 @@ public class EditMobileFragment extends Fragment {
                         }
                     });
         }
+    }
+
+    private void onEditSuccess(String phone) {
+        fragmentEditMobileEtOld.setText("");
+        fragmentEditMobileEtNew.setText("");
+        Intent intent = new Intent(getContext(), SecondHomeActivity.class);
+        intent.putExtra("id", 10);
+        intent.putExtra("type", 3);
+        intent.putExtra("phone", phone);
+        startActivity(intent);
     }
 }

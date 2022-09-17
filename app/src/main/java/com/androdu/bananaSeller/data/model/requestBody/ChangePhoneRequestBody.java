@@ -1,10 +1,9 @@
 package com.androdu.bananaSeller.data.model.requestBody;
 
 public class ChangePhoneRequestBody {
-    String mobile, code;
+    String mobile;
 
-    public ChangePhoneRequestBody(String mobile, String code) {
+    public ChangePhoneRequestBody(String mobile) {
         this.mobile = mobile;
-        this.code = code;
     }
 }

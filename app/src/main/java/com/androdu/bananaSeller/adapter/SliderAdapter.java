@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,16 +22,15 @@ import butterknife.ButterKnife;
 
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.FIRST_TIME;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.saveDataString;
+import static com.androdu.bananaSeller.helper.Constants.WELCOME_IMAGES;
+import static com.androdu.bananaSeller.helper.Constants.WELCOME_SPINNERS;
+import static com.androdu.bananaSeller.helper.Constants.WELCOME_SUBTITLES;
+import static com.androdu.bananaSeller.helper.Constants.WELCOME_TITLES;
 
 public class SliderAdapter extends PagerAdapter {
 
 
-    private Activity context;
-    private LayoutInflater layoutInflater;
-    private Integer[] images = {R.drawable.ic_slider1, R.drawable.ic_slider2, R.drawable.ic_slider3};
-    private Integer[] titles = {R.string.slider_title1, R.string.slider_title2, R.string.slider_title3};
-    private Integer[] subTitles = {R.string.slider_subtitle1, R.string.slider_subtitle2, R.string.slider_subtitle3};
-    private Integer[] spinners = {R.drawable.ic_spinner1, R.drawable.ic_spinner2, R.drawable.ic_spinner3};
+    private final Activity context;
 
     public SliderAdapter(Activity context) {
         this.context = context;
@@ -37,18 +38,20 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return images.length;
+        return WELCOME_IMAGES.length;
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
 
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        @SuppressLint("InflateParams")
         View view = layoutInflater.inflate(R.layout.slider_item, null);
         ButterKnife.bind(view);
         ImageView image = view.findViewById(R.id.slider_item_iv_image);
@@ -58,28 +61,18 @@ public class SliderAdapter extends PagerAdapter {
         Button start = view.findViewById(R.id.slider_item_btn_start);
         ImageView spinner = view.findViewById(R.id.slider_item_iv_spinner);
 
-        image.setImageResource(images[position]);
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLogin();
-            }
-        });
+        image.setImageResource(WELCOME_IMAGES[position]);
+        skip.setOnClickListener(v -> goToLogin());
 
-        title.setText(titles[position]);
-        subTitle.setText(subTitles[position]);
+        title.setText(WELCOME_TITLES[position]);
+        subTitle.setText(WELCOME_SUBTITLES[position]);
 
         if (position == 2) {
             start.setVisibility(View.VISIBLE);
-            start.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   goToLogin();
-                }
-            });
+            start.setOnClickListener(v -> goToLogin());
         }
 
-        spinner.setImageResource(spinners[position]);
+        spinner.setImageResource(WELCOME_SPINNERS[position]);
 
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);
@@ -89,7 +82,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
 
         ViewPager vp = (ViewPager) container;
         View view = (View) object;

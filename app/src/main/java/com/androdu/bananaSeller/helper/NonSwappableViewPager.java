@@ -10,14 +10,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import java.lang.reflect.Field;
 
-public class NonSwipeableViewPager extends ViewPager {
+public class NonSwappableViewPager extends ViewPager {
 
-    public NonSwipeableViewPager(Context context) {
+    public NonSwappableViewPager(Context context) {
         super(context);
         setMyScroller();
     }
 
-    public NonSwipeableViewPager(Context context, AttributeSet attrs) {
+    public NonSwappableViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         setMyScroller();
     }
@@ -47,7 +47,7 @@ public class NonSwipeableViewPager extends ViewPager {
         }
     }
 
-    public class MyScroller extends Scroller {
+    public static class MyScroller extends Scroller {
         public MyScroller(Context context) {
             super(context, new DecelerateInterpolator());
         }

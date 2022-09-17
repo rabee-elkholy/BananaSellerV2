@@ -1,13 +1,10 @@
 package com.androdu.bananaSeller.data.api;
 
 
-import com.androdu.bananaSeller.data.model.requestBody.AddLocationRequestBody;
-import com.androdu.bananaSeller.data.model.requestBody.CancelOfferRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.CancelOrderRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.ChangeLangRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.ChangePhoneRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.CheckCodeRequestBody;
-import com.androdu.bananaSeller.data.model.requestBody.CheckPayRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.ComplaintIdRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.ContactUsRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.DeliveryLoginRequestBody;
@@ -25,7 +22,6 @@ import com.androdu.bananaSeller.data.model.requestBody.addOffer.AddOfferRequestB
 import com.androdu.bananaSeller.data.model.requestBody.addOffer.FieldRequestBody;
 import com.androdu.bananaSeller.data.model.response.GeneralResponse;
 import com.androdu.bananaSeller.data.model.response.SellerFieldsResponse;
-import com.androdu.bananaSeller.data.model.response.checkout.CheckOutResponse;
 import com.androdu.bananaSeller.data.model.response.clientInfo.ClientInfoResponse;
 import com.androdu.bananaSeller.data.model.response.complaints.ComplaintsResponse;
 import com.androdu.bananaSeller.data.model.response.deliveryLogin.DeliveryLoginResponse;
@@ -61,10 +57,6 @@ public interface IRetrofitApi {
 
     @POST("seller/login")
     Call<LoginResponse> login(@Body LoginRequestBody loginRequestBody);
-
-    @POST("delivery/login")
-    Call<DeliveryLoginResponse> loginDelivery(@Body DeliveryLoginRequestBody deliveryLoginRequestBody);
-
 
     @GET("client/guest/products/{type}")
     Call<ProductsResponse> getProductsGuest(@Path("type") String type,
@@ -153,22 +145,6 @@ public interface IRetrofitApi {
     @GET("seller/support/policy")
     Call<TermsPrivacyResponse> getPrivacy();
 
-    @POST("seller/order/cancel")
-    Call<GeneralResponse> cancelOrder(@Header("Authorization") String token,
-                                      @Body CancelOrderRequestBody cancelOrderRequestBody);
-
-    @POST("seller/offers/cancel")
-    Call<GeneralResponse> cancelOffer(@Header("Authorization") String token,
-                                      @Body CancelOfferRequestBody cancelOfferRequestBody);
-
-    @POST("seller/offers/CreateCheckOut")
-    Call<CheckOutResponse> createCheckout(@Header("Authorization") String token,
-                                          @Body CancelOfferRequestBody cancelOfferRequestBody);
-
-    @POST("seller/offers/checkPayment")
-    Call<GeneralResponse> checkPay(@Header("Authorization") String token,
-                                   @Body CheckPayRequestBody checkPayRequestBody);
-
     @POST("seller/signup/verfication/send")
     Call<GeneralResponse> signUpVerification(@Header("Authorization") String token);
 
@@ -209,10 +185,6 @@ public interface IRetrofitApi {
     Call<ClientInfoResponse> getClientInfo(@Header("Authorization") String token,
                                            @Path("orderId") String orderId);
 
-    @POST("seller/profile/add/location")
-    Call<GeneralResponse> addNewLocation(@Header("Authorization") String token,
-                                         @Body AddLocationRequestBody addLocationRequestBody);
-
     @POST("seller/profile/edit/name")
     Call<GeneralResponse> editName(@Header("Authorization") String token,
                                    @Body EditNameRequestBody editNameRequestBody);
@@ -237,21 +209,9 @@ public interface IRetrofitApi {
     Call<GeneralResponse> acceptComplaint(@Header("Authorization") String token,
                                           @Body ComplaintIdRequestBody complaintIdRequestBody);
 
-    @POST("seller/profile/category/add")
-    Call<GeneralResponse> addField(@Header("Authorization") String token,
-                                   @Body FieldRequestBody fieldRequestBody);
-
-    @POST("seller/profile/category/delete")
-    Call<GeneralResponse> removeField(@Header("Authorization") String token,
+    @POST("seller/profile/category/swapcategories")
+    Call<SellerFieldsResponse> changeField(@Header("Authorization") String token,
                                       @Body FieldRequestBody fieldRequestBody);
-
-    @POST("seller/support/issue")
-    @Multipart
-    Call<GeneralResponse> sendComplaint(@Header("Authorization") String token,
-                                        @Part("orderId") String orderId,
-                                        @Part("reason") String reason,
-                                        @Part("demands") String demands,
-                                        @Part MultipartBody.Part[] image);
 
     @POST("seller/profile/certificate")
     @Multipart

@@ -1,5 +1,8 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import static com.androdu.bananaSeller.helper.HelperMethod.disappearKeypad;
+
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
@@ -27,8 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.androdu.bananaSeller.helper.HelperMethod.disappearKeypad;
-
+@SuppressLint("NonConstantResourceId")
 public class PaymentFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -49,9 +51,7 @@ public class PaymentFragment extends Fragment {
     CheckBox fragmentPaymentCbDelivery;
     @BindView(R.id.fragment_payment_btn_confirm)
     Button fragmentPaymentBtnConfirm;
-    private View view;
 
-    private String offerId;
     private String checkoutId;
 
     final Calendar myCalendar = Calendar.getInstance();
@@ -62,7 +62,6 @@ public class PaymentFragment extends Fragment {
 
     public PaymentFragment(String offerId) {
         // Required empty public constructor
-        this.offerId = offerId;
     }
 
 
@@ -70,7 +69,7 @@ public class PaymentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_payment, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment, container, false);
         ButterKnife.bind(this, view);
         init();
 
@@ -85,7 +84,7 @@ public class PaymentFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_payment_et_date_time:
 

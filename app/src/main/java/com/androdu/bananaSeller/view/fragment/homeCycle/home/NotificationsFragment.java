@@ -1,5 +1,15 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
+import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
+import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showView;
+import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,17 +22,16 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
 import com.androdu.bananaSeller.R;
 import com.androdu.bananaSeller.adapter.NotificationAdapter;
 import com.androdu.bananaSeller.data.model.response.notifications.Notification;
 import com.androdu.bananaSeller.data.model.response.notifications.NotificationsResponse;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
 import com.androdu.bananaSeller.helper.OnEndLess;
 import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
 
@@ -35,14 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.androdu.bananaSeller.data.api.ApiService.getClient;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
-import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
-import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showView;
-import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
-
+@SuppressLint("NonConstantResourceId")
 public class NotificationsFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -63,7 +65,6 @@ public class NotificationsFragment extends Fragment {
     TextView fragmentNotificationsTvMsg;
     @BindView(R.id.app_bar_settings)
     ImageButton appBarSettings;
-    private View view;
 
     private ArrayList<Notification> notifications;
     private OnEndLess onEndLess;
@@ -79,7 +80,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         ButterKnife.bind(this, view);
 
         init();
@@ -118,9 +119,7 @@ public class NotificationsFragment extends Fragment {
 
         notificationAdapter = new NotificationAdapter(getActivity(), notifications);
         fragmentNotificationsRvRecyclerView.setAdapter(notificationAdapter);
-        notificationAdapter.SetOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(int position, Notification model) {
+        notificationAdapter.SetOnItemClickListener((position, model) -> {
 //                switch (model.getData().getKey()){
 //                    case "2":
 //                        Intent intent = new Intent(getContext(), SecondHomeActivity.class);
@@ -128,14 +127,10 @@ public class NotificationsFragment extends Fragment {
 //                        startActivity(intent);
 //                        break;
 //                }
-            }
         });
-        fragmentNotificationsSrlSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getNotifications(1);
-                fragmentNotificationsSrlSwipe.setRefreshing(false);
-            }
+        fragmentNotificationsSrlSwipe.setOnRefreshListener(() -> {
+            getNotifications(1);
+            fragmentNotificationsSrlSwipe.setRefreshing(false);
         });
 
     }
@@ -150,7 +145,7 @@ public class NotificationsFragment extends Fragment {
             getClient().getNotifications(loadDataString(getActivity(), TOKEN), page)
                     .enqueue(new Callback<NotificationsResponse>() {
                         @Override
-                        public void onResponse(Call<NotificationsResponse> call, Response<NotificationsResponse> response) {
+                        public void onResponse(@NonNull Call<NotificationsResponse> call, @NonNull Response<NotificationsResponse> response) {
                             hideView(fragmentNotificationsPbProgressBar, loadMore);
 
                             if (response.isSuccessful()) {
@@ -158,12 +153,12 @@ public class NotificationsFragment extends Fragment {
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<NotificationsResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<NotificationsResponse> call, @NonNull Throwable t) {
                             hideView(fragmentNotificationsPbProgressBar, loadMore);
                             showErrorDialog(getActivity(), t.getMessage());
                         }
@@ -173,6 +168,7 @@ public class NotificationsFragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void onGetNotificationsSuccess(NotificationsResponse body, int page) {
         if (page == 1) {
             initOnEndLess();

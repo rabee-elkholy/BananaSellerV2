@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -56,8 +57,8 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogCloseFragment;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class SellerInfoFragment extends Fragment {
-
     @BindView(R.id.app_bar_title)
     TextView appBarTitle;
     @BindView(R.id.fragment_seller_info_rv_images_list)
@@ -78,7 +79,6 @@ public class SellerInfoFragment extends Fragment {
     TextInputLayout fragmentSellerInfoTilWorkingTime;
     @BindView(R.id.fragment_seller_info_btn_confirm)
     Button fragmentSellerInfoBtnConfirm;
-    private View view;
     private List<String> paths;
     private ImagesAdapter adapter;
 
@@ -98,7 +98,7 @@ public class SellerInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_seller_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_seller_info, container, false);
         ButterKnife.bind(this, view);
 
         init();
@@ -118,7 +118,7 @@ public class SellerInfoFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_seller_info_tv_add_image:
 
@@ -134,6 +134,7 @@ public class SellerInfoFragment extends Fragment {
                             myCalendar.set(Calendar.MONTH, monthOfYear);
                             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                             String myFormat = "dd/MM/yyyy";
+                            @SuppressLint("SimpleDateFormat")
                             SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
                             fragmentSellerInfoTitExDate.setText(sdf.format(myCalendar.getTime()));
                             exDate = myCalendar.getTime().getTime();
@@ -158,7 +159,7 @@ public class SellerInfoFragment extends Fragment {
                 pickTime();
                 break;
             case R.id.fragment_seller_info_btn_confirm:
-                disappearKeypad(getActivity());
+                disappearKeypad(requireActivity());
                 if (Validation.sellerInfo(getActivity(),
                         paths.size(),
                         startTime,
@@ -183,13 +184,13 @@ public class SellerInfoFragment extends Fragment {
                 Log.d("addFile", "onViewClicked: " + paths.get(i));
             }
             getClient().addCertificate(loadDataString(getActivity(), TOKEN),
-                    exDate,
-                    fragmentSellerInfoTilAddress.getEditText().getText().toString().trim(),
-                    location.longitude,
-                    location.latitude,
-                    String.valueOf(startTimeMs),
-                    String.valueOf(endTimeMs),
-                    parts)
+                            exDate,
+                            fragmentSellerInfoTilAddress.getEditText().getText().toString().trim(),
+                            location.longitude,
+                            location.latitude,
+                            String.valueOf(startTimeMs),
+                            String.valueOf(endTimeMs),
+                            parts)
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
                         public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
@@ -199,7 +200,7 @@ public class SellerInfoFragment extends Fragment {
                                 showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                ApiErrorHandler.showErrorMessage(requireActivity(), response);
                             }
                         }
 
@@ -221,16 +222,17 @@ public class SellerInfoFragment extends Fragment {
                     myCalendar.set(Calendar.MINUTE, minute);
 
                     String myFormat1 = "hh:mma";
+                    @SuppressLint("SimpleDateFormat")
                     SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat1);
                     if (startTime.isEmpty()) {
                         startTime = sdf2.format(myCalendar.getTime()).toLowerCase();
                         startTimeMs = myCalendar.getTime().getTime();
-                        fragmentSellerInfoTitWorkingTime.setText(getString(R.string.from2) + " " + startTime);
+                        fragmentSellerInfoTitWorkingTime.setText(String.format("%s %s", getString(R.string.from2), startTime));
                         pickTime();
                     } else {
                         endTime = sdf2.format(myCalendar.getTime()).toLowerCase();
                         endTimeMs = myCalendar.getTime().getTime();
-                        fragmentSellerInfoTitWorkingTime.append(" " + getString(R.string.to2) + " " + endTime);
+                        fragmentSellerInfoTitWorkingTime.append(String.format(" %s %s", getString(R.string.to2), endTime));
                     }
                 },
                 myCalendar.get(Calendar.HOUR_OF_DAY),
@@ -248,6 +250,7 @@ public class SellerInfoFragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -257,11 +260,11 @@ public class SellerInfoFragment extends Fragment {
         }
         if (requestCode == 2) {
             location = new LatLng(data.getDoubleExtra("lat", 0), data.getDoubleExtra("long", 0));
-            fragmentSellerInfoTitLocation.setText(location.latitude + " : " + location.longitude);
+            fragmentSellerInfoTitLocation.setText(String.format("%s : %s", location.latitude, location.longitude));
 
         } else if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
-            paths.add(getRealPathFromURIPath(uri, getActivity()));
+            paths.add(getRealPathFromURIPath(uri, requireActivity()));
             adapter.notifyDataSetChanged();
         } else {
             Log.d("debugging", "onActivityResult: ");

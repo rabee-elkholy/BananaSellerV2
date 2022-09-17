@@ -1,5 +1,17 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataBoolean;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
+import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
+import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showView;
+import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,7 +38,6 @@ import com.androdu.bananaSeller.adapter.OrdersAdapter;
 import com.androdu.bananaSeller.data.model.Filter;
 import com.androdu.bananaSeller.data.model.response.orders.Order;
 import com.androdu.bananaSeller.data.model.response.orders.OrdersResponse;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
 import com.androdu.bananaSeller.helper.OnEndLess;
 import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
 import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
@@ -40,16 +52,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.androdu.bananaSeller.data.api.ApiService.getClient;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataBoolean;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
-import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
-import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showView;
-import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
-
+@SuppressLint("NonConstantResourceId")
 public class OrdersFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -70,13 +73,11 @@ public class OrdersFragment extends Fragment {
     TextView fragmentOrdersTvMsg;
     @BindView(R.id.app_bar_sorting)
     ImageButton appBarSorting;
-    private View view;
     private ArrayList<Order> offersList;
     private OnEndLess onEndLess;
     private Integer maxPage = 0;
     private OrdersAdapter ordersAdapter;
     private int filter = 0;
-    private int sort = 2;
     private double deliveryPrice;
     private List<Filter> filters = new ArrayList<>();
 
@@ -98,7 +99,7 @@ public class OrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
         ButterKnife.bind(this, view);
         init();
         if (loadDataBoolean(getActivity(), USER_LOGGED))
@@ -172,7 +173,7 @@ public class OrdersFragment extends Fragment {
                     getFilter())
                     .enqueue(new Callback<OrdersResponse>() {
                         @Override
-                        public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
+                        public void onResponse(@NonNull Call<OrdersResponse> call, @NonNull Response<OrdersResponse> response) {
                             hideView(fragmentOrdersPbProgressBar, loadMore);
 
                             if (response.isSuccessful()) {
@@ -180,12 +181,12 @@ public class OrdersFragment extends Fragment {
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<OrdersResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<OrdersResponse> call, @NonNull Throwable t) {
                             hideView(fragmentOrdersPbProgressBar, loadMore);
                             showErrorDialog(getActivity(), t.getMessage());
                         }
@@ -204,7 +205,7 @@ public class OrdersFragment extends Fragment {
             getClient().getOrdersGuest(page, filter, getFilter())
                     .enqueue(new Callback<OrdersResponse>() {
                         @Override
-                        public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
+                        public void onResponse(@NonNull Call<OrdersResponse> call, @NonNull Response<OrdersResponse> response) {
                             hideView(fragmentOrdersPbProgressBar, loadMore);
 
                             if (response.isSuccessful()) {
@@ -212,12 +213,12 @@ public class OrdersFragment extends Fragment {
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<OrdersResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<OrdersResponse> call, @NonNull Throwable t) {
                             hideView(fragmentOrdersPbProgressBar, loadMore);
                             showErrorDialog(getActivity(), t.getMessage());
                         }
@@ -240,6 +241,7 @@ public class OrdersFragment extends Fragment {
         return requestFilter;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void onGetOrdersSuccess(OrdersResponse body, int page) {
         if (page == 1) {
             initOnEndLess();
@@ -281,6 +283,7 @@ public class OrdersFragment extends Fragment {
 
     @OnClick({R.id.app_bar_filter, R.id.app_bar_sorting})
     public void onViewClicked(View view) {
+        int sort = 2;
         switch (view.getId()) {
             case R.id.app_bar_filter:
                 List<Filter> filtersTemp = new ArrayList<>();

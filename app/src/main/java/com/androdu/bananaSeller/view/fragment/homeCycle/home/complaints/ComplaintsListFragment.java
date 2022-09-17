@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.complaints;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +35,7 @@ import retrofit2.Response;
 import static com.androdu.bananaSeller.data.api.ApiService.getClient;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
 import static com.androdu.bananaSeller.helper.HelperMethod.disappearKeypad;
 import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
 import static com.androdu.bananaSeller.helper.HelperMethod.replaceFragment;
@@ -40,6 +43,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showView;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class ComplaintsListFragment extends Fragment {
 
 
@@ -54,7 +58,6 @@ public class ComplaintsListFragment extends Fragment {
     @BindView(R.id.fragment_complaints_list_tv_msg)
     TextView fragmentComplaintsListTvMsg;
 
-    private View view;
     private String type;
     private ArrayList<Complaint> complaints;
     private ComplaintsAdapter complaintsAdapter;
@@ -80,7 +83,7 @@ public class ComplaintsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_complaints_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -102,7 +105,7 @@ public class ComplaintsListFragment extends Fragment {
                         onEndLess.previous_page = current_page;
 
                         getComplains(current_page);
-                        disappearKeypad(getActivity());
+                        disappearKeypad(requireActivity());
                     } else {
                         onEndLess.current_page = onEndLess.previous_page;
                     }
@@ -115,21 +118,13 @@ public class ComplaintsListFragment extends Fragment {
 
         complaintsAdapter = new ComplaintsAdapter(getActivity(), complaints);
         fragmentComplaintsListRvRecyclerView.setAdapter(complaintsAdapter);
-        complaintsAdapter.SetOnItemClickListener(new ComplaintsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, Complaint model) {
-                replaceFragment(getParentFragmentManager(),
-                        R.id.activity_second_home_container,
-                        new ComplaintDetailsFragment(model, type),
-                        true);
-            }
-        });
-        fragmentComplaintsListSrlSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getComplains(1);
-                fragmentComplaintsListSrlSwipe.setRefreshing(false);
-            }
+        complaintsAdapter.SetOnItemClickListener((position, model) -> replaceFragment(getParentFragmentManager(),
+                R.id.activity_second_home_container,
+                new ComplaintDetailsFragment(model, type),
+                true));
+        fragmentComplaintsListSrlSwipe.setOnRefreshListener(() -> {
+            getComplains(1);
+            fragmentComplaintsListSrlSwipe.setRefreshing(false);
         });
 
     }
@@ -143,7 +138,7 @@ public class ComplaintsListFragment extends Fragment {
             getClient().getComplaints(loadDataString(getActivity(), TOKEN), page, type)
                     .enqueue(new Callback<ComplaintsResponse>() {
                         @Override
-                        public void onResponse(Call<ComplaintsResponse> call, Response<ComplaintsResponse> response) {
+                        public void onResponse(@NonNull Call<ComplaintsResponse> call, @NonNull Response<ComplaintsResponse> response) {
                             hideView(fragmentComplaintsListPbProgress, loadMore);
 
                             if (response.isSuccessful()) {
@@ -151,12 +146,12 @@ public class ComplaintsListFragment extends Fragment {
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ComplaintsResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<ComplaintsResponse> call, @NonNull Throwable t) {
                             hideView(fragmentComplaintsListPbProgress, loadMore);
                             Log.d("error_handler", "onFailure: " + t.getMessage());
                             t.printStackTrace();
@@ -168,6 +163,7 @@ public class ComplaintsListFragment extends Fragment {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void onGetComplaintsSuccess(ComplaintsResponse complaintsResponse, int page) {
 
         if (page == 1) {

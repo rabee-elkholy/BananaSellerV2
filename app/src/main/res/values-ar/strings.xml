@@ -104,7 +104,7 @@
         <item>تم حظر حسابك</item>
         <item>خطأ في البيانات</item>
         <item>رقم الهاتف مسجل من قبل</item>
-        <item>رقم الهاتف أو البريد غير صحيح</item>
+        <item>رقم الهاتف غير صحيح!</item>
         <item>كلمة المرور غير صحيحة</item>
         <item>غير موجود</item>
         <item>العربة فارغة</item>
@@ -359,6 +359,7 @@
     <string name="from2">من:</string>
     <string name="to2">إلي:</string>
     <string name="your_field_will_be_deleted">سيتم حذف المجال</string>
+    <string name="your_field_changed_successfully">تم تغيير المجال بنجاح يرجي ارسال الرخصة للتفعيل</string>
     <string name="your_licence_will_be_deleted_you_shoud_send_new_one">سيتم حذف ترخيصك ، يجب عليك إرسال ترخيص جديد</string>
     <string name="must_be_greater_than_15">يجب ان يكون اكبر من 15</string>
     <string name="km">كم</string>

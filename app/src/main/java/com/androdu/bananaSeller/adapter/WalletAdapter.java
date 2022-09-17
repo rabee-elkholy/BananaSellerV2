@@ -1,11 +1,13 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -20,14 +22,13 @@ import butterknife.ButterKnife;
 public class WalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private Activity activity;
-    private List<WalletTransaction> modelList;
+    private final List<WalletTransaction> modelList;
 
-    public WalletAdapter(Activity activity, List<WalletTransaction> modelList) {
-        this.activity = activity;
+    public WalletAdapter(List<WalletTransaction> modelList) {
         this.modelList = modelList;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
@@ -37,23 +38,22 @@ public class WalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final WalletTransaction model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
             if (model.getAction().equals("pay")) {
-                genericViewHolder.walletTransactionTvAmount.setText("- " + model.getAmount());
-                genericViewHolder.walletTransactionTvType.setText(R.string.withdrawal);
+                viewHolder.walletTransactionTvAmount.setText(String.format("- %s", model.getAmount()));
+                viewHolder.walletTransactionTvType.setText(R.string.withdrawal);
             }else if (model.getAction().equals("deposit")){
-                genericViewHolder.walletTransactionTvAmount.setText("+ " + model.getAmount());
-                genericViewHolder.walletTransactionTvType.setText(R.string.deposit);
+                viewHolder.walletTransactionTvAmount.setText(String.format("+ %s", model.getAmount()));
+                viewHolder.walletTransactionTvType.setText(R.string.deposit);
             } else{
-                genericViewHolder.walletTransactionTvAmount.setText("+ " + model.getAmount());
-                genericViewHolder.walletTransactionTvType.setText(R.string.refund);
+                viewHolder.walletTransactionTvAmount.setText(String.format("+ %s", model.getAmount()));
+                viewHolder.walletTransactionTvType.setText(R.string.refund);
             }
-            genericViewHolder.walletTransactionTvDate.setText(model.getCreatedAt().split("T")[0]);
+            viewHolder.walletTransactionTvDate.setText(model.getCreatedAt().split("T")[0]);
         }
     }
 
@@ -67,8 +67,8 @@ public class WalletAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return modelList.get(position);
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    @SuppressLint("NonConstantResourceId")
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.wallet_transaction_tv_amount)
         TextView walletTransactionTvAmount;
         @BindView(R.id.wallet_transaction_tv_type)

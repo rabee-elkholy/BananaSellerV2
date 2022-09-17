@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -28,12 +30,10 @@ import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
 public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-//    https://stackoverflow.com/questions/12818711/how-to-find-time-is-today-or-yesterday-in-android
 
-    private Activity activity;
-    private List<Notification> modelList;
+    private final Activity activity;
+    private final List<Notification> modelList;
     private OnItemClickListener mItemClickListener;
-    private String userName;
     private Integer todayPosition = -1;
     private Integer earlierPosition = -1;
 
@@ -41,44 +41,44 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public NotificationAdapter(Activity activity, List<Notification> modelList) {
         this.activity = activity;
         this.modelList = modelList;
-        userName = loadDataString(activity, USER_NAME);
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.notifications_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.notifications_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Notification model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
             if (getLanguagePref(activity).equals(LANGUAGE_KEY_ENGLISH)) {
-                genericViewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleEn());
-                genericViewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyEn());
+                viewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleEn());
+                viewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyEn());
             } else if (getLanguagePref(activity).equals(LANGUAGE_KEY_ARABIC)){
-                genericViewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleAr());
-                genericViewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyAr());
+                viewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleAr());
+                viewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyAr());
             }else{
-                genericViewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleUr());
-                genericViewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyUr());
+                viewHolder.notificationItemTvTitle.setText(model.getNotificationDetails().getTitleUr());
+                viewHolder.notificationItemTvBody.setText(model.getNotificationDetails().getBodyUr());
             }
 
-            genericViewHolder.notificationItemTvDateTime.setText(getTimeBetween(Long.valueOf(model.getDate()), position));
+            viewHolder.notificationItemTvDateTime.setText(getTimeBetween(Long.valueOf(model.getDate()), position));
             if (todayPosition == position) {
-                genericViewHolder.notificationItemTvPositionType.setVisibility(View.VISIBLE);
-                genericViewHolder.notificationItemTvPositionType.setText(activity.getString(R.string.today));
+                viewHolder.notificationItemTvPositionType.setVisibility(View.VISIBLE);
+                viewHolder.notificationItemTvPositionType.setText(activity.getString(R.string.today));
             } else if (earlierPosition == position) {
-                genericViewHolder.notificationItemTvPositionType.setVisibility(View.VISIBLE);
-                genericViewHolder.notificationItemTvPositionType.setText(activity.getString(R.string.earlier));
+                viewHolder.notificationItemTvPositionType.setVisibility(View.VISIBLE);
+                viewHolder.notificationItemTvPositionType.setText(activity.getString(R.string.earlier));
             } else
-                genericViewHolder.notificationItemTvPositionType.setVisibility(View.GONE);
+                viewHolder.notificationItemTvPositionType.setVisibility(View.GONE);
         }
     }
 
@@ -127,6 +127,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return activity.getString(R.string.ago) + " " + days + " " + activity.getString(R.string.days_ago);
 
         } else {
+            @SuppressLint("SimpleDateFormat")
             SimpleDateFormat formatter = new SimpleDateFormat("d MMM yyyy");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(notificationTime);
@@ -136,7 +137,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-
         return modelList.size();
     }
 
@@ -153,7 +153,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return modelList.get(position);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.notification_item_tv_title)
         TextView notificationItemTvTitle;
@@ -168,12 +168,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onClick(getAdapterPosition(), modelList.get(getAdapterPosition()));
-                }
-            });
+            itemView.setOnClickListener(v -> mItemClickListener.onClick(getAdapterPosition(), modelList.get(getAdapterPosition())));
         }
 
     }

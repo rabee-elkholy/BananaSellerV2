@@ -1,5 +1,20 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_FIELD;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataBoolean;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.saveDataString;
+import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
+import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.baked_goods;
+import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.fish_and_meat;
+import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.food;
+import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.fruits_and_vegetables;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,19 +39,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.androdu.bananaSeller.data.api.ApiService.getClient;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataBoolean;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
-import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
-import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
-import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.baked_goods;
-import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.fish_and_meat;
-import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.food;
-import static com.androdu.bananaSeller.view.fragment.homeCycle.home.ProductsFragment.fruits_and_vegetables;
 
-
+@SuppressLint("NonConstantResourceId")
 public class HomeFragment extends Fragment {
 
     @BindView(R.id.h1)
@@ -55,7 +59,6 @@ public class HomeFragment extends Fragment {
     View b3;
     @BindView(R.id.b4)
     View b4;
-    private View view;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -65,14 +68,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
 
         if (loadDataBoolean(getActivity(), USER_LOGGED))
-            getFields();
+            if (loadDataString(getActivity(), USER_FIELD) == null)
+                getFields();
+            else
+                init();
 
         return view;
     }
+
+
 
     private void getFields() {
         if (isConnected(getContext())) {
@@ -82,15 +90,8 @@ public class HomeFragment extends Fragment {
                         public void onResponse(Call<SellerFieldsResponse> call, Response<SellerFieldsResponse> response) {
                             if (response.isSuccessful()) {
                                 List<String> myFields = response.body().getData();
-
-                                if (!myFields.contains("F-V"))
-                                    b1.setVisibility(View.VISIBLE);
-                                if (!myFields.contains("F-M"))
-                                    b3.setVisibility(View.VISIBLE);
-                                if (!myFields.contains("B"))
-                                    b2.setVisibility(View.VISIBLE);
-                                if (!myFields.contains("F"))
-                                    b4.setVisibility(View.VISIBLE);
+                                saveDataString(getActivity(), USER_FIELD, myFields.get(0));
+                                init();
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
                                 ApiErrorHandler.showErrorMessage(getActivity(), response);
@@ -105,6 +106,29 @@ public class HomeFragment extends Fragment {
 
         }
     }
+
+    void init() {
+        String field = loadDataString(getActivity(), USER_FIELD);
+        b1.setVisibility(View.VISIBLE);
+        b2.setVisibility(View.VISIBLE);
+        b3.setVisibility(View.VISIBLE);
+        b4.setVisibility(View.VISIBLE);
+        switch (field) {
+            case "F-V":
+                b1.setVisibility(View.INVISIBLE);
+                break;
+            case "F-M":
+                b3.setVisibility(View.INVISIBLE);
+                break;
+            case "B":
+                b2.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                b4.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
 
     @OnClick({R.id.h1, R.id.h3, R.id.h2, R.id.h4})
     public void onViewClicked(View view) {

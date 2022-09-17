@@ -87,10 +87,6 @@ public class SignUpFragment extends Fragment {
     CheckBox fragmentSignUpCbTerms;
     @BindView(R.id.fragment_sign_up_ccp_code)
     CountryCodePicker fragmentSignUpCcpCode;
-    @BindView(R.id.fragment_sign_up_et_code)
-    TextInputEditText fragmentSignUpEtCode;
-    @BindView(R.id.fragment_sign_up_til_email)
-    TextInputLayout fragmentSignUpTilEmail;
     private View view;
     private boolean validNum;
 
@@ -122,7 +118,6 @@ public class SignUpFragment extends Fragment {
 
         EditText phoneEt = fragmentSignUpTilPhone.getEditText();
         String countryCode = fragmentSignUpCcpCode.getSelectedCountryCodeWithPlus();
-        fragmentSignUpEtCode.setText(countryCode);
 //        Log.d("error_", "init: " + countryCode);
 
         fragmentSignUpCcpCode.registerCarrierNumberEditText(phoneEt);
@@ -188,7 +183,6 @@ public class SignUpFragment extends Fragment {
                         validNum,
                         fragmentSignUpCbTerms.isChecked(),
                         fragmentSignUpTilName,
-                        fragmentSignUpTilEmail,
                         fragmentSignUpTilField,
                         fragmentSignUpTilPhone,
                         fragmentSignUpTilPassword,
@@ -207,14 +201,9 @@ public class SignUpFragment extends Fragment {
 
         if (isConnected(getContext())) {
             String name = fragmentSignUpTilName.getEditText().getText().toString().trim();
-            String email = fragmentSignUpTilEmail.getEditText().getText().toString().trim();
             String phone = fragmentSignUpCcpCode.getFullNumber();
             String password = fragmentSignUpTilPassword.getEditText().getText().toString().trim();
-            String code = fragmentSignUpCcpCode.getSelectedCountryCode();
-            Log.d("error_", "phone: " + phone
-                    + " code: " + fragmentSignUpCcpCode.getSelectedCountryCode()
-                    + " phoneWithNum: " + fragmentSignUpCcpCode.getFullNumber()
-            );
+
 
             String locale;
             if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_URDU))
@@ -223,7 +212,7 @@ public class SignUpFragment extends Fragment {
                 locale = getLanguagePref(getContext());
 
 
-            ApiService.getClient().signUp(new SignUpRequestBody(name, email, phone, code, password, password, fcm, locale, myFields))
+            ApiService.getClient().signUp(new SignUpRequestBody(name, phone, password, password, fcm, locale, myFields))
                     .enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

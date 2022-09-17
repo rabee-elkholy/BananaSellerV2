@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -26,12 +28,13 @@ import butterknife.OnClick;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ARABIC;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_URDU;
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
+import static java.lang.String.format;
 
 public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private Activity activity;
-    private List<Order> modelList;
+    private final Activity activity;
+    private final List<Order> modelList;
     private OnItemClickListener mItemClickListener;
 
     public OrdersAdapter(Activity activity, List<Order> modelList) {
@@ -39,18 +42,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.modelList = modelList;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.orders_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.orders_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Order model = getItem(position);
             ViewHolder genericViewHolder = (ViewHolder) holder;
@@ -91,19 +96,18 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 genericViewHolder.ordersListItemBtnAction.setVisibility(View.VISIBLE);
 
 
-            genericViewHolder.ordersListItemTvClientOrders.setText(model.getClient().getEndedClientOrders() + " "
-                    + activity.getString(R.string.from) + " "
-                    + model.getClient().getTotalClientOrders());
+            genericViewHolder.ordersListItemTvClientOrders.setText(format("%d %s %d", model.getClient().getEndedClientOrders(), activity.getString(R.string.from), model.getClient().getTotalClientOrders()));
 
             if (model.getDistance() >= 1000) {
-                genericViewHolder.ordersListItemTvDistance.setText((((int) model.getDistance()) / 1000) + activity.getString(R.string.km));
+                genericViewHolder.ordersListItemTvDistance.setText(format("%d%s", ((int) model.getDistance()) / 1000, activity.getString(R.string.km)));
             } else {
-                genericViewHolder.ordersListItemTvDistance.setText((int) model.getDistance() + activity.getString(R.string.m));
+                genericViewHolder.ordersListItemTvDistance.setText(String.format("%d%s", (int) model.getDistance(), activity.getString(R.string.m)));
             }
 
             if (model.getOrderDetails().getArriveDate() == 0)
                 genericViewHolder.ordersListItemTvDeliveryDate.setText(R.string.direct_delivery);
             else {
+                @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(model.getOrderDetails().getArriveDate());
@@ -131,7 +135,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return modelList.get(position);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.orders_list_item_tv_order_num)
         TextView ordersListItemTvOrderNum;

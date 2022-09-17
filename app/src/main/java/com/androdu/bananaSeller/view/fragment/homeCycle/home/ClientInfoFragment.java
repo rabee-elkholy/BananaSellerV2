@@ -1,5 +1,15 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
+import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
+import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showView;
+import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,13 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import com.androdu.bananaSeller.R;
 import com.androdu.bananaSeller.data.model.response.clientInfo.ClientInfoResponse;
 import com.androdu.bananaSeller.data.model.response.clientInfo.Data;
 import com.androdu.bananaSeller.data.model.response.sellerInfo.SellerInfoResponse;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
 import com.androdu.bananaSeller.helper.Constants;
 import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -32,15 +42,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.androdu.bananaSeller.data.api.ApiService.getClient;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
-import static com.androdu.bananaSeller.helper.HelperMethod.hideView;
-import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showView;
-import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
-
+@SuppressLint("NonConstantResourceId")
 public class ClientInfoFragment extends BottomSheetDialogFragment {
 
     @BindView(R.id.fragment_client_info_tv_receiver_number)
@@ -71,7 +74,6 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
     LinearLayout fragmentClientInfoLinPayment;
     private String id;
     private int type;
-    private View view;
 
     public ClientInfoFragment() {
         // Required empty public constructor
@@ -87,7 +89,7 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_client_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_client_info, container, false);
         ButterKnife.bind(this, view);
         if (type == 1)
             getClientInfo();
@@ -106,19 +108,19 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
             getClient().getClientInfo(loadDataString(getActivity(), TOKEN), id)
                     .enqueue(new Callback<ClientInfoResponse>() {
                         @Override
-                        public void onResponse(Call<ClientInfoResponse> call, Response<ClientInfoResponse> response) {
+                        public void onResponse(@NonNull Call<ClientInfoResponse> call, @NonNull Response<ClientInfoResponse> response) {
                             hideView(fragmentClientInfoPbProgress);
                             if (response.isSuccessful()) {
                                 onGetInfoSuccess(response.body().getData());
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<ClientInfoResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<ClientInfoResponse> call, @NonNull Throwable t) {
                             hideView(fragmentClientInfoPbProgress);
                             showErrorDialog(getActivity(), t.getMessage());
                         }
@@ -133,14 +135,14 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
             getClient().getClientInfoD(loadDataString(getActivity(), TOKEN), id)
                     .enqueue(new Callback<ClientInfoResponse>() {
                         @Override
-                        public void onResponse(Call<ClientInfoResponse> call, Response<ClientInfoResponse> response) {
+                        public void onResponse(@NonNull Call<ClientInfoResponse> call, @NonNull Response<ClientInfoResponse> response) {
                             hideView(fragmentClientInfoPbProgress);
                             if (response.isSuccessful()) {
                                 onGetInfoSuccess(response.body().getData());
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
@@ -160,19 +162,19 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
             getClient().getSellerInfoD(loadDataString(getActivity(), TOKEN), id)
                     .enqueue(new Callback<SellerInfoResponse>() {
                         @Override
-                        public void onResponse(Call<SellerInfoResponse> call, Response<SellerInfoResponse> response) {
+                        public void onResponse(@NonNull Call<SellerInfoResponse> call, @NonNull Response<SellerInfoResponse> response) {
                             hideView(fragmentClientInfoPbProgress);
                             if (response.isSuccessful()) {
                                 onGetInfoSuccess2(response.body().getData());
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<SellerInfoResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<SellerInfoResponse> call, @NonNull Throwable t) {
                             hideView(fragmentClientInfoPbProgress);
                             showErrorDialog(getActivity(), t.getMessage());
                         }
@@ -191,43 +193,31 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
         fragmentClientInfoLinWorkTime.setVisibility(View.VISIBLE);
 
 
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("hh:mm a");
         Calendar calendar = Calendar.getInstance();
 
         calendar.setTimeInMillis(Long.parseLong(data.getSeller().getCertificate().getAvilable().getFrom()));
-        fragmentClientInfoTvWorkTime.setText(getString(R.string.from2) + " " + formatter.format(calendar.getTime()) + " ");
+        fragmentClientInfoTvWorkTime.setText(String.format("%s %s ", getString(R.string.from2), formatter.format(calendar.getTime())));
 
         calendar.setTimeInMillis(Long.parseLong(data.getSeller().getCertificate().getAvilable().getTo()));
         fragmentClientInfoTvWorkTime.append(getString(R.string.to2) + " " + formatter.format(calendar.getTime()));
 
 
-        fragmentClientInfoTvName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + data.getSeller().getCode();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
+        fragmentClientInfoTvName.setOnClickListener(v -> {
+            openWhatsApp(data.getSeller().getCode());
         });
-        fragmentClientInfoTvReceiverNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + data.getSeller().getCode()));
-                startActivity(intent);
-            }
+        fragmentClientInfoTvReceiverNum.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + data.getSeller().getCode()));
+            startActivity(intent);
         });
 
-        fragmentClientInfoCvMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SecondHomeActivity.class);
-                intent.putExtra("id", 3);
-                intent.putExtra("lat", data.getSeller().getCertificate().getLocation().getCoordinates().get(1));
-                intent.putExtra("lng", data.getSeller().getCertificate().getLocation().getCoordinates().get(0));
-                startActivity(intent);
-            }
+        fragmentClientInfoCvMaps.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SecondHomeActivity.class);
+            intent.putExtra("id", 3);
+            intent.putExtra("lat", data.getSeller().getCertificate().getLocation().getCoordinates().get(1));
+            intent.putExtra("lng", data.getSeller().getCertificate().getLocation().getCoordinates().get(0));
+            startActivity(intent);
         });
     }
 
@@ -244,41 +234,36 @@ public class ClientInfoFragment extends BottomSheetDialogFragment {
         if (clientData.getDate() == 0)
             fragmentClientInfoTvDate.setText(R.string.direct_delivery);
         else {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(clientData.getDate());
             fragmentClientInfoTvDate.setText(formatter.format(calendar.getTime()));
         }
 
-        fragmentClientInfoTvName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://api.whatsapp.com/send?phone=" + clientData.getAccountMobile();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
+        fragmentClientInfoTvName.setOnClickListener(v -> {
+            openWhatsApp(clientData.getAccountMobile());
         });
 
-        fragmentClientInfoTvReceiverNum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + clientData.getMobile()));
-                startActivity(intent);
-            }
+        fragmentClientInfoTvReceiverNum.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + clientData.getMobile()));
+            startActivity(intent);
         });
 
-        fragmentClientInfoCvMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), SecondHomeActivity.class);
-                intent.putExtra("id", 3);
-                intent.putExtra("lat", clientData.getLocation().getCoordinates().get(1));
-                intent.putExtra("lng", clientData.getLocation().getCoordinates().get(0));
-                startActivity(intent);
-            }
+        fragmentClientInfoCvMaps.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SecondHomeActivity.class);
+            intent.putExtra("id", 3);
+            intent.putExtra("lat", clientData.getLocation().getCoordinates().get(1));
+            intent.putExtra("lng", clientData.getLocation().getCoordinates().get(0));
+            startActivity(intent);
         });
 
+    }
+
+    private void openWhatsApp(String phoneNum) {
+        String url = "https://api.whatsapp.com/send?phone=" + phoneNum;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

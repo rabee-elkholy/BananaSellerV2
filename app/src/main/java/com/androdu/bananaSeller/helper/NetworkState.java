@@ -16,7 +16,7 @@ public class NetworkState {
         try {
             cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         } catch (NullPointerException e) {
-
+            e.printStackTrace();
         }
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

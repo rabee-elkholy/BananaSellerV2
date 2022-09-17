@@ -78,7 +78,7 @@
 
     <string name="no_internet">No internet connection!</string>
     <string name="check_internet">Please check your internet connection try again.</string>
-    <string name="wrong_mobile_number">Wrong mobile number</string>
+    <string name="wrong_mobile_number">Wrong phone number</string>
     <string name="wrong_password">Wrong password</string>
 
 
@@ -104,7 +104,7 @@
         <item>Your account blocked</item>
         <item>Wrong data</item>
         <item>Phone number already registered</item>
-        <item>Wrong mobile number or email</item>
+        <item>Wrong mobile number!</item>
         <item>Wrong password</item>
         <item>Not found</item>
         <item>Cart is empty</item>
@@ -365,6 +365,7 @@
     <string name="default_notification_channel_name" translatable="false">BananaSeller</string>
 
     <string name="your_field_will_be_deleted">Your field will be deleted</string>
+    <string name="your_field_changed_successfully">Your Field has been changed successfully. Please send the license to activate</string>
     <string name="your_licence_will_be_deleted_you_shoud_send_new_one">Your licence will be deleted you should send new one</string>
     <string name="must_be_greater_than_15">Must be greater than 15</string>
     <string name="km">KM</string>

@@ -15,6 +15,7 @@ public class SharedPreferencesManger {
     public static final String FCM = "fcm";
     public static final String USER_LOGGED = "user_logged";
     public static final String USER_TYPE = "user_type";
+    public static final String USER_FIELD = "user_field";
     public static final String FIRST_TIME = "first_time";
     public static final String USER_DATA = "user_data";
     public static final String USER_PHONE = "user_phone";
@@ -24,7 +25,6 @@ public class SharedPreferencesManger {
 
 
     public static final String TYPE_SELLER = "1";
-    public static final String TYPE_DELIVERY = "2";
 
     private static void setSharedPreferences(Activity activity) {
         if (sharedPreferences == null) {
@@ -106,7 +106,7 @@ public class SharedPreferencesManger {
     }
 
     public static SellerData loadUserData(Activity activity) {
-        SellerData data = null;
+        SellerData data;
 
         Gson gson = new Gson();
         data = gson.fromJson(loadDataString(activity, USER_DATA), SellerData.class);

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -50,6 +52,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.nav_view)
@@ -93,64 +96,38 @@ public class HomeActivity extends BaseActivity {
 
         ((TextView) drawerView.findViewById(R.id.drawer_header_tv_name)).setText(loadDataString(this, USER_NAME));
 
-        drawerView.findViewById(R.id.drawer_header_lin_my_offers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
-                intent.putExtra("id", 1);
-                startActivity(intent);
-            }
+        drawerView.findViewById(R.id.drawer_header_lin_my_offers).setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
+            intent.putExtra("id", 1);
+            startActivity(intent);
         });
 
-        drawerView.findViewById(R.id.drawer_header_lin_settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
-                intent.putExtra("id", 5);
-                startActivity(intent);
-            }
+        drawerView.findViewById(R.id.drawer_header_lin_settings).setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
+            intent.putExtra("id", 5);
+            startActivity(intent);
         });
-        drawerView.findViewById(R.id.drawer_header_lin_about).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
-                intent.putExtra("id", 6);
-                startActivity(intent);
-            }
+        drawerView.findViewById(R.id.drawer_header_lin_about).setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
+            intent.putExtra("id", 6);
+            startActivity(intent);
         });
-        drawerView.findViewById(R.id.drawer_header_lin_complaints).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
-                intent.putExtra("id", 7);
-                startActivity(intent);
-            }
+        drawerView.findViewById(R.id.drawer_header_lin_complaints).setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SecondHomeActivity.class);
+            intent.putExtra("id", 7);
+            startActivity(intent);
         });
         logoutBtn = drawerView.findViewById(R.id.drawer_header_lin_logout);
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
+        logoutBtn.setOnClickListener(v -> logout());
 
-            }
-        });
         homeActivityDlDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        // This method will trigger on item Click of navigation menu
+        navView.setNavigationItemSelectedListener(menuItem -> {
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            //Checking if the item is in checked state or not, if not make it in checked state
+            menuItem.setChecked(!menuItem.isChecked());
 
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) {
-                    menuItem.setChecked(false);
-                } else {
-                    menuItem.setChecked(true);
-                }
-                menuItem.setChecked(true);
-
-                return true;
-            }
+            return true;
         });
 
     }
@@ -164,7 +141,7 @@ public class HomeActivity extends BaseActivity {
                     new LogoutRequestBody(loadDataString(this, FCM)))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             enableView(logoutBtn);
                             if (response.isSuccessful()) {
@@ -180,7 +157,7 @@ public class HomeActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<GeneralResponse> call, Throwable t) {
                             dismissProgressDialog();
                             enableView(logoutBtn);
                             showErrorDialog(HomeActivity.this, t.getMessage());
@@ -208,8 +185,6 @@ public class HomeActivity extends BaseActivity {
         activityHomeIvNavCart.setPaddingRelative(padding, padding, padding, padding);
         activityHomeIvNavNotification.setImageResource(R.drawable.ic_notification);
         activityHomeIvNavNotification.setPaddingRelative(padding, padding, padding, padding);
-//        activityHomeIvNavMore.setImageResource(R.drawable.ic_more);
-//        activityHomeIvNavMore.setPaddingRelative(padding, padding, padding, padding);
     }
 
     @OnClick({R.id.activity_home_iv_nav_home, R.id.activity_home_iv_nav_orders, R.id.activity_home_iv_nav_cart, R.id.activity_home_iv_nav_notification, R.id.activity_home_iv_nav_more})
@@ -263,6 +238,7 @@ public class HomeActivity extends BaseActivity {
 
         }
     }
+
 
     @Override
     public void onBackPressed() {

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -29,10 +31,10 @@ import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
 public class DeliveryOffersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Activity activity;
-    private List<Offer> modelList;
+    private final Activity activity;
+    private final List<Offer> modelList;
     private OnItemClickListener mItemClickListener;
-    private String type;
+    private final String type;
 
     public DeliveryOffersAdapter(Activity activity, List<Offer> modelList, String type) {
         this.activity = activity;
@@ -40,61 +42,66 @@ public class DeliveryOffersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.type = type;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_offers_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.my_offers_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Offer model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
 
-            genericViewHolder.offersListItemTvOfferNum.setText(model.getId());
+            viewHolder.offersListItemTvOfferNum.setText(model.getId());
 
-            genericViewHolder.offersListItemTvQuantity.setText("");
-            genericViewHolder.offersListItemTvItems.setText("");
+            viewHolder.offersListItemTvQuantity.setText("");
+            viewHolder.offersListItemTvItems.setText("");
             String local = getLanguagePref(activity);
             StringBuffer sb = new StringBuffer("");
 
             for (OfferProduct product : model.getOfferProducts()) {
                 if (local.equals(LANGUAGE_KEY_ARABIC) || local.equals(LANGUAGE_KEY_URDU)) {
                     if (product.getPath().equals("clientProducts")) {
-                        sb.append(product.getProduct().getName() + " , ");
+                        sb.append(product.getProduct().getName()).append(" , ");
                     } else {
                         if (local.equals(LANGUAGE_KEY_ARABIC))
-                            sb.append(product.getProduct().getNameAr() + " , ");
+                            sb.append(product.getProduct().getNameAr()).append(" , ");
                         else
-                            sb.append(product.getProduct().getNameUr() + " , ");
+                            sb.append(product.getProduct().getNameUr()).append(" , ");
                     }
                 } else
-                    sb.append(product.getProduct().getNameEn() + " , ");
+                    sb.append(product.getProduct().getNameEn()).append(" , ");
 
                 int unitIndex = Arrays.asList(Constants.units).indexOf(product.getUnit());
-                genericViewHolder.offersListItemTvQuantity.append(product.getAmount() + " " + (activity.getResources().getStringArray(R.array.weights))[unitIndex] + " , ");
+                viewHolder.offersListItemTvQuantity.append(product.getAmount()
+                        + " "
+                        + (activity.getResources().getStringArray(R.array.weights))[unitIndex]
+                        + " , ");
 
             }
             sb.deleteCharAt(sb.length() - 1);
-            genericViewHolder.offersListItemTvItems.setText(sb);
+            viewHolder.offersListItemTvItems.setText(sb);
 
+            viewHolder.offersListItemTvPrice.setText(String.valueOf(model.getPrice()));
 
-            genericViewHolder.offersListItemTvPrice.setText(model.getPrice() + "");
-
-            genericViewHolder.offersListItemTvAddress.setText(model.getOrder().getLocationDetails().getStringAdress());
+            viewHolder.offersListItemTvAddress.setText(model.getOrder().getLocationDetails().getStringAdress());
 
             if (model.getOrder().getArriveDate() == 0)
-                genericViewHolder.offersListItemTvDeliveryDate.setText(R.string.direct_delivery);
+                viewHolder.offersListItemTvDeliveryDate.setText(R.string.direct_delivery);
             else {
+                @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(model.getOrder().getArriveDate());
-                genericViewHolder.offersListItemTvDeliveryDate.setText(formatter.format(calendar.getTime()) + " ");
+                viewHolder.offersListItemTvDeliveryDate.setText(String.format("%s ", formatter.format(calendar.getTime())));
             }
 
         }
@@ -102,7 +109,6 @@ public class DeliveryOffersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-
         return modelList.size();
     }
 
@@ -124,6 +130,7 @@ public class DeliveryOffersAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.offers_list_item_tv_offer_num)
         TextView offersListItemTvOfferNum;

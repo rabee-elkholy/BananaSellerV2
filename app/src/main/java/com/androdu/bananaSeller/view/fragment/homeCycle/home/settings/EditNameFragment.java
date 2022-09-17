@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.androdu.bananaSeller.R;
@@ -43,6 +45,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogCloseFragment;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class EditNameFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -55,7 +58,6 @@ public class EditNameFragment extends Fragment {
     Button fragmentEditNameBtnConfirm;
     @BindView(R.id.fragment_edit_name_civ_image)
     CircleImageView fragmentEditNameCivImage;
-    private View view;
 
     private Integer avatarPosition;
 
@@ -67,7 +69,7 @@ public class EditNameFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_edit_name, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_name, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -87,17 +89,12 @@ public class EditNameFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_edit_name_civ_image:
                 replaceFragment(getParentFragmentManager(),
                         R.id.activity_second_home_container,
-                        new AvatarFragment(new AvatarFragment.OnClickListener() {
-                            @Override
-                            public void onClick(Integer avatar, Integer position) {
-                                avatarPosition = position;
-                            }
-                        }),
+                        new AvatarFragment((avatar, position) -> avatarPosition = position),
                         true);
                 break;
             case R.id.fragment_edit_name_btn_confirm:
@@ -116,7 +113,7 @@ public class EditNameFragment extends Fragment {
             getClient().editName(loadDataString(getActivity(), TOKEN), new EditNameRequestBody(fragmentEditNameEtName.getText().toString(), avatarPosition))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             enableView(fragmentEditNameBtnConfirm);
                             if (response.isSuccessful()) {
@@ -125,12 +122,12 @@ public class EditNameFragment extends Fragment {
                                 saveDataInt(getActivity(), USER_AVATAR, avatarPosition);
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                ApiErrorHandler.showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
                             dismissProgressDialog();
                             enableView(fragmentEditNameBtnConfirm);
                             showErrorDialog(getActivity(), t.getMessage());

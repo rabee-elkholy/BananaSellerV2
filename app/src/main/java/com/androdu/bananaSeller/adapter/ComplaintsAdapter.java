@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -22,9 +23,8 @@ import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
 public class ComplaintsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-
-    private Activity activity;
-    private List<Complaint> modelList;
+    private final Activity activity;
+    private final List<Complaint> modelList;
     private OnItemClickListener mItemClickListener;
 
     public ComplaintsAdapter(Activity activity, List<Complaint> modelList) {
@@ -32,28 +32,29 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.modelList = modelList;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.complaint_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.complaint_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Complaint model = getItem(position);
-            ViewHolder genericViewHolder = (ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
 
             if (getLanguagePref(activity).equals(LANGUAGE_KEY_ENGLISH))
-                genericViewHolder.complaintItemTvTitle.setText(model.getReason().getReasonEn());
+                viewHolder.complaintItemTvTitle.setText(model.getReason().getReasonEn());
             else if (getLanguagePref(activity).equals(LANGUAGE_KEY_ARABIC))
-                genericViewHolder.complaintItemTvTitle.setText(model.getReason().getReasonAr());
+                viewHolder.complaintItemTvTitle.setText(model.getReason().getReasonAr());
             else
-                genericViewHolder.complaintItemTvTitle.setText(model.getReason().getReasonUr());
+                viewHolder.complaintItemTvTitle.setText(model.getReason().getReasonUr());
 
         }
     }
@@ -86,12 +87,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mItemClickListener.onItemClick(getAdapterPosition(), modelList.get(getAdapterPosition()));
-                }
-            });
+            itemView.setOnClickListener(v -> mItemClickListener.onItemClick(getAdapterPosition(), modelList.get(getAdapterPosition())));
 
         }
     }

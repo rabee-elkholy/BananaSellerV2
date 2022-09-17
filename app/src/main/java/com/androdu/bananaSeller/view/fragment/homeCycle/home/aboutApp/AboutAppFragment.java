@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.aboutApp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,10 +18,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.androdu.bananaSeller.helper.Constants.INSTAGRAM;
+import static com.androdu.bananaSeller.helper.Constants.TELEGRAM;
+import static com.androdu.bananaSeller.helper.Constants.WEB_PAGE;
+import static com.androdu.bananaSeller.helper.Constants.WHATSAPP;
 import static com.androdu.bananaSeller.helper.HelperMethod.replaceFragment;
 
+@SuppressLint("NonConstantResourceId")
 public class AboutAppFragment extends Fragment {
-
     @BindView(R.id.app_bar_back)
     ImageView appBarBack;
     @BindView(R.id.app_bar_title)
@@ -37,7 +42,6 @@ public class AboutAppFragment extends Fragment {
     TextView fragmentAboutAppTvAppReview;
     @BindView(R.id.fragment_about_app_tv_share)
     TextView fragmentAboutAppTvShare;
-    private View view;
 
     public AboutAppFragment() {
         // Required empty public constructor
@@ -47,7 +51,7 @@ public class AboutAppFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_about_app, container, false);
+        View view = inflater.inflate(R.layout.fragment_about_app, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -61,7 +65,7 @@ public class AboutAppFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_about_app_tv_about_us:
                 replaceFragment(getParentFragmentManager(),
@@ -92,28 +96,24 @@ public class AboutAppFragment extends Fragment {
             case R.id.fragment_about_app_tv_share:
                 break;
             case R.id.fragment_about_app_iv_go_telegram:
-                String url = "https:t.me/banana_app";
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
+                i.setData(Uri.parse(TELEGRAM));
                 startActivity(i);
 
                 break;
             case R.id.fragment_about_app_iv_go_insta:
-                String url2 = "https://www.instagram.com/banana.uae?r=nametag";
                 Intent i2 = new Intent(Intent.ACTION_VIEW);
-                i2.setData(Uri.parse(url2));
+                i2.setData(Uri.parse(INSTAGRAM));
                 startActivity(i2);
                 break;
             case R.id.fragment_about_app_iv_go_whats:
-                String url3 = "https://api.whatsapp.com/send?phone=971566151716";
                 Intent i3 = new Intent(Intent.ACTION_VIEW);
-                i3.setData(Uri.parse(url3));
+                i3.setData(Uri.parse(WHATSAPP));
                 startActivity(i3);
                 break;
             case R.id.fragment_about_app_iv_go_web:
-                String url4 = "http://bananas.ae/";
                 Intent i4 = new Intent(Intent.ACTION_VIEW);
-                i4.setData(Uri.parse(url4));
+                i4.setData(Uri.parse(WEB_PAGE));
                 startActivity(i4);
                 break;
         }

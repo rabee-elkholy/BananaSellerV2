@@ -1,5 +1,7 @@
 package com.androdu.bananaSeller.view.activity;
 
+import static com.androdu.bananaSeller.helper.HelperMethod.replaceFragment;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,7 +32,7 @@ public class SecondHomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_home);
 
-        Fragment fragment = new Fragment();
+        Fragment fragment;
 
         switch (getIntent().getIntExtra("id", 0)) {
             case 1:
@@ -89,7 +91,7 @@ public class SecondHomeActivity extends BaseActivity {
                 break;
         }
 
-        HelperMethod.replaceFragment(getSupportFragmentManager(),
+        replaceFragment(getSupportFragmentManager(),
                 R.id.activity_second_home_container,
                 fragment,
                 false);

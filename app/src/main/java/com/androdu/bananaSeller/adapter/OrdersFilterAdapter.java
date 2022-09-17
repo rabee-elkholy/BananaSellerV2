@@ -19,12 +19,10 @@ import butterknife.ButterKnife;
 
 public class OrdersFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Activity activity;
-    private List<String> modelList;
+    private final List<String> modelList;
     public int lastChecked;
 
-    public OrdersFilterAdapter(Activity activity, List<String> modelList, int lastChecked) {
-        this.activity = activity;
+    public OrdersFilterAdapter(List<String> modelList, int lastChecked) {
         this.modelList = modelList;
         this.lastChecked = lastChecked;
 

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.complaints;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +46,7 @@ import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ENGLI
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class ComplaintDetailsFragment extends Fragment {
 
     @BindView(R.id.fragment_complaints_details_cv_images)
@@ -65,12 +68,8 @@ public class ComplaintDetailsFragment extends Fragment {
     RadioGroup fragmentComplaintsDetailsRgAcceptRefuse;
     @BindView(R.id.fragment_complaints_details_btn_confirm)
     Button fragmentComplaintsDetailsBtnConfirm;
-    private View view;
 
     private Complaint complaint;
-
-    private ArrayList<String> paths;
-    private ImagesAdapter adapter;
     private boolean accept = true;
 
     public ComplaintDetailsFragment() {
@@ -87,7 +86,7 @@ public class ComplaintDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_complaint_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_complaint_details, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -116,21 +115,15 @@ public class ComplaintDetailsFragment extends Fragment {
         if (complaint.getImageUrl().isEmpty())
             fragmentComplaintsDetailsCvImages.setVisibility(View.GONE);
         else {
-            paths = new ArrayList<>();
+            ArrayList<String> paths = new ArrayList<>();
             paths.addAll(complaint.getImageUrl());
 
-            adapter = new ImagesAdapter(getActivity(), paths,1);
+            ImagesAdapter adapter = new ImagesAdapter(getActivity(), paths, 1);
             fragmentComplaintsDetailsRvImagesList.setAdapter(adapter);
         }
 
-        fragmentComplaintsDetailsRgAcceptRefuse.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.fragment_add_offer_rb_banana_delivery)
-                    accept = true;
-                else
-                    accept = false;
-            }
+        fragmentComplaintsDetailsRgAcceptRefuse.setOnCheckedChangeListener((group, checkedId) -> {
+            accept = (checkedId == R.id.fragment_add_offer_rb_banana_delivery);
         });
 
     }
@@ -139,62 +132,70 @@ public class ComplaintDetailsFragment extends Fragment {
         if (isConnected(getContext())) {
             showProgressDialog(getActivity());
             if (accept)
-                getClient().acceptComplaint(loadDataString(getActivity(), TOKEN), new ComplaintIdRequestBody(complaint.getId()))
-                        .enqueue(new Callback<GeneralResponse>() {
-                            @Override
-                            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                                dismissProgressDialog();
-                                if (response.isSuccessful()) {
-                                    showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
-
-                                } else {
-                                    Log.d("error_handler", "onResponse: " + response.message());
-                                    ApiErrorHandler.showErrorMessage(getActivity(), response);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<GeneralResponse> call, Throwable t) {
-                                dismissProgressDialog();
-                                Log.d("error_handler", "onFailure: " + t.getMessage());
-                                t.printStackTrace();
-
-                                showErrorDialog(getActivity(), t.getMessage());
-                            }
-                        });
+                acceptComplaint();
             else
-                getClient().refuseComplaint(loadDataString(getActivity(), TOKEN), new ComplaintIdRequestBody(complaint.getId()))
-                        .enqueue(new Callback<GeneralResponse>() {
-                            @Override
-                            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                                dismissProgressDialog();
-                                if (response.isSuccessful()) {
-                                    showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
-
-                                } else {
-                                    Log.d("error_handler", "onResponse: " + response.message());
-                                    ApiErrorHandler.showErrorMessage(getActivity(), response);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<GeneralResponse> call, Throwable t) {
-                                dismissProgressDialog();
-                                Log.d("error_handler", "onFailure: " + t.getMessage());
-                                t.printStackTrace();
-
-                                showErrorDialog(getActivity(), t.getMessage());
-                            }
-                        });
-
+                refuseComplaint();
         }
+    }
+
+    private void acceptComplaint() {
+        getClient().acceptComplaint(loadDataString(getActivity(), TOKEN), new ComplaintIdRequestBody(complaint.getId()))
+                .enqueue(new Callback<GeneralResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
+                        dismissProgressDialog();
+                        if (response.isSuccessful()) {
+                            showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
+
+                        } else {
+                            Log.d("error_handler", "onResponse: " + response.message());
+                            ApiErrorHandler.showErrorMessage(requireActivity(), response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
+                        dismissProgressDialog();
+                        Log.d("error_handler", "onFailure: " + t.getMessage());
+                        t.printStackTrace();
+
+                        showErrorDialog(getActivity(), t.getMessage());
+                    }
+                });
+    }
+
+    private void refuseComplaint() {
+
+        getClient().refuseComplaint(loadDataString(getActivity(), TOKEN), new ComplaintIdRequestBody(complaint.getId()))
+                .enqueue(new Callback<GeneralResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
+                        dismissProgressDialog();
+                        if (response.isSuccessful()) {
+                            showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
+
+                        } else {
+                            Log.d("error_handler", "onResponse: " + response.message());
+                            ApiErrorHandler.showErrorMessage(requireActivity(), response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
+                        dismissProgressDialog();
+                        Log.d("error_handler", "onFailure: " + t.getMessage());
+                        t.printStackTrace();
+
+                        showErrorDialog(getActivity(), t.getMessage());
+                    }
+                });
     }
 
     @OnClick({R.id.app_bar_back, R.id.fragment_complaints_details_btn_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_complaints_details_btn_confirm:
                 acceptRefuseComplaint();

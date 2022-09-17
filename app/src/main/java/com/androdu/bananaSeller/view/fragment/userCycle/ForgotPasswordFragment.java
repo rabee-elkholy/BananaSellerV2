@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.androdu.bananaSeller.data.model.response.GeneralResponse;
 import com.androdu.bananaSeller.helper.ApiErrorHandler;
 import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
+import com.hbb20.CountryCodePicker;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,10 +41,14 @@ public class ForgotPasswordFragment extends Fragment {
 
     @BindView(R.id.fragment_forgot_password_til_phone)
     TextInputLayout fragmentForgotPasswordEtPhone;
+    @BindView(R.id.fragment_forgot_password_ccp_code)
+    CountryCodePicker fragmentForgotPasswordCcpCode;
     @BindView(R.id.fragment_forgot_password_btn_confirm)
     Button fragmentForgotPasswordBtnConfirm;
 
     private View view;
+    private boolean validNum;
+
 
     public ForgotPasswordFragment() {
         // Required empty public constructor
@@ -55,7 +61,31 @@ public class ForgotPasswordFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_forgot_password, container, false);
         ButterKnife.bind(this, view);
 
+        init();
+
         return view;
+    }
+
+    private void init() {
+        EditText phoneEt = fragmentForgotPasswordEtPhone.getEditText();
+        String countryCode = fragmentForgotPasswordCcpCode.getSelectedCountryCodeWithPlus();
+//        Log.d("error_", "init: " + countryCode);
+
+        fragmentForgotPasswordCcpCode.registerCarrierNumberEditText(phoneEt);
+        fragmentForgotPasswordCcpCode.setPhoneNumberValidityChangeListener(isValidNumber -> {
+            validNum = isValidNumber;
+            if (validNum) {
+                StringBuilder e = new StringBuilder(fragmentForgotPasswordCcpCode.getFormattedFullNumber());
+                phoneEt.setText(e.substring(countryCode.length() + 1));
+//                Log.d("error_", "init: " + fragmentSignUpCcpCode.getFormattedFullNumber());
+            } else {
+                phoneEt.setText(phoneEt.getText().toString().replaceAll(" ", ""));
+            }
+            phoneEt.setSelection(phoneEt.getText().length());
+        });
+
+        phoneEt.setText("");
+
     }
 
 
@@ -65,13 +95,13 @@ public class ForgotPasswordFragment extends Fragment {
             case R.id.fragment_forgot_password_btn_confirm:
                 fragmentForgotPasswordEtPhone.setError(null);
 
-                if (!fragmentForgotPasswordEtPhone.getEditText().getText().toString().isEmpty()) {
-                    String phoneNum = fragmentForgotPasswordEtPhone.getEditText().getText().toString().trim();
+                if (validNum) {
+                    String phoneNum = fragmentForgotPasswordCcpCode.getFullNumber();
 
                     //Setting message manually and performing action on button click
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme)
                             .setTitle(getString(R.string.We_well_send_code_to_this_phone_number))
-                            .setMessage(phoneNum + getString(R.string.this_or_edit))
+                            .setMessage(fragmentForgotPasswordCcpCode.getFullNumberWithPlus() + getString(R.string.this_or_edit))
                             .setCancelable(false)
                             .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
                                 dialog.dismiss();
@@ -83,7 +113,7 @@ public class ForgotPasswordFragment extends Fragment {
                     alert.show();
 
                 } else {
-                    fragmentForgotPasswordEtPhone.setError(getString(R.string.enter_phone));
+                    fragmentForgotPasswordEtPhone.setError(getString(R.string.invalid_phone_number));
                 }
                 break;
         }

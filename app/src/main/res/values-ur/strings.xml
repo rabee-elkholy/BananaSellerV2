@@ -99,7 +99,7 @@
         <item>آپ کا اکاؤنٹ مسدود ہے</item>
         <item>غلط ڈیٹا</item>
         <item>فون نمبر پہلے ہی رجسٹرڈ ہے</item>
-        <item>غلط موبائل نمبر یا ای میل</item>
+        <item>غلط موبائل نمبر!</item>
         <item>غلط پاس ورڈ</item>
         <item>نہیں ملا</item>
         <item>ٹوکری خالی ہے</item>
@@ -282,6 +282,7 @@
     <string name="add_new_pass">نیا پاس ورڈ درج کریں</string>
     <string name="seller_app">دكان دار ایپ</string>
     <string name="choose_your_field">کاروبار کا انتخاب کریں </string>
+    <string name="your_field_changed_successfully">ڈومین کامیابی کے ساتھ تبدیل کر دیا گیا ہے۔ براہ کرم ایکٹیویٹ کرنے کے لیے لائسنس بھیجیں۔ </string>
     <string name="edit_my_activities">کاروبار میں ترمیم کریں </string>
     <string name="my_commercial_license">میرا تجارتی لائسنس</string>
     <string name="orders_number">آرڈر نمبر:</string>

@@ -111,7 +111,7 @@ public class WalletFragment extends Fragment {
         };
         fragmentWalletRvRecyclerView.addOnScrollListener(onEndLess);
 
-        walletAdapter = new WalletAdapter(getActivity(), walletTransactions);
+        walletAdapter = new WalletAdapter(walletTransactions);
         fragmentWalletRvRecyclerView.setAdapter(walletAdapter);
 
     }

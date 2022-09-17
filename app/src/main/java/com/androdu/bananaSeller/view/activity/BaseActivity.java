@@ -22,8 +22,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context base) {
-//        LanguageManager.setNewLocale(base, LanguageManager.LANGUAGE_KEY_ARABIC);
-        if (getLanguagePref(base).isEmpty())
+         if (getLanguagePref(base).isEmpty())
             super.attachBaseContext(setNewLocale(base, Locale.getDefault().getLanguage()));
         else
             super.attachBaseContext(setLocale(base));

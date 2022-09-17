@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.aboutApp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.androdu.bananaSeller.R;
@@ -36,6 +38,9 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialog;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 import static com.androdu.bananaSeller.helper.Validation.contactUs;
 
+import java.util.Objects;
+
+@SuppressLint("NonConstantResourceId")
 public class ContactUsFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -50,7 +55,6 @@ public class ContactUsFragment extends Fragment {
     EditText fragmentContactUsEtMessage;
     @BindView(R.id.fragment_contact_us_btn_confirm)
     Button fragmentContactUsBtnConfirm;
-    private View view;
 
     public ContactUsFragment() {
         // Required empty public constructor
@@ -61,7 +65,7 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_contact_us, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -75,7 +79,7 @@ public class ContactUsFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_contact_us_btn_confirm:
                 if (contactUs(getActivity(),
@@ -98,14 +102,14 @@ public class ContactUsFragment extends Fragment {
                             fragmentContactUsEtMessage.getText().toString().trim()))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             enableView(fragmentContactUsBtnConfirm);
                             if (response.isSuccessful()) {
                                 showSuccessDialog(getActivity(), getString(R.string.done));
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                ApiErrorHandler.showErrorMessage(requireActivity(), response);
                             }
                         }
 

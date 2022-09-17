@@ -192,10 +192,9 @@ public class PinTestFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (validNum) {
-                    String phone = tilPhone.getEditText().getText().toString().trim();
-                    String code = codePicker.getFullNumber();
+                    String phone = codePicker.getFullNumber();
 
-                    changePhone(phone, code);
+                    changePhone(phone);
                 }
             }
         });
@@ -204,10 +203,10 @@ public class PinTestFragment extends Fragment {
         alertDialog.show();
     }
 
-    private void changePhone(String phone, String code) {
+    private void changePhone(String phone) {
         if (isConnected(getContext())) {
             showProgressDialog(getActivity());
-            getClient().signUpChangePhone(loadDataString(getActivity(), TOKEN), new ChangePhoneRequestBody(phone, code))
+            getClient().signUpChangePhone(loadDataString(getActivity(), TOKEN), new ChangePhoneRequestBody(phone))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
                         public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {

@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -27,8 +29,8 @@ import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
 public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Activity activity;
-    private List<OrderProduct> modelList;
+    private final Activity activity;
+    private final List<OrderProduct> modelList;
 
     public ProductsAdapter(Activity activity, List<OrderProduct> modelList) {
         this.activity = activity;
@@ -36,18 +38,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.product_list_item, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final OrderProduct model = getItem(position);
             ViewHolder genericViewHolder = (ViewHolder) holder;
@@ -66,7 +70,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             int unitIndex = Arrays.asList(Constants.units).indexOf(model.getUnit());
             model.setUnitStr((activity.getResources().getStringArray(R.array.weights))[unitIndex]);
-            genericViewHolder.productsItemEtCounter.setText(model.getCount() + " " + model.getUnitStr());
+            genericViewHolder.productsItemEtCounter.setText(String.format("%d %s", model.getCount(), model.getUnitStr()));
 
         }
     }
@@ -81,7 +85,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return modelList.get(position);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.product_item_tv_title)
         TextView productsItemTvTitle;
@@ -100,6 +104,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
 
+        @SuppressLint("DefaultLocale")
         @OnClick({R.id.product_item_btn_increment, R.id.product_item_btn_decrement})
         public void onViewClicked(View view) {
             if (getAdapterPosition() == RecyclerView.NO_POSITION) {
@@ -111,18 +116,16 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 case R.id.product_item_btn_increment:
                     if (model.getCount() < model.getAmount()) {
                         model.setCount(model.getCount() + 1);
-                        productsItemEtCounter.setText(model.getCount() + " " + model.getUnitStr());
+                        productsItemEtCounter.setText(String.format("%d %s", model.getCount(), model.getUnitStr()));
                     }
                     break;
                 case R.id.product_item_btn_decrement:
                     if (model.getCount() > 0) {
                         model.setCount(model.getCount() - 1);
-                        productsItemEtCounter.setText(model.getCount() + " " + model.getUnitStr());
+                        productsItemEtCounter.setText(String.format("%d %s", model.getCount(), model.getUnitStr()));
                     }
                     break;
-
             }
         }
-
     }
 }

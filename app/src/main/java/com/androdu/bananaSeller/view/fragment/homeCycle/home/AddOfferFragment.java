@@ -1,6 +1,16 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
-import android.app.Dialog;
+import static com.androdu.bananaSeller.data.api.ApiService.getClient;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
+import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
+import static com.androdu.bananaSeller.helper.ApiErrorHandler.showErrorMessage;
+import static com.androdu.bananaSeller.helper.HelperMethod.dismissProgressDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
+import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogCloseFragment;
+import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +31,6 @@ import com.androdu.bananaSeller.data.model.requestBody.addOffer.OfferItem;
 import com.androdu.bananaSeller.data.model.response.GeneralResponse;
 import com.androdu.bananaSeller.data.model.response.order.OrderResponse;
 import com.androdu.bananaSeller.data.model.response.orders.OrderProduct;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
 import com.androdu.bananaSeller.helper.Validation;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,20 +41,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.androdu.bananaSeller.data.api.ApiService.getClient;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.loadDataString;
-import static com.androdu.bananaSeller.helper.HelperMethod.dismissProgressDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
-import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogCloseFragment;
-import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
-
+@SuppressLint("NonConstantResourceId")
 public class AddOfferFragment extends Fragment {
 
     @BindView(R.id.app_bar_title)
@@ -61,7 +62,6 @@ public class AddOfferFragment extends Fragment {
     private List<OrderProduct> orderProducts;
     private List<OfferItem> amountArr;
     private ProductsAdapter productsAdapter;
-    private LatLng orderLocation;
     private boolean bananaDelivery = false;
     private boolean isEmptyOffer;
     private double deliveryPrice;
@@ -120,11 +120,12 @@ public class AddOfferFragment extends Fragment {
                         public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                             dismissProgressDialog();
                             if (response.isSuccessful()) {
+                                assert response.body() != null;
                                 onGetOrderSuccess(response.body());
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
@@ -139,8 +140,9 @@ public class AddOfferFragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void onGetOrderSuccess(OrderResponse body) {
-        orderLocation = new LatLng(body.getOrder().getLocation().getCoordinates().get(1), body.getOrder().getLocation().getCoordinates().get(0));
+        LatLng orderLocation = new LatLng(body.getOrder().getLocation().getCoordinates().get(1), body.getOrder().getLocation().getCoordinates().get(0));
         orderProducts.addAll(body.getOrder().getProducts());
         for (int i = 0; i < orderProducts.size(); i++) {
             orderProducts.get(i).setCount(orderProducts.get(i).getAmount());
@@ -152,31 +154,31 @@ public class AddOfferFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_add_offer_btn_add_offer:
                 createAmountArr();
                 if (Validation.addOffer(getActivity(),
                         isEmptyOffer,
                         fragmentAddOfferTilTotalPrice)) {
-                    if (bananaDelivery) {
-                        SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE);
-                        dialog.setTitleText(getString(R.string.attention));
-                        dialog.setContentText(getString(R.string.delivery_price_message1) + " " + deliveryPrice + " " + getString(R.string.delivery_price_message2));
-                        dialog.setConfirmText(getString(R.string.ok));
-                        dialog.setCancelText(getString(R.string.cancel));
-                        dialog.setConfirmClickListener(sweetAlertDialog -> {
-                            sweetAlertDialog.dismiss();
-                            price = Double.parseDouble(fragmentAddOfferTilTotalPrice.getEditText().getText().toString()) + deliveryPrice;
-                            addOffer();
-                        });
-                        dialog.setCancelClickListener(Dialog::dismiss);
-                        dialog.setCancelable(false);
-                        dialog.show();
-                    } else {
-                        price = Double.parseDouble(fragmentAddOfferTilTotalPrice.getEditText().getText().toString());
-                        addOffer();
-                    }
+//                    if (bananaDelivery) {
+//                        SweetAlertDialog dialog = new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE);
+//                        dialog.setTitleText(getString(R.string.attention));
+//                        dialog.setContentText(getString(R.string.delivery_price_message1) + " " + deliveryPrice + " " + getString(R.string.delivery_price_message2));
+//                        dialog.setConfirmText(getString(R.string.ok));
+//                        dialog.setCancelText(getString(R.string.cancel));
+//                        dialog.setConfirmClickListener(sweetAlertDialog -> {
+//                            sweetAlertDialog.dismiss();
+//                            price = Double.parseDouble(fragmentAddOfferTilTotalPrice.getEditText().getText().toString()) + deliveryPrice;
+//                            addOffer();
+//                        });
+//                        dialog.setCancelClickListener(Dialog::dismiss);
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//                    } else {
+                    price = Double.parseDouble(fragmentAddOfferTilTotalPrice.getEditText().getText().toString());
+                    addOffer();
+//                    }
 
                 }
 
@@ -189,24 +191,24 @@ public class AddOfferFragment extends Fragment {
         if (isConnected(getContext())) {
             showProgressDialog(getActivity());
             getClient().addOffer(loadDataString(getActivity(), TOKEN),
-                    new AddOfferRequestBody(orderId,
-                            price,
-                            bananaDelivery,
-                            amountArr))
+                            new AddOfferRequestBody(orderId,
+                                    price,
+                                    bananaDelivery,
+                                    amountArr))
                     .enqueue(new Callback<GeneralResponse>() {
                         @Override
-                        public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
                             dismissProgressDialog();
                             if (response.isSuccessful()) {
                                 showSuccessDialogCloseFragment(getActivity(), getString(R.string.done));
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
-                                ApiErrorHandler.showErrorMessage(getActivity(), response);
+                                showErrorMessage(requireActivity(), response);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
                             dismissProgressDialog();
                             showErrorDialog(getActivity(), t.getMessage());
                         }

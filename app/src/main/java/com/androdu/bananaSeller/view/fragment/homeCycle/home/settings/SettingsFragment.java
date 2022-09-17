@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home.settings;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ARABI
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ENGLISH;
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 
+@SuppressLint("NonConstantResourceId")
 public class SettingsFragment extends Fragment {
 
 
@@ -40,7 +42,6 @@ public class SettingsFragment extends Fragment {
     TextView fragmentSettingsTvEditActivities;
     @BindView(R.id.fragment_settings_tv_my_license)
     TextView fragmentSettingsTvMyLicense;
-    private View view;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -51,7 +52,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -73,7 +74,7 @@ public class SettingsFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.app_bar_back:
-                getActivity().onBackPressed();
+                requireActivity().onBackPressed();
                 break;
             case R.id.fragment_settings_tv_edit_mobile:
                 replaceFragment(getParentFragmentManager(),

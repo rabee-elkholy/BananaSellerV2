@@ -98,23 +98,51 @@
         <!--            android:layout_weight="2" />-->
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fragment_login_til_email_or_phone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_32sdp"
-            android:theme="@style/TextInputLayout">
+            android:gravity="top">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/fragment_login_ccp_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_autoDetectLanguage="true"
+                app:ccp_autoFormatNumber="true"
+                app:ccp_clickable="false"
+                app:ccp_countryPreference="ae"
+                app:ccp_padding="0dp"
+                app:ccp_showArrow="false"
+                app:ccp_showNameCode="true"
+                app:ccp_showPhoneCode="true"
+                app:ccp_textSize="@dimen/_13sdp"
+                app:ccp_useFlagEmoji="true" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_login_til_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email_phone"
-                android:textSize="@dimen/_13ssp"
-                android:singleLine="true"
-                android:textColor="@color/title_color" />
+                android:theme="@style/TextInputLayout">
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number"
+                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:inputType="phone"
+                    android:digits="1234567890 "
+                    android:textColor="@color/title_color"
+
+                    android:textSize="@dimen/_13ssp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_login_til_password"

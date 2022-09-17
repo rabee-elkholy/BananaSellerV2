@@ -20,56 +20,48 @@ public class Validation {
         layouts[0].setErrorEnabled(false);
 
         if (layouts[1].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[1].setError(activity.getString(R.string.enter_email));
+            layouts[1].setError(" ");
             layouts[1].requestFocus();
             return false;
         }
         layouts[1].setErrorEnabled(false);
 
-
         if (layouts[2].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[2].setError(" ");
+            layouts[2].setError(activity.getString(R.string.enter_phone));
+            layouts[2].requestFocus();
+            return false;
+        }
+        if (!isValidNum) {
+            layouts[2].setError(activity.getString(R.string.invalid_phone_number));
             layouts[2].requestFocus();
             return false;
         }
         layouts[2].setErrorEnabled(false);
 
         if (layouts[3].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[3].setError(activity.getString(R.string.enter_phone));
+            layouts[3].setError(activity.getString(R.string.enter_password));
             layouts[3].requestFocus();
             return false;
         }
-        if (!isValidNum) {
-            layouts[3].setError(activity.getString(R.string.invalid_phone_number));
+        if (layouts[3].getEditText().getText().toString().trim().length() < 8) {
+            layouts[3].setError(activity.getString(R.string.password_must_greater_than_7));
             layouts[3].requestFocus();
             return false;
         }
         layouts[3].setErrorEnabled(false);
 
         if (layouts[4].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[4].setError(activity.getString(R.string.enter_password));
+            layouts[4].setError(activity.getString(R.string.enter_confirm_password));
             layouts[4].requestFocus();
             return false;
         }
-        if (layouts[4].getEditText().getText().toString().trim().length() < 8) {
-            layouts[4].setError(activity.getString(R.string.password_must_greater_than_7));
+        if (!layouts[4].getEditText().getText().toString().trim()
+                .equals(layouts[3].getEditText().getText().toString().trim())) {
+            layouts[4].setError(activity.getString(R.string.password_does_not_match));
             layouts[4].requestFocus();
             return false;
         }
         layouts[4].setErrorEnabled(false);
-
-        if (layouts[5].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[5].setError(activity.getString(R.string.enter_confirm_password));
-            layouts[5].requestFocus();
-            return false;
-        }
-        if (!layouts[5].getEditText().getText().toString().trim()
-                .equals(layouts[4].getEditText().getText().toString().trim())) {
-            layouts[5].setError(activity.getString(R.string.password_does_not_match));
-            layouts[5].requestFocus();
-            return false;
-        }
-        layouts[5].setErrorEnabled(false);
 
         if (!isTermsChecked) {
             showErrorDialog(activity, activity.getString(R.string.terms_error));
@@ -79,7 +71,12 @@ public class Validation {
         return true;
     }
 
-    public static boolean login(Activity activity, TextInputLayout... layouts) {
+    public static boolean login(Activity activity, boolean isValidNum, TextInputLayout... layouts) {
+        if (!isValidNum) {
+            layouts[0].setError(activity.getString(R.string.invalid_phone_number));
+            layouts[0].requestFocus();
+            return false;
+        }
         if (layouts[0].getEditText().getText().toString().trim().isEmpty()) {
             layouts[0].setError(activity.getString(R.string.enter_phone));
             layouts[0].requestFocus();
@@ -149,7 +146,7 @@ public class Validation {
         return true;
     }
 
-    public static boolean editMobileNumber(Activity activity, boolean validOldNum, boolean validNewNum, EditText... editTexts) {
+    public static boolean editMobileNumber(Activity activity, String currentNum, String enteredNum, boolean validOldNum, boolean validNewNum, EditText... editTexts) {
         if (editTexts[0].getText().toString().trim().isEmpty()) {
             editTexts[0].setError(activity.getString(R.string.enter_phone));
             editTexts[0].requestFocus();
@@ -157,6 +154,11 @@ public class Validation {
         }
         if (!validOldNum) {
             editTexts[0].setError(activity.getString(R.string.invalid_phone_number));
+            editTexts[0].requestFocus();
+            return false;
+        }
+        if(!enteredNum.equals(currentNum)){
+            editTexts[0].setError(activity.getString(R.string.wrong_mobile_number));
             editTexts[0].requestFocus();
             return false;
         }

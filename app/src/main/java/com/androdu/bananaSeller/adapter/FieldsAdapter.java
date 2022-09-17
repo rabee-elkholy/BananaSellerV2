@@ -1,12 +1,13 @@
 package com.androdu.bananaSeller.adapter;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.androdu.bananaSeller.R;
@@ -20,12 +21,10 @@ import butterknife.ButterKnife;
 
 public class FieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Activity activity;
-    private List<Filter> modelList;
+    private final List<Filter> modelList;
     public int lastChecked = 0;
 
-    public FieldsAdapter(Activity activity, List<Filter> modelList) {
-        this.activity = activity;
+    public FieldsAdapter(List<Filter> modelList) {
         this.modelList = modelList;
 
         boolean isChecked = false;
@@ -33,7 +32,6 @@ public class FieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             if (f.isChecked()){
                 isChecked = true;
                 lastChecked = f.getKey();
-                Log.d("error_", "forEach: " + f.getKey());
 
             }
         }
@@ -43,42 +41,37 @@ public class FieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.bottom_sheet_list_item_radio, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.bottom_sheet_list_item_radio, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
-        //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final Filter model = getItem(holder.getAdapterPosition());
-            ViewHolder genericViewHolder = (ViewHolder) holder;
-            genericViewHolder.bottomSheetCbFilterItem.setText(model.getName());
-            if (model.isChecked()) {
-                genericViewHolder.bottomSheetCbFilterItem.setChecked(true);
-            }else
-                genericViewHolder.bottomSheetCbFilterItem.setChecked(false);
+            ViewHolder viewHolder = (ViewHolder) holder;
+            viewHolder.bottomSheetCbFilterItem.setText(model.getName());
+            viewHolder.bottomSheetCbFilterItem.setChecked(model.isChecked());
 
-            genericViewHolder.bottomSheetCbFilterItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    modelList.get(lastChecked).setChecked(false);
-                    model.setChecked(true);
-                    lastChecked = model.getKey();
-                    notifyDataSetChanged();
-                }
+            viewHolder.bottomSheetCbFilterItem.setOnClickListener(v -> {
+                modelList.get(lastChecked).setChecked(false);
+                model.setChecked(true);
+                lastChecked = model.getKey();
+                notifyDataSetChanged();
             });
         }
     }
 
     @Override
     public int getItemCount() {
-
         return modelList.size();
     }
 
@@ -86,7 +79,7 @@ public class FieldsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return modelList.get(position);
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.bottom_sheet_cb_filter_item)
         RadioButton bottomSheetCbFilterItem;

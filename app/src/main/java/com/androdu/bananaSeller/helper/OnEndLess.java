@@ -2,6 +2,7 @@ package com.androdu.bananaSeller.helper;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,14 +10,14 @@ public abstract class OnEndLess extends RecyclerView.OnScrollListener {
     public static String TAG = OnEndLess.class.getSimpleName();
 
     private boolean loading = true; // True if we are still waiting for the last set of data to load.
-    private int visibleThreshold; // The minimum amount of items to have below your current scroll position before loading more.
+    private final int visibleThreshold; // The minimum amount of items to have below your current scroll position before loading more.
     public int firstVisibleItem, visibleItemCount, totalItemCount;
 
     public int previousTotal = 0; // The total number of items in the dataset after the last load
     public int current_page = 1;
     public int previous_page = 1;
 
-    private LinearLayoutManager mLinearLayoutManager;
+    private final LinearLayoutManager mLinearLayoutManager;
 
     public OnEndLess(Object linearLayoutManager, int visibleThreshold) {
         this.mLinearLayoutManager = (LinearLayoutManager) linearLayoutManager;
@@ -24,7 +25,7 @@ public abstract class OnEndLess extends RecyclerView.OnScrollListener {
     }
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
         Log.d(TAG, "onScrolled: ");
 
@@ -42,9 +43,6 @@ public abstract class OnEndLess extends RecyclerView.OnScrollListener {
         if (!loading && (totalItemCount - visibleItemCount)
                 <= (firstVisibleItem + visibleThreshold)) {
             // End has been reached
-
-            Log.d(TAG, "onScrolledqwqwqwq: ");
-
             // Do something
             current_page++;
             onLoadMore(current_page);

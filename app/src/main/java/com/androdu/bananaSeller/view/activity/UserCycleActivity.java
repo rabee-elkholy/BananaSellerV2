@@ -1,5 +1,7 @@
 package com.androdu.bananaSeller.view.activity;
 
+import static com.androdu.bananaSeller.helper.HelperMethod.replaceFragment;
+
 import android.os.Bundle;
 
 import com.androdu.bananaSeller.R;
@@ -13,7 +15,7 @@ public class UserCycleActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cycle);
 
-        HelperMethod.replaceFragment(getSupportFragmentManager(),
+        replaceFragment(getSupportFragmentManager(),
                 R.id.activity_user_cycle_container,
                 new LoginFragment(),
                 false);
