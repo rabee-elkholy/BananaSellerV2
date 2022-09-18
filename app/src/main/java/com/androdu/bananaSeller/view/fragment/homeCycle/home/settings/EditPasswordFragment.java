@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.androdu.bananaSeller.R;
 import com.androdu.bananaSeller.data.model.requestBody.EditPasswordRequestBody;
+import com.androdu.bananaSeller.data.model.response.ChangePassResponse;
 import com.androdu.bananaSeller.data.model.response.GeneralResponse;
 import com.androdu.bananaSeller.helper.ApiErrorHandler;
 
@@ -128,9 +129,9 @@ public class EditPasswordFragment extends Fragment {
                             fragmentEditPasswordEtNewPassword.getText().toString().trim(),
                             fragmentEditPasswordEtNewPassword.getText().toString().trim(),
                             logout))
-                    .enqueue(new Callback<GeneralResponse>() {
+                    .enqueue(new Callback<ChangePassResponse>() {
                         @Override
-                        public void onResponse(@NonNull Call<GeneralResponse> call, @NonNull Response<GeneralResponse> response) {
+                        public void onResponse(@NonNull Call<ChangePassResponse> call, @NonNull Response<ChangePassResponse> response) {
                             dismissProgressDialog();
                             enableView(fragmentEditPasswordBtnConfirm);
                             if (response.isSuccessful()) {
@@ -147,7 +148,7 @@ public class EditPasswordFragment extends Fragment {
                         }
 
                         @Override
-                        public void onFailure(@NonNull Call<GeneralResponse> call, @NonNull Throwable t) {
+                        public void onFailure(@NonNull Call<ChangePassResponse> call, @NonNull Throwable t) {
                             dismissProgressDialog();
                             enableView(fragmentEditPasswordBtnConfirm);
                             showErrorDialog(getActivity(), t.getMessage());

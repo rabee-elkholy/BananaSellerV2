@@ -170,11 +170,9 @@ public class MyOffersListFragment extends Fragment {
                             hideView(fragmentOrdersListPbProgress, loadMore);
                             Log.d("error_handler", "onFailure: " + t.getMessage());
                             t.printStackTrace();
-
                             showErrorDialog(getActivity(), t.getMessage());
                         }
                     });
-
         }
     }
 

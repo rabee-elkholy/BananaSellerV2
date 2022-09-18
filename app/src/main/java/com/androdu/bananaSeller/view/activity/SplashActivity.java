@@ -5,6 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.AudioAttributes;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,17 +34,28 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
             String channelId = getString(R.string.default_notification_channel_id);
             String channelName = getString(R.string.default_notification_channel_name);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(new NotificationChannel(channelId,
-                    channelName,
-                    NotificationManager.IMPORTANCE_HIGH));
-        }
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
+            NotificationChannel channel = new NotificationChannel(channelId,
+                    channelName,
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel.enableVibration(true);
+            channel.enableLights(true);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_ALARM)
+                    .build();
+
+            channel.setSound(alarmSound, audioAttributes);
+
+            notificationManager.createNotificationChannel(channel);
+        }
+//
         if (getIntent().getExtras() != null) {
             for (String key : getIntent().getExtras().keySet()) {
                 Object value = getIntent().getExtras().get(key);
@@ -49,11 +63,10 @@ public class SplashActivity extends BaseActivity {
             }
         }
 
-        if (Build.VERSION.SDK_INT <= 20) {
-            try {
-                ProviderInstaller.installIfNeeded(this);
-            } catch (Exception ignored) {
-            }
+        try {
+            ProviderInstaller.installIfNeeded(this);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

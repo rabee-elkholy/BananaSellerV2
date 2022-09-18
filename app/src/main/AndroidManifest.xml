@@ -4,10 +4,13 @@
     package="com.androdu.bananaSeller">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
 
 
     <application
@@ -17,7 +20,8 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:exported="true"
@@ -56,12 +60,15 @@
             android:value="@string/google_maps_key" />
 
         <service
-            android:name=".view.MyFirebaseMessagingService"
-            android:exported="false">
+            android:name="com.androdu.bananaSeller.view.MyFirebaseMessagingService"
+            android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.permission.RECIEVE" />
             </intent-filter>
         </service>
+
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

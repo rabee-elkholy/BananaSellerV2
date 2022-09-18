@@ -10,7 +10,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ApiService {
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "https://api-new-test.bananas.ae/";
+    private static final String BASE_URL = "https://api-new.bananas.ae/";
 
     public static IRetrofitApi getClient() {
         if (retrofit == null) {

@@ -36,7 +36,7 @@ public abstract class Constants {
     public final static String COMPLAINT_STATUS_OK = "ok";
     public final static String COMPLAINT_STATUS_CANCELED = "cancel";
 
-    public static String BASE_URL = "https://api-new-test.bananas.ae/";
+    public static String BASE_URL = "https://api-new.bananas.ae/";
     public final static Integer[] clientAvatars = {R.drawable.avatar1, R.drawable.avatar2, R.drawable.avatar3, R.drawable.avatar4, R.drawable.avatar5, R.drawable.avatar6, R.drawable.avatar7};
     public final static Integer[] sellerAvatars = {R.drawable.avatar10,R.drawable.avatar9, R.drawable.avatar11, R.drawable.avatar12,
             R.drawable.avatar13, R.drawable.avatar14, R.drawable.avatar15, R.drawable.avatar16, R.drawable.avatar17, R.drawable.avatar18,

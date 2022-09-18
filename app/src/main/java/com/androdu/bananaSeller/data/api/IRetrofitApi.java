@@ -20,6 +20,7 @@ import com.androdu.bananaSeller.data.model.requestBody.PullBalanceRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.SignUpRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.addOffer.AddOfferRequestBody;
 import com.androdu.bananaSeller.data.model.requestBody.addOffer.FieldRequestBody;
+import com.androdu.bananaSeller.data.model.response.ChangePassResponse;
 import com.androdu.bananaSeller.data.model.response.GeneralResponse;
 import com.androdu.bananaSeller.data.model.response.SellerFieldsResponse;
 import com.androdu.bananaSeller.data.model.response.clientInfo.ClientInfoResponse;
@@ -194,8 +195,8 @@ public interface IRetrofitApi {
                                    @Body AddOfferRequestBody addOfferRequestBody);
 
     @POST("seller/profile/edit/password")
-    Call<GeneralResponse> editPassword(@Header("Authorization") String token,
-                                       @Body EditPasswordRequestBody editPasswordRequestBody);
+    Call<ChangePassResponse> editPassword(@Header("Authorization") String token,
+                                          @Body EditPasswordRequestBody editPasswordRequestBody);
 
     @POST("seller/support/contactUs")
     Call<GeneralResponse> contactUs(@Header("Authorization") String token,
@@ -234,6 +235,4 @@ public interface IRetrofitApi {
 
     @POST("seller/logout")
     Call<GeneralResponse> logout(@Header("Authorization") String token, @Body LogoutRequestBody logoutRequestBody);
-
 }
-

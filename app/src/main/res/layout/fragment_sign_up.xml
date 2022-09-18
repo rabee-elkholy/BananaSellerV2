@@ -57,6 +57,25 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_sign_up_til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/title_color"
+                android:textSize="@dimen/_13ssp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_sign_up_til_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +92,6 @@
                 android:focusable="false"
                 android:hint="@string/choose_your_field"
                 android:textColor="@color/title_color"
-
                 android:textSize="@dimen/_13ssp" />
 
         </com.google.android.material.textfield.TextInputLayout>

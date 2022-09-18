@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -176,26 +177,37 @@ public class PinTestFragment extends Fragment {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
         final View v = layoutInflater.inflate(R.layout.change_phone_dialog, null);
-        alertDialog = new AlertDialog.Builder(getContext()).create();
+        alertDialog = new AlertDialog.Builder(requireActivity()).create();
         alertDialog.setCancelable(true);
 
         final CountryCodePicker codePicker = v.findViewById(R.id.ccp_code);
         final TextInputLayout tilPhone = v.findViewById(R.id.til_phone);
         final Button btnConfirm = v.findViewById(R.id.btn_confirm);
 
-        codePicker.registerCarrierNumberEditText(tilPhone.getEditText());
+        EditText phoneEt = tilPhone.getEditText();
+        String countryCode = codePicker.getSelectedCountryCodeWithPlus();
+
+        codePicker.registerCarrierNumberEditText(phoneEt);
         codePicker.setPhoneNumberValidityChangeListener(isValidNumber -> {
             validNum = isValidNumber;
+            if (validNum) {
+                StringBuilder e = new StringBuilder(codePicker.getFormattedFullNumber());
+                phoneEt.setText(e.substring(countryCode.length() + 1));
+            } else {
+                phoneEt.setText(phoneEt.getText().toString().replaceAll(" ", ""));
+            }
+            phoneEt.setSelection(phoneEt.getText().length());
         });
 
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validNum) {
-                    String phone = codePicker.getFullNumber();
+        phoneEt.setText("");
 
-                    changePhone(phone);
-                }
+        btnConfirm.setOnClickListener(v1 -> {
+            if (validNum) {
+                tilPhone.setError("");
+                String phone = codePicker.getFullNumber();
+                changePhone(phone);
+            }else {
+                tilPhone.setError(getString(R.string.invalid_phone_number));
             }
         });
 
@@ -413,6 +425,5 @@ public class PinTestFragment extends Fragment {
         super.onStop();
         if (countDownTimer != null)
             countDownTimer.cancel();
-
     }
 }

@@ -69,6 +69,8 @@ public class SignUpFragment extends Fragment {
 
     @BindView(R.id.fragment_sign_up_til_name)
     TextInputLayout fragmentSignUpTilName;
+    @BindView(R.id.fragment_sign_up_til_email)
+    TextInputLayout fragmentSignUpTilEmail;
     @BindView(R.id.fragment_sign_up_et_phone)
     TextInputLayout fragmentSignUpTilPhone;
     @BindView(R.id.fragment_sign_up_til_password)
@@ -143,22 +145,19 @@ public class SignUpFragment extends Fragment {
 
                 BottomSheetFragment bottomSheetDialog = new BottomSheetFragment(7, fields);
                 bottomSheetDialog.show(getParentFragmentManager(), "Custom Bottom Sheet");
-                bottomSheetDialog.SetOnConfirmClickListener(new BottomSheetFragment.OnConfirmClickListener() {
-                    @Override
-                    public void onConfirm(List<Filter> sheetFilters) {
+                bottomSheetDialog.SetOnConfirmClickListener(sheetFilters -> {
 
-                        Log.d("error_", "onConfirm: " + sheetFilters.size());
-                        fragmentSignUpTitField.setText("");
-                        myFields.clear();
-                        for (Filter filter : sheetFilters) {
-                            if (filter.isChecked()) {
-                                fragmentSignUpTitField.append(filter.getName());
-                                myFields.add(Constants.fields[filter.getKey()]);
-                            }
+                    Log.d("error_", "onConfirm: " + sheetFilters.size());
+                    fragmentSignUpTitField.setText("");
+                    myFields.clear();
+                    for (Filter filter : sheetFilters) {
+                        if (filter.isChecked()) {
+                            fragmentSignUpTitField.append(filter.getName());
+                            myFields.add(Constants.fields[filter.getKey()]);
                         }
-                        fields = sheetFilters;
-
                     }
+                    fields = sheetFilters;
+
                 });
                 break;
             case R.id.fragment_sign_up_tv_terms:
@@ -183,6 +182,7 @@ public class SignUpFragment extends Fragment {
                         validNum,
                         fragmentSignUpCbTerms.isChecked(),
                         fragmentSignUpTilName,
+                        fragmentSignUpTilEmail,
                         fragmentSignUpTilField,
                         fragmentSignUpTilPhone,
                         fragmentSignUpTilPassword,
@@ -200,6 +200,7 @@ public class SignUpFragment extends Fragment {
     private void signUp(String fcm) {
 
         if (isConnected(getContext())) {
+            String email = fragmentSignUpTilEmail.getEditText().getText().toString().trim();
             String name = fragmentSignUpTilName.getEditText().getText().toString().trim();
             String phone = fragmentSignUpCcpCode.getFullNumber();
             String password = fragmentSignUpTilPassword.getEditText().getText().toString().trim();
@@ -212,7 +213,7 @@ public class SignUpFragment extends Fragment {
                 locale = getLanguagePref(getContext());
 
 
-            ApiService.getClient().signUp(new SignUpRequestBody(name, phone, password, password, fcm, locale, myFields))
+            ApiService.getClient().signUp(new SignUpRequestBody(email, name, phone, password, password, fcm, locale, myFields))
                     .enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

@@ -10,7 +10,6 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showErrorDialog;
 
 public class Validation {
 
-
     public static boolean signUp(Activity activity, boolean isValidNum, boolean isTermsChecked, TextInputLayout... layouts) {
         if (layouts[0].getEditText().getText().toString().trim().isEmpty()) {
             layouts[0].setError(activity.getString(R.string.enter_name));
@@ -20,48 +19,56 @@ public class Validation {
         layouts[0].setErrorEnabled(false);
 
         if (layouts[1].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[1].setError(" ");
+            layouts[1].setError(activity.getString(R.string.enter_email));
             layouts[1].requestFocus();
             return false;
         }
         layouts[1].setErrorEnabled(false);
 
+
         if (layouts[2].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[2].setError(activity.getString(R.string.enter_phone));
-            layouts[2].requestFocus();
-            return false;
-        }
-        if (!isValidNum) {
-            layouts[2].setError(activity.getString(R.string.invalid_phone_number));
+            layouts[2].setError(" ");
             layouts[2].requestFocus();
             return false;
         }
         layouts[2].setErrorEnabled(false);
 
         if (layouts[3].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[3].setError(activity.getString(R.string.enter_password));
+            layouts[3].setError(activity.getString(R.string.enter_phone));
             layouts[3].requestFocus();
             return false;
         }
-        if (layouts[3].getEditText().getText().toString().trim().length() < 8) {
-            layouts[3].setError(activity.getString(R.string.password_must_greater_than_7));
+        if (!isValidNum) {
+            layouts[3].setError(activity.getString(R.string.invalid_phone_number));
             layouts[3].requestFocus();
             return false;
         }
         layouts[3].setErrorEnabled(false);
 
         if (layouts[4].getEditText().getText().toString().trim().isEmpty()) {
-            layouts[4].setError(activity.getString(R.string.enter_confirm_password));
+            layouts[4].setError(activity.getString(R.string.enter_password));
             layouts[4].requestFocus();
             return false;
         }
-        if (!layouts[4].getEditText().getText().toString().trim()
-                .equals(layouts[3].getEditText().getText().toString().trim())) {
-            layouts[4].setError(activity.getString(R.string.password_does_not_match));
+        if (layouts[4].getEditText().getText().toString().trim().length() < 8) {
+            layouts[4].setError(activity.getString(R.string.password_must_greater_than_7));
             layouts[4].requestFocus();
             return false;
         }
         layouts[4].setErrorEnabled(false);
+
+        if (layouts[5].getEditText().getText().toString().trim().isEmpty()) {
+            layouts[5].setError(activity.getString(R.string.enter_confirm_password));
+            layouts[5].requestFocus();
+            return false;
+        }
+        if (!layouts[5].getEditText().getText().toString().trim()
+                .equals(layouts[4].getEditText().getText().toString().trim())) {
+            layouts[5].setError(activity.getString(R.string.password_does_not_match));
+            layouts[5].requestFocus();
+            return false;
+        }
+        layouts[5].setErrorEnabled(false);
 
         if (!isTermsChecked) {
             showErrorDialog(activity, activity.getString(R.string.terms_error));
