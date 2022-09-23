@@ -1,5 +1,6 @@
 package com.androdu.bananaSeller.view.fragment.homeCycle.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.HelperMethod.showSuccessDialogCloseFragment;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
+@SuppressLint("NonConstantResourceId")
 public class PullBalanceFragment extends Fragment {
 
     @BindView(R.id.app_bar_back)
@@ -53,7 +55,6 @@ public class PullBalanceFragment extends Fragment {
     EditText fragmentPaymentEtBalance;
     @BindView(R.id.fragment_payment_btn_confirm)
     Button fragmentPaymentBtnConfirm;
-    private View view;
 
     public PullBalanceFragment() {
         // Required empty public constructor
@@ -64,7 +65,7 @@ public class PullBalanceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_pull_balance, container, false);
+        View view = inflater.inflate(R.layout.fragment_pull_balance, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;

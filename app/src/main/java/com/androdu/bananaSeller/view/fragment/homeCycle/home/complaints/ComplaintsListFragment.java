@@ -73,11 +73,6 @@ public class ComplaintsListFragment extends Fragment {
         this.type = type;
     }
 
-    @Override
-    public void onResume() {
-        getComplains(1);
-        super.onResume();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +81,7 @@ public class ComplaintsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_complaints_list, container, false);
         ButterKnife.bind(this, view);
         init();
+        getComplains(1);
         return view;
     }
 
