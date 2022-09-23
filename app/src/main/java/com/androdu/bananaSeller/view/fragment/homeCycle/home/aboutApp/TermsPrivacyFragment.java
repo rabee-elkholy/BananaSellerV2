@@ -30,6 +30,7 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showView;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ARABIC;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_ENGLISH;
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
+import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref2;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
 
 @SuppressLint("NonConstantResourceId")
@@ -73,6 +74,7 @@ public class TermsPrivacyFragment extends Fragment {
             appBarTitle.setText(R.string.privacy_policy);
             getPrivacy();
         }
+        appBarBack.setOnClickListener(view -> getActivity().onBackPressed());
     }
 
 
@@ -87,14 +89,18 @@ public class TermsPrivacyFragment extends Fragment {
 
                             if (response.isSuccessful()) {
                                 assert response.body() != null;
-                                if (response.body().getTermsPrivacy() != null)
-
-                                    if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ENGLISH))
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getEN());
-                                    else if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ARABIC))
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getAR());
-                                    else
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getUr());
+                                if (response.body().getTermsPrivacy() != null) {
+                                    try {
+                                        if (getLanguagePref2(getContext()).equals(LANGUAGE_KEY_ENGLISH))
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getEN());
+                                        else if (getLanguagePref2(getContext()).equals(LANGUAGE_KEY_ARABIC))
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getAR());
+                                        else
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getUr());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
 
                             } else {
                                 Log.d("error_handler", "onResponse: " + response.message());
@@ -124,12 +130,16 @@ public class TermsPrivacyFragment extends Fragment {
                             assert response.body() != null;
                             if (response.body().getTermsPrivacy() != null)
                                 if (response.isSuccessful()) {
-                                    if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ENGLISH))
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getEN());
-                                    else if (getLanguagePref(getContext()).equals(LANGUAGE_KEY_ARABIC))
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getAR());
-                                    else
-                                        fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getUr());
+                                    try {
+                                        if (getLanguagePref2(getContext()).equals(LANGUAGE_KEY_ENGLISH))
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getEN());
+                                        else if (getLanguagePref2(getContext()).equals(LANGUAGE_KEY_ARABIC))
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getAR());
+                                        else
+                                            fragmentTermsPrivacyTvBody.setText(response.body().getTermsPrivacy().getUr());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 } else {
                                     Log.d("error_handler", "onResponse: " + response.message());
                                     showErrorMessage(requireActivity(), response);

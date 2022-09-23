@@ -1,53 +1,9 @@
 package com.androdu.bananaSeller.view.fragment.userCycle;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import com.androdu.bananaSeller.R;
-import com.androdu.bananaSeller.data.api.ApiService;
-import com.androdu.bananaSeller.data.model.requestBody.DeliveryLoginRequestBody;
-import com.androdu.bananaSeller.data.model.requestBody.LoginRequestBody;
-import com.androdu.bananaSeller.data.model.response.deliveryLogin.DeliveryLoginResponse;
-import com.androdu.bananaSeller.data.model.response.login.LoginResponse;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
-import com.androdu.bananaSeller.helper.HelperMethod;
-import com.androdu.bananaSeller.helper.Validation;
-import com.androdu.bananaSeller.view.activity.HomeActivity;
-import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
-import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.hbb20.CountryCodePicker;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.FCM;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TYPE_SELLER;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_AVATAR;
-import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_FIELD;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_LOGGED;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_NAME;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_PASSWORD;
@@ -65,6 +21,40 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_URDU;
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+import com.androdu.bananaSeller.R;
+import com.androdu.bananaSeller.data.api.ApiService;
+import com.androdu.bananaSeller.data.model.requestBody.LoginRequestBody;
+import com.androdu.bananaSeller.data.model.response.login.LoginResponse;
+import com.androdu.bananaSeller.helper.ApiErrorHandler;
+import com.androdu.bananaSeller.helper.HelperMethod;
+import com.androdu.bananaSeller.helper.Validation;
+import com.androdu.bananaSeller.view.activity.HomeActivity;
+import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.hbb20.CountryCodePicker;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
 
@@ -273,31 +263,19 @@ public class LoginFragment extends Fragment {
         if (isConnected(getContext())) {
             disableView(fragmentLoginBtnLogin);
             showProgressDialog(getActivity());
-            FirebaseMessaging.getInstance().subscribeToTopic("bananaSeller")
+            FirebaseMessaging.getInstance().getToken()
                     .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            FirebaseInstanceId.getInstance().getInstanceId()
-                                    .addOnCompleteListener(task1 -> {
-                                        if (!task1.isSuccessful()) {
-                                            Log.w("login", "getInstanceId failed", task1.getException());
-                                            dismissProgressDialog();
-                                            fragmentLoginBtnLogin.setEnabled(true);
-                                            showErrorDialog(getActivity(), task1.getException().getMessage());
-
-                                            return;
-                                        }
-
-                                        // Get new Instance ID token
-                                        String token = task1.getResult().getToken();
-                                        Log.d("login", "token: " + token);
-
-                                        login(token);
-                                    });
-                        } else {
-                            fragmentLoginBtnLogin.setEnabled(true);
+                        if (!task.isSuccessful()) {
+                            Log.w("login", "getInstanceId failed", task.getException());
                             dismissProgressDialog();
+                            fragmentLoginBtnLogin.setEnabled(true);
                             showErrorDialog(getActivity(), task.getException().getMessage());
+                            return;
                         }
+                        // Get new Instance ID token
+                        String token = task.getResult();
+                        Log.d("login", "token: " + token);
+                        login(token);
                     });
         }
     }

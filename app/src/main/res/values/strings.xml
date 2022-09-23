@@ -70,7 +70,7 @@
 
     <string-array name="order_filter">
         <item>All</item>
-        <item>Nearly</item>
+        <item>Nearby</item>
         <item>Last 12 hours</item>
         <item>Direct delivery</item>
     </string-array>

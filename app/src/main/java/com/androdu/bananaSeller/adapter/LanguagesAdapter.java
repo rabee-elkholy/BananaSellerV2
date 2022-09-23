@@ -29,12 +29,16 @@ public class LanguagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public LanguagesAdapter(Activity activity, List<String> modelList) {
         this.modelList = modelList;
-        if (getLanguagePref(activity).equals(LANGUAGE_KEY_ENGLISH))
-            lastChecked = 0;
-        else if (getLanguagePref(activity).equals(LANGUAGE_KEY_ARABIC))
-            lastChecked = 1;
-        else
-            lastChecked = 2;
+        try {
+            if (getLanguagePref(activity).equals(LANGUAGE_KEY_ENGLISH))
+                lastChecked = 0;
+            else if (getLanguagePref(activity).equals(LANGUAGE_KEY_ARABIC))
+                lastChecked = 1;
+            else
+                lastChecked = 2;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

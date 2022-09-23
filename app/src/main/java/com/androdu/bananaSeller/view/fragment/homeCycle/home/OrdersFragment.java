@@ -77,7 +77,7 @@ public class OrdersFragment extends Fragment {
     private OnEndLess onEndLess;
     private Integer maxPage = 0;
     private OrdersAdapter ordersAdapter;
-    private int filter = 0;
+    private int sort = 2;
     private double deliveryPrice;
     private List<Filter> filters = new ArrayList<>();
 
@@ -115,6 +115,13 @@ public class OrdersFragment extends Fragment {
         appBarBack.setVisibility(View.GONE);
         appBarFilter.setVisibility(View.VISIBLE);
         appBarSorting.setVisibility(View.VISIBLE);
+
+        String[] filtersArr = getResources().getStringArray(R.array.order_filter);
+        filters.add(new Filter(filtersArr[1], 1));
+        filters.add(new Filter(filtersArr[2], 2));
+        filters.get(1).setChecked(true);
+        filters.add(new Filter(filtersArr[3], 3));
+
 
         offersList = new ArrayList<>();
 
@@ -168,9 +175,9 @@ public class OrdersFragment extends Fragment {
             else
                 showView(loadMore);
             getClient().getOrders(loadDataString(getActivity(), TOKEN),
-                    page,
-                    filter,
-                    getFilter())
+                            page,
+                            sort,
+                            getFilter())
                     .enqueue(new Callback<OrdersResponse>() {
                         @Override
                         public void onResponse(@NonNull Call<OrdersResponse> call, @NonNull Response<OrdersResponse> response) {
@@ -202,7 +209,7 @@ public class OrdersFragment extends Fragment {
                 showView(fragmentOrdersPbProgressBar);
             else
                 showView(loadMore);
-            getClient().getOrdersGuest(page, filter, getFilter())
+            getClient().getOrdersGuest(page, sort, getFilter())
                     .enqueue(new Callback<OrdersResponse>() {
                         @Override
                         public void onResponse(@NonNull Call<OrdersResponse> call, @NonNull Response<OrdersResponse> response) {
@@ -230,7 +237,6 @@ public class OrdersFragment extends Fragment {
 
     private List<String> getFilter() {
         List<String> requestFilter = new ArrayList<>();
-
         for (int i = 0; i < filters.size(); i++) {
             if (filters.get(i).isChecked()) {
                 requestFilter.add(String.valueOf(filters.get(i).getKey()));
@@ -283,7 +289,7 @@ public class OrdersFragment extends Fragment {
 
     @OnClick({R.id.app_bar_filter, R.id.app_bar_sorting})
     public void onViewClicked(View view) {
-        int sort = 2;
+        int sortTemp;
         switch (view.getId()) {
             case R.id.app_bar_filter:
                 List<Filter> filtersTemp = new ArrayList<>();
@@ -302,11 +308,12 @@ public class OrdersFragment extends Fragment {
                 break;
             case R.id.app_bar_sorting:
                 Log.d("debugging", "init: ");
-                BottomSheetFragment bottomSheetDialog2 = new BottomSheetFragment(6, sort);
+                sortTemp = sort;
+                BottomSheetFragment bottomSheetDialog2 = new BottomSheetFragment(6, sortTemp);
                 bottomSheetDialog2.show(getParentFragmentManager(), "Custom Bottom Sheet");
                 bottomSheetDialog2.SetOnConfirmClickListener(sheetFilters -> {
 
-                    filter = sheetFilters.get(0).getKey();
+                    sort = sheetFilters.get(0).getKey();
 
                     getOrders(1);
                 });

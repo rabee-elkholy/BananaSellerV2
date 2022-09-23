@@ -310,17 +310,14 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         filterKeys.add(2);
         filterKeys.add(3);
 
-        fragmentBottomSheetTvConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("sheet", "onClick: " + adapter.lastChecked);
-                List<Filter> f = new ArrayList<>();
-                f.add(new Filter(filters.get(adapter.lastChecked),
-                        filterKeys.get(adapter.lastChecked)));
-                mConfirmClickListener.onConfirm(f);
+        fragmentBottomSheetTvConfirm.setOnClickListener(v -> {
+            Log.d("sheet", "onClick: " + adapter.lastChecked);
+            List<Filter> f = new ArrayList<>();
+            f.add(new Filter(filters.get(adapter.lastChecked),
+                    filterKeys.get(adapter.lastChecked)));
+            mConfirmClickListener.onConfirm(f);
 
-                dismiss();
-            }
+            dismiss();
         });
     }
 

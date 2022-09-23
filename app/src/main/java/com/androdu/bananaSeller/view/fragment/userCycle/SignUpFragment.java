@@ -1,53 +1,5 @@
 package com.androdu.bananaSeller.view.fragment.userCycle;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.Selection;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import com.androdu.bananaSeller.R;
-import com.androdu.bananaSeller.data.api.ApiService;
-import com.androdu.bananaSeller.data.model.Filter;
-import com.androdu.bananaSeller.data.model.requestBody.SignUpRequestBody;
-import com.androdu.bananaSeller.data.model.response.login.LoginResponse;
-import com.androdu.bananaSeller.helper.ApiErrorHandler;
-import com.androdu.bananaSeller.helper.Constants;
-import com.androdu.bananaSeller.helper.HelperMethod;
-import com.androdu.bananaSeller.helper.Validation;
-import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
-import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.hbb20.CountryCodePicker;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.FCM;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.TOKEN;
 import static com.androdu.bananaSeller.data.local.SharedPreferencesManger.USER_NAME;
@@ -64,6 +16,45 @@ import static com.androdu.bananaSeller.helper.HelperMethod.showProgressDialog;
 import static com.androdu.bananaSeller.helper.LanguageManager.LANGUAGE_KEY_URDU;
 import static com.androdu.bananaSeller.helper.LanguageManager.getLanguagePref;
 import static com.androdu.bananaSeller.helper.NetworkState.isConnected;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+import com.androdu.bananaSeller.R;
+import com.androdu.bananaSeller.data.api.ApiService;
+import com.androdu.bananaSeller.data.model.Filter;
+import com.androdu.bananaSeller.data.model.requestBody.SignUpRequestBody;
+import com.androdu.bananaSeller.data.model.response.login.LoginResponse;
+import com.androdu.bananaSeller.helper.ApiErrorHandler;
+import com.androdu.bananaSeller.helper.Constants;
+import com.androdu.bananaSeller.helper.Validation;
+import com.androdu.bananaSeller.view.activity.SecondHomeActivity;
+import com.androdu.bananaSeller.view.fragment.BottomSheetFragment;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.hbb20.CountryCodePicker;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignUpFragment extends Fragment {
 
@@ -269,37 +260,19 @@ public class SignUpFragment extends Fragment {
         if (isConnected(getContext())) {
             disableView(fragmentSignUpBtnRegister);
             showProgressDialog(getActivity());
-            FirebaseMessaging.getInstance().subscribeToTopic("bananaSeller")
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseInstanceId.getInstance().getInstanceId()
-                                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                                if (!task.isSuccessful()) {
-                                                    Log.w("login", "getInstanceId failed", task.getException());
-                                                    dismissProgressDialog();
-                                                    fragmentSignUpBtnRegister.setEnabled(true);
-                                                    HelperMethod.showErrorDialog(getActivity(), task.getException().getMessage());
-
-                                                    return;
-                                                }
-
-                                                // Get new Instance ID token
-                                                String token = task.getResult().getToken();
-                                                Log.d("login", "token: " + token);
-
-                                                signUp(token);
-                                            }
-                                        });
-                            } else {
-                                fragmentSignUpBtnRegister.setEnabled(true);
-                                dismissProgressDialog();
-                                HelperMethod.showErrorDialog(getActivity(), task.getException().getMessage());
-                            }
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                            Log.w("login", "getInstanceId failed", task.getException());
+                            dismissProgressDialog();
+                            fragmentSignUpBtnRegister.setEnabled(true);
+                            showErrorDialog(getActivity(), task.getException().getMessage());
+                            return;
                         }
+                        // Get new Instance ID token
+                        String token = task.getResult();
+                        Log.d("login", "token: " + token);
+                        signUp(token);
                     });
         }
     }

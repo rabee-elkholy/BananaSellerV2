@@ -22,10 +22,14 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context base) {
-         if (getLanguagePref(base).isEmpty())
-            super.attachBaseContext(setNewLocale(base, Locale.getDefault().getLanguage()));
-        else
-            super.attachBaseContext(setLocale(base));
+        try {
+            if (getLanguagePref(base).isEmpty())
+               super.attachBaseContext(setNewLocale(base, Locale.getDefault().getLanguage()));
+           else
+               super.attachBaseContext(setLocale(base));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

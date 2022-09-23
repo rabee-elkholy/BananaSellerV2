@@ -61,6 +61,11 @@ public class LanguageManager {
         return mPreferences.getString(LANGUAGE_KEY, "");
     }
 
+    public static String getLanguagePref2(Context mContext) throws Exception {
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return mPreferences.getString(LANGUAGE_KEY, "");
+    }
+
     /**
      *  set pref key
       * @param mContext
