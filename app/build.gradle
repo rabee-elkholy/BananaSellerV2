@@ -14,6 +14,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        signingConfig signingConfigs.debug
 
     }
 
@@ -95,4 +96,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.2'
 
     implementation 'com.github.dhaval2404:imagepicker:1.8'
+
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }

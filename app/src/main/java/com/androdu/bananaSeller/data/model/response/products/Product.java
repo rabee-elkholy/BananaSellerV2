@@ -1,6 +1,8 @@
 
 package com.androdu.bananaSeller.data.model.response.products;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -44,6 +46,8 @@ public class Product {
     private Integer v;
 
     int count = 1, unit = 0;
+    private Bitmap imgBitmap;
+
 
 
     public Integer getOrders() {
@@ -156,5 +160,13 @@ public class Product {
 
     public void setNameUr(String nameUr) {
         this.nameUr = nameUr;
+    }
+
+    public Bitmap getImgBitmap() {
+        return imgBitmap;
+    }
+
+    public void setImgBitmap(Bitmap imgBitmap) {
+        this.imgBitmap = imgBitmap;
     }
 }

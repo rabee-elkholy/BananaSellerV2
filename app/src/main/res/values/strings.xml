@@ -152,6 +152,7 @@
         <item>You can\'t filter with location in guest</item>
         <item>You should provide location</item>
         <item>You must be logged in to use this feature</item>
+        <item>it is not possible to add more than one section in the cart , please delete the products in the cart to add a new section</item>
 
     </string-array>
     <string name="recently_added">Recently added</string>
