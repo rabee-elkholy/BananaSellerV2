@@ -184,4 +184,9 @@ public class ComplaintsListFragment extends Fragment {
         onEndLess.previous_page = 1;
     }
 
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        getComplains(1);
+//    }
 }
