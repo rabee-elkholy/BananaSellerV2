@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Response;
 
 public class ApiErrorHandler {

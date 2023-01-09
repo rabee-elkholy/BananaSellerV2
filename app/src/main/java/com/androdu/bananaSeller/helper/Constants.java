@@ -1,5 +1,7 @@
 package com.androdu.bananaSeller.helper;
 
+import android.view.View;
+
 import com.androdu.bananaSeller.R;
 
 import java.util.ArrayList;
@@ -51,4 +53,5 @@ public abstract class Constants {
     public final static String WEB_PAGE = "http://bananas.ae/";
 
 
+    public static View.OnTouchListener FOCUS_TOUCH_LISTENER;
 }
